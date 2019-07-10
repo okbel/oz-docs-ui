@@ -22,7 +22,7 @@
     }
   }
 
-  // home icon in breadcrumbs
+  
   .link-home {
 
     &:active svg,
@@ -47,19 +47,19 @@
     display: inline-block;
     height: var(--md);
     margin: 0 var(--xs);
-    opacity: .4; // same as search icon
+    opacity: .4; 
     pointer-events: none;
     transform: rotate(-90deg);
     width: var(--md);
   }
 }
 
-// version selector
+
 .version-select + .link-edit {
   margin-left: var(--lg);
 }
 
-// link to GitHub
+
 .link-edit {
   font-size: 12px;
   height: var(--lg);

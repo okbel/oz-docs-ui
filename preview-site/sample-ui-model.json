@@ -12,9 +12,6 @@
             "title": "Getting started",
             "url": "/getting-started/",
             "currentPath": true
-          }, {
-            "title": "Crowd release availability and changes",
-            "url": "/getting-started/api-lifecycle-overview"
           }
         ]
       }, {

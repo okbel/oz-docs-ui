@@ -5,7 +5,7 @@
   {{else}}
   <span class="flex shrink align-center nav-heading">{{{./title}}}</span>
   {{/if}}
-  {{!-- if there's more nesting --}}
+  {{!-- Nesting --}}
   {{#if ./items}}
   <ol class="nested-list">
     {{> navigation-tree navigation=./items level=(increment ../level) }}

@@ -6,7 +6,7 @@
   src: local('DINPro'), url('../fonts/din-pro-regular.woff') format('woff');
 }
 
-// headings
+
 h1,
 h2,
 h3,
@@ -43,7 +43,7 @@ h6 {
   font-size: 16px;
 }
 
-// utility
+
 .small {
   font-size: 13px;
   font-weight: var(--weight-normal); /* reset if within header tags */
@@ -61,7 +61,7 @@ h6 {
   word-wrap: normal;
 }
 
-// links
+
 .link {
   color: var(--steel-2);
 
@@ -71,6 +71,6 @@ h6 {
 
   &:focus,
   &:active {
-    color: var(--core-blue-3);
+    color: var(--core-violet-3);
   }
 }

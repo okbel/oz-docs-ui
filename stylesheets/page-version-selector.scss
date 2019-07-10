@@ -35,7 +35,7 @@
 .page-version-selector-toggle:active,
 .page-version-selector-toggle:focus {
   outline: none;
-  border-color: var(--core-blue-3);
+  border-color: var(--core-violet-3);
 }
 
 .page-version-selector-toggle::-moz-focus-inner {
@@ -43,8 +43,8 @@
 }
 
 .page-version-selector-panel {
-  background-color: var(--core-blue-3);
-  border: 1px solid var(--core-blue-3);
+  background-color: var(--core-violet-3);
+  border: 1px solid var(--core-violet-3);
   box-sizing: border-box;
   padding: 1.6rem 0.5rem 0.3rem 0.5rem;
   position: absolute;

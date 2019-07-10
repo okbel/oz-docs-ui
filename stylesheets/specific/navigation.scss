@@ -38,7 +38,7 @@
       display: block;
       height: var(--md);
       left: var(--xs);
-      opacity: .4; // same as chevrons
+      opacity: .4; 
       position: absolute;
       width: var(--md);
       z-index: 1;
@@ -53,9 +53,9 @@
 
   &.active {
 
-    // marks parent nav item as active
+    
     > .nav-li:first-child .nav-link {
-      color: var(--core-blue-3);
+      color: var(--core-violet-3);
       cursor: default;
     }
 
@@ -69,7 +69,7 @@
     }
   }
 
-  // for product icons
+  
   > .nav-li .nav-link,
   > .nav-li .nav-heading {
     padding-left: 25px;
@@ -78,16 +78,16 @@
 
 .nav-li {
 
-  // visibility prevents focus state when hidden
+  
   &.fade {
     opacity: 0;
     transition: opacity var(--transition-speed-md) var(--transition-timing), visibility var(--transition-speed-md) var(--transition-timing);
     visibility: hidden;
   }
 
-  // marks sub nav items as active
+  
   &.active .nav-link {
-    color: var(--core-blue-3);
+    color: var(--core-violet-3);
   }
 }
 
@@ -116,7 +116,7 @@
   color: var(--steel-2);
 }
 
-// nesting: level 1
+
 .nav-li[data-depth="0"] .nav-heading,
 .nav-li[data-depth="1"] .nav-heading,
 .nav-li[data-depth="2"] .nav-heading,
@@ -127,7 +127,7 @@
   font-weight: var(--weight-bold);
   margin-top: var(--md);
 }
-// nesting: level 2
+
 .nav-li[data-depth="1"] .nav-heading {
   font-size: 12px;
   font-weight: var(--weight-normal);
@@ -136,15 +136,15 @@
   text-transform: uppercase;
 }
 
-// .nav-li[data-depth="2"],
-// .nav-li[data-depth="3"],
-// .nav-li[data-depth="4"],
-// .nav-li[data-depth="5"],
-// .nav-li[data-depth="6"] {
-//   margin-left: var(--md);
-// }
 
-// collapsing margin for nested lists (note: this is why we don't use flexbox on list items)
+
+
+
+
+
+
+
+
 .nested-list {
   margin-bottom: var(--md);
 }

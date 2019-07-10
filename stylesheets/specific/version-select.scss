@@ -1,11 +1,11 @@
-// select menu version
+
 .version-select {
   font-size: 12px;
   font-weight: var(--weight-normal);
   width: 45px;
 }
 
-// button version
+
 .btn-version {
   border: 1px solid var(--aluminum-4);
   border-radius: 22px;
@@ -23,8 +23,8 @@
 
   &:active {
     background: var(--tertiary);
-    border-color: var(--core-blue-3);
-    color: var(--core-blue-3);
+    border-color: var(--core-violet-3);
+    color: var(--core-violet-3);
   }
 
   svg {
@@ -33,11 +33,11 @@
     width: var(--md);
   }
 
-  // temporary interaction
+  
   &:focus {
     background: var(--tertiary);
-    border-color: var(--core-blue-3);
-    color: var(--core-blue-3);
+    border-color: var(--core-violet-3);
+    color: var(--core-violet-3);
 
     .popover {
       opacity: 1;
@@ -98,8 +98,8 @@
     }
 
     &:active {
-      background: #e2f8ff; // yet another blue
-      color: var(--core-blue-3);
+      background: #e2f8ff; 
+      color: var(--core-violet-3);
     }
 
     svg {
@@ -109,7 +109,7 @@
 
       &:hover,
       &:focus {
-        fill: var(--core-blue-3);
+        fill: var(--core-violet-3);
       }
     }
   }
