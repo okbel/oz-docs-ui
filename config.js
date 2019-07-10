@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-const fs = require('fs')
-const path = require('path')
-const convict = require('convict')
-const yaml = require('js-yaml')
+const fs = require('fs');
+const path = require('path');
+const convict = require('convict');
+const yaml = require('js-yaml');
 
 const conf = convict({
   config_file: {
@@ -29,7 +29,8 @@ const conf = convict({
     default: null,
   },
   cache_buster: {
-    doc: 'Instructs the build to add the specified cache buster query string to asset URLs',
+    doc:
+      'Instructs the build to add the specified cache buster query string to asset URLs',
     format: String,
     default: undefined,
     arg: 'cache-buster',
@@ -59,10 +60,10 @@ const conf = convict({
     default: 8080,
     arg: 'port',
   },
-})
+});
 
-const ymlFile = fs.readFileSync(conf.get('config_file')).toString()
-const configFromYaml = yaml.safeLoad(ymlFile)
-conf.load(configFromYaml)
+const ymlFile = fs.readFileSync(conf.get('config_file')).toString();
+const configFromYaml = yaml.safeLoad(ymlFile);
+conf.load(configFromYaml);
 
-module.exports = conf
+module.exports = conf;

@@ -15,124 +15,6 @@
           }
         ]
       }, {
-        "name": "access-management",
-        "title": "Access Management",
-        "versions": [
-          {
-            "string": "latest",
-            "url": "/access-management/"
-          }
-        ],
-        "items": [
-          {
-            "title": "Overview",
-            "url": "/access-management/"
-          }, {
-            "title": "Managing your account",
-            "url": "/access-management/managing-your-account"
-          }, {
-            "title": "Organization",
-            "url": "/access-management/organization"
-          }, {
-            "title": "Users",
-            "url": "/access-management/users"
-          }, {
-            "title": "Roles",
-            "url": "/access-management/roles"
-          }, {
-            "title": "Environments",
-            "url": "/access-management/environments"
-          }, {
-            "title": "Identity Management",
-            "items": [
-              {
-                "title": "Overview",
-                "url": "/access-management/external-identity"
-              }, {
-                "title": "SSO prerequisites and limitations",
-                "url": "/access-management/sso-prerequisites-about"
-              }, {
-                "title": "External Identity Configuration",
-                "items": [
-                  {
-                    "title": "SAML",
-                    "url": "/access-management/managing-users"
-                  }, {
-                    "title": "Open ID Connect",
-                    "url": "/access-management/conf-openid-connect-task"
-                  }, {
-                    "title": "Testing",
-                    "url": "/access-management/test-external-identity-task"
-                  }, {
-                    "title": "Modifications",
-                    "url": "/access-management/change-id-mgmt-conf-about"
-                  }
-                ]
-              }, {
-                "title": "LDAP Configuration",
-                "items": [
-                  {
-                    "title": "Map users to roles",
-                    "url": "/access-management/map-users-roles-ldap-task"
-                  }, {
-                    "title": "Private Cloud",
-                    "url": "/access-management/conf-ldap-private-cloud-task"
-                  }
-                ]
-              }
-            ]
-          }, {
-            "title": "Client Management",
-            "items": [
-              {
-                "title": "Overview",
-                "url": "/access-management/managing-api-clients"
-              }, {
-                "title": "Configuration",
-                "items": [
-                  {
-                    "title": "Open AM",
-                    "url": "/access-management/conf-client-mgmt-openam-task"
-                  }, {
-                    "title": "PingFederate",
-                    "url": "/access-management/conf-client-mgmt-pf-task"
-                  }
-                ]
-              }
-            ]
-          }, {
-            "title": "Audit logging",
-            "url": "/access-management/audit-logging"
-          }, {
-            "title": "Managing permissions",
-            "url": "/access-management/managing-permissions"
-          }, {
-            "title": "Troubleshooting",
-            "url": "/access-management/troubleshooting-anypoint-platform-access"
-          }
-        ]
-      }, {
-        "name": "analytics",
-        "title": "Analytics",
-        "items": [
-          {
-            "title": "Viewing Analytics",
-            "url": "/analytics/viewing-api-analytics"
-          }, {
-            "title": "Event API",
-            "url": "/analytics/analytics-event-api"
-          }, {
-            "title": "Analytics in API Manager",
-            "url": "/analytics/analytics-chart"
-          }, {
-            "title": "API consumer",
-            "url": "/analytics/api-consumer-analytics"
-          }, {
-            "title": "Event forwarding",
-            "url": "/analytics/analytics-event-forward"
-          }
-        ]
-      }, {
         "name": "contracts",
         "title": "Contracts",
         "versions": [
@@ -327,7 +209,7 @@
       }
     ]
   },
-  "title": "Sample Page",
+  "title": "Contracts",
   "keywords": "key, words, many, of, them",
   "canonicalUrl": "https://example.com/index.html",
   "editUrl": "https://github.com/openzeppelin/contracts/edit/v3.8/modules/ROOT/content/index.adoc",
@@ -387,12 +269,12 @@
   ],
   "breadcrumbs": [
     {
-      "title": "Level 0 item 0",
+      "title": "API Reference",
       "url": "level-0-item-0.html",
       "currentPath": true
     },
     {
-      "title": "INDEX",
+      "title": "ERC 20",
       "url": "index.html",
       "currentPage": true,
       "items": []
