@@ -9,6 +9,14 @@ const merge = require('merge-stream');
 const minimatch = require('minimatch');
 const handlebars = require('handlebars');
 const requireFromString = require('require-from-string');
+const asciidoctor = require('asciidoctor.js')();
+
+const ASCIIDOC_ATTRIBUTES = {
+  experimental: '',
+  icons: 'font',
+  sectanchors: '',
+  'source-highlighter': 'highlight.js',
+};
 
 module.exports = async (src, dest, destTheme) => {
   const relativeThemePath = path.relative(dest, destTheme);
@@ -27,7 +35,7 @@ module.exports = async (src, dest, destTheme) => {
   const sampleUiModel = JSON.parse(sampleUiModelData.toString());
 
   vfs
-    .src(['preview-site/**/*.html'])
+    .src(['preview-site/**/*.adoc'])
     .pipe(
       map((file, next) => {
         const compiledLayout =
@@ -42,6 +50,25 @@ module.exports = async (src, dest, destTheme) => {
         sampleUiModel['contents'] = file.contents.toString();
         sampleUiModel['navigation-link-prefix'] = relativeToRoot;
         file.contents = new Buffer(compiledLayout(sampleUiModel));
+
+        const doc = asciidoctor.load(file.contents, {
+          safe: 'safe',
+          attributes: ASCIIDOC_ATTRIBUTES,
+        });
+
+        // sampleUiModel.page.attributes = Object.entries(doc.getAttributes())
+        //   .filter(([name, val]) => name.startsWith('page-'))
+        //   .reduce((accum, [name, val]) => {
+        //     accum[name.substr(5)] = val;
+        //     return accum;
+        //   }, {});
+
+        // sampleUiModel.page.layout = doc.getAttribute('page-layout', 'default');
+        // sampleUiModel.page.title = doc.getDocumentTitle();
+        sampleUiModel.page.contents = Buffer.from(doc.convert());
+
+        file.extname = '.html';
+        file.contents = Buffer.from(compiledLayout(sampleUiModel));
         next(null, file);
       })
     )
