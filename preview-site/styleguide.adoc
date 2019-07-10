@@ -29,6 +29,20 @@ require 'asciidoctor'
 puts Asciidoctor.convert_file 'mysample.adoc', to_file: false
 ----
 
+== Functions
+
+[[function]]
+.Function
+Type the word [userinput]#asciidoc# into the search bar.
+
+[function]
+algo
+
+[.function]
+****
+totalSupply() => [userinput]#uint236# [userinput]#external#
+
+****
 
 NOTE: Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
 
