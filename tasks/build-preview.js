@@ -34,10 +34,17 @@ module.exports = async (src, dest, destTheme) => {
   const sampleUiModelData = fs.readFileSync(sampleUiModelPath, 'utf8');
   const sampleUiModel = JSON.parse(sampleUiModelData.toString());
 
+  // console.log('sampleUiModel', sampleUiModel);
+
   vfs
-    .src(['preview-site/**/*.adoc'])
+    .src(['preview-site/**/*.html'])
     .pipe(
       map((file, next) => {
+        const doc = asciidoctor.load(file.contents, {
+          safe: 'safe',
+          attributes: ASCIIDOC_ATTRIBUTES,
+        });
+
         const compiledLayout =
           layoutsIndex[file.stem === '404' ? '404.hbs' : 'default.hbs'];
         const previewSitePath = path.resolve('preview-site');
@@ -46,29 +53,11 @@ module.exports = async (src, dest, destTheme) => {
           relativeToRoot,
           relativeThemePath
         );
+
         sampleUiModel['siteRootUrl'] = path.join(relativeToRoot, 'index.html');
-        sampleUiModel['contents'] = file.contents.toString();
+        sampleUiModel['contents'] = Buffer.from(doc.convert());
         sampleUiModel['navigation-link-prefix'] = relativeToRoot;
         file.contents = new Buffer(compiledLayout(sampleUiModel));
-
-        const doc = asciidoctor.load(file.contents, {
-          safe: 'safe',
-          attributes: ASCIIDOC_ATTRIBUTES,
-        });
-
-        // sampleUiModel.page.attributes = Object.entries(doc.getAttributes())
-        //   .filter(([name, val]) => name.startsWith('page-'))
-        //   .reduce((accum, [name, val]) => {
-        //     accum[name.substr(5)] = val;
-        //     return accum;
-        //   }, {});
-
-        // sampleUiModel.page.layout = doc.getAttribute('page-layout', 'default');
-        // sampleUiModel.page.title = doc.getDocumentTitle();
-        sampleUiModel.page.contents = Buffer.from(doc.convert());
-
-        file.extname = '.html';
-        file.contents = Buffer.from(compiledLayout(sampleUiModel));
         next(null, file);
       })
     )
