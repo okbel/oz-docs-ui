@@ -103,7 +103,8 @@
 
   .icon + span {
     display: inline-block;
-    margin-left: 5px;
+		margin-left: 5px;
+		font-size: 0.98rem;
   }
 }
 
@@ -122,10 +123,24 @@
   margin-top: var(--md);
 }
 
+.nav-li[data-depth='0'] {
+	.nav-heading {
+  font-size: 1rem;
+  font-weight: var(--weight-medium);
+  margin-top: var(--md);
+	opacity: 0.6;
+	color: #282846;
+	}
+
+	.nav-link {
+		padding-left: calc(var(--md) * 2);
+	}
+}
+
 .nav-li[data-depth='1'] .nav-heading {
   font-size: 12px;
   font-weight: var(--weight-normal);
-  margin-top: var(--md);
+	margin-top: var(--md);
   opacity: 0.6;
   text-transform: uppercase;
 }
