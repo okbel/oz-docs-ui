@@ -1,0 +1,646 @@
+<section id="preamble" class="section">
+  <p>Mule supports the ability to define selected connectors as common resources and expose them to all applications deployed under a same
+    <strong>domain</strong>. These resources are known as
+    <strong>shared resources</strong>, to host these you must create a
+    <strong>Mule Domain Project</strong> and then reference it on each of the projects that are meant to use the elements in it. Once defined, any Mule application associated with a particular domain can access resources in this file. Note that Mule applications can be associated with only one domain at a time.
+  <dl>
+    <dt>From</dt>
+    <dd>Who the transmission came from</dd>
+    <dt>To</dt>
+    <dd>Who it was sent to</dd>
+    <dt>Date</dt>
+    <dd>Date and time at which the event occurred</dd>
+    <dt>Direction</dt>
+    <dd>Either <strong>Inbound</strong> or <strong>Outbound</strong></dd>
+    <dt>Transmission Type</dt>
+    <dd>What it was sent over</dd>
+    <dt>Label</dt>
+    <dd>Any label associated with the transmission</dd>
+  </dl>
+  <p>Shared resources allow multiple development teams to work in parallel using the same set of reusable connectors. Defining these connectors as shared resources at the domain level allows the team to:
+  <p>The DataSense Explorer is a panel that appears in the lower right corner of the default Mule perspective in Anypoint Studio. You can toggle it <strong>on</strong> and <strong>off</strong> using the <img src="https://docs.openzeppelin.com/anypoint-studio/v/6/_images/dsexplorer-icon.png" alt="dsexplorer icon"> icon.
+  <ul>
+    <li>
+      <p>Expose multiple services within the domain through the same port
+    <li>
+      <p>Share the connection to persistent storage
+    <li>
+      <p>Share services between applications through a well-defined interface
+    <li>
+      <p>Ensure consistency between applications upon any changes, as the configuration is only set in one place
+  </ul>
+</section>
+
+<section class="section">
+  <h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+  <p>This document assumes that you are using Anypoint Studio with Mule runtime 3.6 or newer, or that you are building your applications outside Studio and deploying them to Mule Standalone <strong>3.5.0</strong> runtime or newer.
+  <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml"><span class="hljs-tag">&lt;<span class="hljs-name">flow</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"exampleFlow"</span>&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="hljs-tag">&lt;<span class="hljs-name">http:listener</span> <span class="hljs-attr">config-ref</span>=<span class="hljs-string">"HTTP_Listener_Configuration"</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/"</span>
+      <span class="hljs-attr">allowedMethods</span>=<span class="hljs-string">"GET"</span> <span class="hljs-attr">doc:name</span>=<span class="hljs-string">"HTTP"</span>/&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">set-payload</span>
+      <span class="hljs-attr">value</span>=<span class="hljs-string">"#[message.inboundProperties['http.query.params']['url_key']]"</span>
+      <span class="hljs-attr">doc:name</span>=<span class="hljs-string">"Set Original Payload"</span>/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">flow-ref</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"exampleFlow2"</span> <span class="hljs-attr">doc:name</span>=<span class="hljs-string">"exampleFlow2"</span>/&gt;</span> <i class="conum" data-value="3"></i><b>(3)</b>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">choice</span> <span class="hljs-attr">doc:name</span>=<span class="hljs-string">"Choice"</span>&gt;</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="hljs-tag">&lt;<span class="hljs-name">when</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">"#[flowVars['my_variable'].equals('var_value_1')]"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">set-payload</span>
+          <span class="hljs-attr">value</span>=<span class="hljs-string">"#['response_payload_1']"</span> <span class="hljs-attr">doc:name</span>=<span class="hljs-string">"Set Response Payload"</span>/&gt;</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">when</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">otherwise</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">set-payload</span>
+          <span class="hljs-attr">value</span>=<span class="hljs-string">"#['response_payload_2']"</span> <span class="hljs-attr">doc:name</span>=<span class="hljs-string">"Set Response Payload"</span>/&gt;</span> <i class="conum" data-value="6"></i><b>(6)</b>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">otherwise</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">choice</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">flow</span>&gt;</span></code></pre>
+  <table>
+    <tbody>
+      <tr>
+        <td><i class="conum" data-value="1"></i><b>1</b></td>
+        <td>Main Flow, <code>exampleFlow</code>.</td>
+      </tr>
+      <tr>
+        <td><i class="conum" data-value="2"></i><b>2</b></td>
+        <td>Take data from the HTTP request.</td>
+      </tr>
+      <tr>
+        <td><i class="conum" data-value="3"></i><b>3</b></td>
+        <td>Make call to <code>exampleFlow2</code> for further processing.</td>
+      </tr>
+      <tr>
+        <td><i class="conum" data-value="4"></i><b>4</b></td>
+        <td>Make a decision based on the value of the invocation variable <code>my_variable</code>, which was set by <code>exampleFlow2</code>.</td>
+      </tr>
+      <tr>
+        <td><i class="conum" data-value="5"></i><b>5</b></td>
+        <td>Creates <code>response payload 1</code>.</td>
+      </tr>
+      <tr>
+        <td><i class="conum" data-value="6"></i><b>6</b></td>
+        <td>Creates <code>response payload 2</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section>
+  <h2 id="limitations"><a class="anchor" href="#limitations"></a>Limitations</h2>
+  <ul>
+    <li>
+      <p>Defining flows, subflows, or any message processors as shared resources is not supported.
+    <li>
+      <p>To share a WMQ connector as a shared resource, you need to remove the <code>mule-transport-wmq-ee-&lt;mule-version&gt;.jar</code> file from the <code>$MULE_HOME/lib/mule/per-app/</code> directory and remove all the native jars for WMQ connectivity in your application’s <code>$MULE_HOME/apps/&lt;my-app&gt;/lib/</code> directory. Place all these jars in the <code>$MULE_HOME/domains/&lt;my-domain&gt;/lib/</code> folder instead.
+    </li>
+    <li>
+      <p>Adding properties in the configuration files of applications that use shared resources can result in issues, as these properties are shared with other apps in the domain and there may be conflicts. You can instead
+        <a href="../administer/setting-environment-variables.html" class="xref">set environment variables</a>.
+    <li>
+      <p>Only the following connectors and related specifications can be specified as shared resources at this time:
+      <ul>
+        <li>
+          <p>HTTP/HTTPS (both endpoints and connectors)
+        <li>
+          <p>VM
+        <li>
+          <p>TLS Context elements
+        <li>
+          <p>JMS
+        <li>
+          <p>JMS Caching Connection Factory
+        <li>
+          <p>Database
+        <li>
+          <p>WMQ
+        <li>
+          <p>JBoss Transaction Manager
+        <li>
+          <p>Bitronix Transaction Manager
+      </ul>
+  </ul>
+</section>
+
+<section>
+  <h2 id="basic-anatomy"><a class="anchor" href="#basic-anatomy"></a>Basic Anatomy</h2>
+  <p>The following files are key within the Mule Domain Project:
+  <table class="tableblock frame-all grid-all spread">
+    <colgroup>
+      <col>
+      <col>
+    </colgroup>
+    <tbody>
+    <tr>
+      <td class="tableblock halign-left valign-top">
+        <p class="tableblock"><strong>mule-domain-config.xml</strong>
+      </td>
+      <td class="tableblock halign-left valign-top">
+        <p class="tableblock">This is the shared resources configuration file. This file must have the
+          <code>mule-domain-config.xml</code> file name.
+      </td>
+    </tr>
+    <tr>
+      <td class="tableblock halign-left valign-top">
+        <p class="tableblock"><strong>/lib</strong>
+      </td>
+      <td class="tableblock halign-left valign-top">
+        <p class="tableblock">This directory can contain libraries associated with the domain. Place the JDBC drivers for the datasources that you define as shared resources here or JMS broker APIs needed for the JMS connector.
+      </td>
+    </tr>
+    <tr>
+      <td class="tableblock halign-left valign-top">
+        <p class="tableblock"><strong>mule-deploy.properties</strong>
+      </td>
+      <td class="tableblock halign-left valign-top">
+        <p class="tableblock">This optional file may contain two configuration properties are equivalent to the ones in a Mule application:
+          <strong>redeployment.enabled</strong> and <strong>loader.overrides</strong>. See
+          <a href="../deploy/mule-application-deployment-descriptor#deployment-descriptor-in-a-domain.html" class="xref">Deployment Descriptor in a Domain</a> for more details.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+  <p>To use shared resources in your applications, you must complete the following tasks.
+  <ol class="arabic">
+    <li>
+      <p><a href="#creating-a-new-domain">Creating a New Domain</a>
+    <li>
+      <p>Define one or more shared resources in that domain
+    <li>
+      <p><a href="#associating-applications-with-the-domain">Associating Applications with the Domain</a>
+    <li>
+      <p><a href="#referencing-shared-resources">Referencing Shared Resources</a> in your applications
+    <li>
+      <p>
+        <a href="#deploying-with-shared-resources">Deploying with Shared Resources</a> the domain and the applications. Note that you can also deploy domain and apps together in a
+        <a href="#deploying-domain-bundles">Deploying Domain Bundles</a>
+  </ol>
+  <p>The sections below describe the procedure for each of these steps.
+</section>
+
+<section>
+  <h2 id="creating-a-new-domain"><a class="anchor" href="#creating-a-new-domain"></a>Creating a New Domain</h2>
+  <p>To create a new domain in Anypoint Studio, follow the steps below:
+  <ol class="arabic">
+    <li>
+      <p>In the top menu bar select <strong>File</strong> ➡ <strong>New</strong> ➡ <strong>Mule Domain Project</strong></p>
+      <img src="../_theme/images/screenshots/new-domain.png" alt="new domain">
+    <li>
+      <p>Fill in the same fields as you would with a regular Mule Project:</p>
+      <img src="../_theme/images/screenshots/create-new-domain.png" alt="create new domain">
+      <p>Provide a name for the project and select a runtime. Optionally complete the Maven settings if you plan to use Maven with this project, and optionally create a .gitignore file if you plan to share this project via git or github.
+  </ol>
+  <aside>
+    <p>You can also create a domain project outside Studio, to do so create the following file structure in your file system:</p>
+    <img src="../_theme/images/screenshots/domain-folders.png" alt="domain folders">
+    <p>Note that the <code>lib</code> folder is optional.
+  </aside>
+
+  <section>
+    <h3 id="defining-shared-resources"><a class="anchor" href="#defining-shared-resources"></a>Defining Shared Resources</h3>
+    <p>You can configure the domain project that you just created in the previous step by defining shared resources in the the <code>mule-domain-config.xml</code> file. You can define multiple resources in this configuration file. In Anypoint Studio, there are two different views for editing this file. The <code>source</code> view should be the most familiar for those used to the XML editor in regular Studio Mule projects:</p>
+    <img src="../_theme/images/screenshots/design-source.png" alt="design source">
+    <p>Include, at minimum, the namespace and XML schema location for the domain, as shown below. Be sure to use the version, <strong>Community</strong> or <strong>Enterprise</strong>, that matches the resource that you are creating. VM, WMQ, and the Bitronix Transaction Manager require the Enterprise version.
+    <p>Add additional namespaces and schema locations for each resource that you want to share. See the example definitions for each supported shared resource below for full namespace definitions required for each. Note that the examples are separated into separate XML configurations for clarity, but you can define multiple shared resources in a single <code>mule-domain</code> project.
+  </section>
+
+  <section>
+    <h3 id="associating-applications-with-the-domain"><a class="anchor" href="#associating-applications-with-the-domain"></a>Associating Applications with the Domain</h3>
+    <aside>Applications may only be associated with one domain at a time.</aside>
+    <p>In Anypoint Studio, to associate an existing application with a domain, edit the <code>mule-project.xml</code> file located at root level in the project. In the graphical view of this file, you see a <strong>Domain</strong> field, which by default is set to <strong>default</strong>, this value gives each project its independent domain. Change this value, the dropdown list on this field displays all of the domains you’ve created in the current workspace.</p>
+    <img src="../_theme/images/screenshots/assign-domain.png" alt="assign domain">
+    <p>Note that when picking a domain, the Server Runtime of your project automatically becomes that of the domain, as these must always match.
+    <aside>
+      <p>If you&#8217;re creating your applications outside Studio, then to associate an existing application with a domain, edit the <code>mule-deploy.properties</code> file to include the domain property:
+      <p><code>domain= &lt;name of domain folder&gt;</code>
+      <p>For example:
+      <p><code>domain=mule-test-domain</code>
+    </aside>
+  </section>
+
+  <section>
+    <h3 id="referencing-shared-resources"><a class="anchor" href="#referencing-shared-resources"></a>Referencing Shared Resources</h3>
+    <p>In the following example <code>mule-domain-config.xml</code>, an HTTP connector is defined as a shared resource.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd"&gt;
+
+    &lt;http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+    <p>Any Mule application associated with the domain can make use of the shared resource by referencing it within the configuration, just as you would reference a resource within the project itself. In the example below, the HTTP listener connector references the shared resource named <code>HTTP_Listener_Configuration</code>.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;mule&gt;
+   &lt;flow name="httpService"&gt;
+      &lt;http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/&gt;
+      &lt;set-payload value="success" /&gt;
+   &lt;/flow&gt;
+&lt;/mule&gt;</code></pre>
+    <p>In Studio’s visual editor, you can simply pick the shared resource out of the dropdown list in the <strong>Connector Configuration</strong> field of the connector’s properties editor:</p>
+    <img src="../_theme/images/screenshots/pick-resource.png" alt="pick resource">
+  </section>
+</section>
+
+<section>
+  <h2 id="deploying-with-shared-resources"><a class="anchor" href="#deploying-with-shared-resources"></a>Deploying with Shared Resources</h2>
+  <p>In Anypoint Studio, when you deploy an application that is associated to a domain, by default Studio deploys both the application and the domain together. Also, when deploying a domain project, by default Studio deploys every application associated to it as well. You can change these default behaviors by changing the Run Configuration for the domain, you can in fact make any set of applications in your workspace be deployed together, even if they don&#8217;t share the same domain.
+  <p>To set this in Studio, open the drop-down menu next to the play button and select <strong>Run Configurations</strong>.</p>
+  <img src="../_theme/images/screenshots/run-configurations-1.png" alt="run configurations 1">
+  <p>Then pick the <strong>General</strong> tab, and tick or untick the boxes next to the projects that you want to always deploy together with the application that is currently selected on the navigation menu to the right.</p>
+  <img src="../_theme/images/screenshots/run-configuration-3.png" alt="run configuration 3">
+  <p>The steps below describe how to deploy your domain project and the applications outside Studio, to Standalone Mule.
+  <ol class="arabic">
+    <li>
+      <p>In Studio, select <strong>File</strong> ➡ <strong>Export</strong>. Then in the folder named <strong>Mule</strong>, pick <strong>Anypoint Studio Project to Mule Deployable Archive (includes Studio metadata)</strong>. This creates a .zip file that you can deploy to Standalone Mule.</p>
+      <img src="../_theme/images/screenshots/export.png" alt="export">
+      <aside>
+        <p>If you&#8217;ve created your Domain outside Studio, Zip the components of your domain project by selecting the <code>mule-domain-config.xml</code> file and, if you have one, the <code>lib</code> folder with its contents, and compressing them into a single zip file. Name this zip file with the name of the domain. Copy the zip file to <code>MULE_HOME/domains</code>.
+        <p>Note that right clicking the a folder and selecting <strong>Compress</strong> results in additional folders being added to your folder structure when Mule unzips your file, which causes deployment problems. Use the command line to zip your files recursively, or package your app as a zip file from Studio.
+      </aside>
+    <li>
+      <p>Save, zip, and copy the zip file for each application that references this domain into the <code>MULE_HOME/apps</code> folder.
+    <li>
+      <p>Start Mule via the command console.
+      <p>When Mule starts, it first deploys any domains found in the <code>MULE_HOME/domains</code> folder, then it deploys the applications in the <code>MULE_HOME/apps</code> folder, so that all domains are fully started before the applications start.
+  </ol>
+  <section>
+    <h3 id="deploying-domain-bundles"><a class="anchor" href="#deploying-domain-bundles"></a>Deploying Domain Bundles</h3>
+    <p>You also have the option of bundling the applications associated with a domain in your domain folder, then deploying the entire folder as a bundled unit. To do this, include an <code>apps</code> folder in your domain folder structure and place the zip files of your applications there.</p>
+    <img src="../_theme/images/screenshots/domainbundle.png" alt="domainbundle">
+    <p>The deployment behavior is the same as deploying a domain and apps separately: Mule first deploys the domain itself, then the applications. Deploying domain bundles simplifies the deployment mechanism for teams by removing the manual step of deploying applications separately.
+  </section>
+</section>
+
+<section>
+  <h2 id="example-mule-domain-projects"><a class="anchor" href="#example-mule-domain-projects"></a>Example Mule Domain Projects</h2>
+  <p>The following code examples show sample <code>mule-domain-config.xml</code> files, each configured to share a single resource. Note that you can define multiple shared resources in your <code>mule-domain-config.xml</code> file.
+  <section>
+    <h3 id="http"><a class="anchor" href="#http"></a>HTTP</h3>
+    <p>Sharing an HTTP connector within a domain allows you to reuse the same port within all the applications that belong to the domain.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd"&gt;
+
+    &lt;http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081"/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="https"><a class="anchor" href="#https"></a>HTTPS</h3>
+    <p>Sharing an HTTPS connector within a domain allows you to reuse the same port within all the applications that belong to the domain.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xmlns:spring="http://www.springframework.org/schema/beans"
+            xmlns:tls="http://www.openzeppelin.org/schema/mule/tls"
+            xmlns:doc="http://www.openzeppelin.org/schema/mule/documentation"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/mule/vm http://www.openzeppelin.org/schema/mule/vm/current/mule-vm.xsd
+              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+              http://www.openzeppelin.org/schema/mule/tls http://www.openzeppelin.org/schema/mule/tls/current/mule-tls.xsd"&gt;
+
+
+
+
+    &lt;http:listener-config name="HTTPS_Listener_Configuration" host="localhost" protocol="HTTPS" port="8081"&gt;
+        &lt;tls:context name="MyContext"&gt;
+            &lt;tls:trust-store path="ssltest-cacerts.jks" password="mypassword"/&gt;
+            &lt;tls:key-store path="ssltest-keystore.jks" keyPassword="mypassword" password="mypassword"/&gt;
+        &lt;/tls:context&gt;
+    &lt;/http:listener-config&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="vm"><a class="anchor" href="#vm"></a>VM</h3>
+    <p><strong><em>Enterprise</em></strong>
+    <p>Sharing a VM connector allows multiple Mule applications within the same domain to communicate through VM queues. Defining a VM connector as a shared resource is a best practice for consuming services provided by other Mule applications within the same container.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:vm="http://www.openzeppelin.org/schema/mule/vm"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/vm http://www.openzeppelin.org/schema/mule/vm/current/mule-vm.xsd"&gt;
+
+    &lt;vm:connector name="sharedVmConnector"/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="jms"><a class="anchor" href="#jms"></a>JMS</h3>
+    <p>Sharing a JMS connector creates a common connection to the broker between multiple applications, minimizing the number of client connections to the broker.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:spring="http://www.springframework.org/schema/beans"
+            xmlns:doc="http://www.openzeppelin.org/schema/mule/documentation"
+            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
+            xmlns:util="http://www.springframework.org/schema/util"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+              http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-current.xsd
+              http://www.openzeppelin.org/schema/mule/jms http://www.openzeppelin.org/schema/mule/jms/current/mule-jms.xsd"&gt;
+
+
+    &lt;spring:beans&gt;
+        &lt;util:properties id="providerProperties"&gt;
+            &lt;spring:prop key="queue.jndi-queue-in"&gt;in&lt;/spring:prop&gt;
+            &lt;spring:prop key="topic.jndi-topic-in"&gt;in&lt;/spring:prop&gt;
+        &lt;/util:properties&gt;
+    &lt;/spring:beans&gt;
+
+    &lt;jms:connector name="sharedJmsConnector"
+                   connectionFactoryJndiName="ConnectionFactory"&gt;
+        &lt;jms:default-jndi-name-resolver
+                jndiInitialFactory="org.apache.activemq.jndi.ActiveMQInitialContextFactory"
+                jndiProviderUrl="vm://localhost?broker.persistent=false&amp;amp;broker.useJmx=false"
+                jndiProviderProperties-ref="providerProperties"/&gt;
+    &lt;/jms:connector&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="jms-caching-connection-factory"><a class="anchor" href="#jms-caching-connection-factory"></a>JMS Caching Connection Factory</h3>
+    <p>Mule provides a caching connection factory for JMS connections to improve JMS resource utilization.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:spring="http://www.springframework.org/schema/beans"
+            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+              http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-current.xsd
+              http://www.openzeppelin.org/schema/mule/jms http://www.openzeppelin.org/schema/mule/jms/current/mule-jms.xsd"&gt;
+
+    &lt;spring:bean name="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
+        &lt;spring:property name="brokerURL" value="vm://localhost?broker.persistent=false&amp;amp;broker.useJmx=false"/&gt;
+    &lt;/spring:bean&gt;
+
+    &lt;jms:caching-connection-factory name="cachingConnectionFactory" connectionFactory-ref="connectionFactory"
+                                    cacheProducers="false" sessionCacheSize="1"/&gt;
+
+    &lt;jms:activemq-connector name="sharedJmsConnector"
+                            connectionFactory-ref="cachingConnectionFactory"
+                            specification="1.1"
+                            validateConnections="true"
+                            maxRedelivery="-1"
+                            numberOfConsumers="1"/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="database-configuration"><a class="anchor" href="#database-configuration"></a>Database Configuration</h3>
+      <p>Sharing a <code>db</code> configuration creates a common connection to a database between multiple applications, minimizing the number of client connections to the database.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:spring="http://www.springframework.org/schema/beans"
+            xmlns:db="http://www.openzeppelin.org/schema/mule/db"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+              http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-current.xsd
+              http://www.openzeppelin.org/schema/mule/db http://www.openzeppelin.org/schema/mule/db/current/mule-db.xsd"&gt;
+
+
+    &lt;spring:bean id="jdbcDataSource" class="org.enhydra.jdbc.standard.StandardDataSource" destroy-method="shutdown"&gt;
+        &lt;spring:property name="driverName" value="org.apache.derby.jdbc.EmbeddedDriver"/&gt;
+        &lt;spring:property name="url" value="${database.connection}"/&gt;
+    &lt;/spring:bean&gt;
+
+    &lt;db:generic-config name="dbConfig" dataSource-ref="jdbcDataSource"/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="tls-context"><a class="anchor" href="#tls-context"></a>TLS Context</h3>
+    <p>Share <a href="../connectors/tls/tls-configuration.html" class="xref">TLS configurations</a> allows shared <a href="#http">listener configurations</a> to use the same TLS configuration.
+    <p>Additionally, all data (including passwords) would only need to be visible at the domain level, so app developers could use the certificates without having to access other critical data.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;domain:mule-domain
+        xmlns="http://www.openzeppelin.org/schema/mule/core"
+        xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:spring="http://www.springframework.org/schema/beans"
+        xmlns:doc="http://www.openzeppelin.org/schema/mule/documentation"
+        xsi:schemaLocation="
+               http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+               http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+               http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd"&gt;
+
+&lt;tls:context name="customContext"&gt;
+        &lt;tls:trust-store path="trustStore" password="mulepassword"/&gt;
+        &lt;tls:key-store path="clientKeystore" keyPassword="mulepassword" password="mulepassword"/&gt;
+&lt;/tls:context&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="wmq"><a class="anchor" href="#wmq"></a>WMQ</h3>
+    <p><strong><em>Enterprise</em></strong>
+    <p>Sharing a WMQ connector creates a common connection to the broker between multiple applications, minimizing the number of client connections to the broker.
+    <p>To share a WMQ connector as a shared resource, you need to <strong>remove</strong> the <code>mule-transport-wmq-ee-&lt;mule-version&gt;.jar</code> from <code>$MULE_HOME/lib/mule/per-app/</code> folder and <strong>remove</strong> native wmq jars from your application&#8217;s <code>$MULE_HOME/apps/&lt;my-app&gt;/lib/</code> directory. Place all these jars in the <code>$MULE_HOME/domains/&lt;my-domain&gt;/lib/</code> folder instead.
+    <p>For example:
+      <table class="tableblock frame-all grid-all spread">
+        <colgroup>
+          <col>
+          <col>
+        </colgroup>
+        <thead>
+        <tr>
+          <th>Before</th>
+          <th>After</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <p>$MULE_HOME/lib/mule/per-app/mule-transport-wmq-ee-&lt;mule-version&gt;.jar
+          </td>
+          <td>
+            <p>$MULE_HOME/domains/&lt;my-domain&gt;/lib/mule-transport-wmq-ee-&lt;mule-version&gt;.jar
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mq-7.0.jar
+          </td>
+          <td>
+            <p>$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mq-7.0.jar
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mq.jmqi-7.0.jar
+          </td>
+          <td>
+            <p>$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mq.jmqi-7.0.jar
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mqetclient-7.0.jar
+          </td>
+          <td>
+            <p>$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mqetclient-7.0.jar
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mqjms-7.0.jar
+          </td>
+          <td>
+            <p>$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mqjms-7.0.jar
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:wmq="http://www.openzeppelin.org/schema/mule/ee/wmq"
+            xmlns:context="http://www.springframework.org/schema/context"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/mule/ee/wmq http://www.openzeppelin.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd"&gt;
+
+
+
+    &lt;context:property-placeholder location="wmq-test.properties"/&gt;
+
+    &lt;wmq:connector name="sharedJmsConnector"
+                   hostName="${wmq.host}"
+                   port="${wmq.port}"
+                   queueManager="${wmq.queue.manager}"
+                   transportType="CLIENT_MQ_TCPIP"
+                   username="${wmq.username}"
+                   password="${wmq.password}"&gt;
+    &lt;/wmq:connector&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="jboss-transaction-manager"><a class="anchor" href="#jboss-transaction-manager"></a>JBoss Transaction Manager</h3>
+    <p>When you define JMS connectors and <code>db</code> configurations as shared resources in your domain, you may have to use XA transactions in your applications. In this case, you must define the XA transaction manager in your domain configuration as well.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:jbossts="http://www.openzeppelin.org/schema/mule/jbossts"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/mule/jbossts http://www.openzeppelin.org/schema/mule/jbossts/current/mule-jbossts.xsd"&gt;
+
+    &lt;jbossts:transaction-manager/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+  <section>
+    <h3 id="bitronix-transaction-manager"><a class="anchor" href="#bitronix-transaction-manager"></a>Bitronix Transaction Manager</h3>
+    <p><strong><em>Enterprise</em></strong>
+    <p>When you define JMS connectors and <code>db</code> configurations as shared resources in your domain, you may have to use XA transactions in your applications. In this case, you must define the XA transaction manager in your domain configuration as well.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
+            xmlns:bti="http://www.openzeppelin.org/schema/mule/ee/bti"
+            xmlns:spring="http://www.springframework.org/schema/beans"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd"&gt;
+
+    &lt;bti:transaction-manager/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+    <p>The Bitronix module integration also provides a JMS connection factory pool and a datasource pool to be used when using a datasource with XA transactions. You can define either or both of them as shared resources.
+    <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
+            xmlns:bti="http://www.openzeppelin.org/schema/mule/ee/bti"
+            xmlns:spring="http://www.springframework.org/schema/beans"
+            xsi:schemaLocation="
+              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/mule/jms http://www.openzeppelin.org/schema/mule/jms/current/mule-jms.xsd
+              http://www.openzeppelin.org/schema/mule/ee/bti http://www.openzeppelin.org/schema/mule/ee/bti/current/mule-bti-ee.xsd"&gt;
+
+
+     &lt;spring:bean name="xaConnectionFactory" class="org.apache.activemq.ActiveMQXAConnectionFactory"&gt;
+        &lt;spring:property name="brokerURL" value="vm://localhost?broker.persistent=false&amp;amp;broker.useJmx=false"/&gt;
+    &lt;/spring:bean&gt;
+
+
+    &lt;jms:activemq-xa-connector connectionFactory-ref="connectionFactoryPool" name="sharedJmsConnector"
+                               maxRedelivery="-1" specification="1.1" numberOfConsumers="1"/&gt;
+
+    &lt;bti:xa-connection-factory-pool name="connectionFactoryPool" minPoolSize="5" maxPoolSize="15" maxIdleTime="40"
+                                    connectionFactory-ref="xaConnectionFactory"/&gt;
+
+    &lt;bti:transaction-manager/&gt;
+
+&lt;/domain:mule-domain&gt;</code></pre>
+  </section>
+</section>
+<section>
+  <h2 id="tips"><a class="anchor" href="#tips"></a>Tips</h2>
+  <ul>
+    <li>
+      <p>If you have existing applications that you created in Studio and you want to modify them to use shared resources you can follow all the same steps above.
+    <li>
+      <p>Connectors defined at the domain level are automatically used as the default connectors for the applications deployed in those domains. When only one connector of a specific type is defined at the domain level and the application doesn&#8217;t explicitly contain a reference to another connector of the same type, then the one defined at the domain level is used as the default connector for that application. In such case the <code>connector-ref</code> or <code>config-ref</code> attribute to use the shared resource is optional.
+    <li>
+      <p>Note that although shared resources is limited to the selected connectors and libraries covered in this document, there are ways to share other configuration fragments in Mule. Refer to <a href="../shared-resources/sharing-custom-configuration-fragments.html" class="xref">Sharing Custom Configuration Fragments</a> for details.
+  </ul>
+</section>
+<section>
+  <h2 id="see-also"><a class="anchor" href="#see-also"></a>See Also</h2>
+  <p>Access reference documentation for:
+  <ul>
+    <li>
+      <p><a href="../transports/vm-transport-reference.html" class="xref">VM</a>
+    <li>
+      <p><a href="../connectors/database/database-connector.html" class="xref">DB</a>
+    <li>
+      <p><a href="../transports/jms-transport-reference.html" class="xref">JMS</a>
+    <li>
+      <p><a href="../connectors/http/http-connector.html" class="xref">HTTP Connector</a>
+    <li>
+      <p><a href="../transports/mule-wmq-transport-reference.html" class="xref">WMQ</a>
+    <li>
+      <p><a href="../modules/jboss-transaction-manager-reference.html" class="xref">JBoss</a>
+    <li>
+      <p><a href="../administer/setting-environment-variables.html" class="xref">Set Environment Variables</a>
+  </ul>
+</section>
