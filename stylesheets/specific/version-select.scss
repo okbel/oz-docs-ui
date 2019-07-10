@@ -1,10 +1,8 @@
-
 .version-select {
   font-size: 12px;
   font-weight: var(--weight-normal);
   width: 45px;
 }
-
 
 .btn-version {
   border: 1px solid var(--aluminum-4);
@@ -33,7 +31,6 @@
     width: var(--md);
   }
 
-  
   &:focus {
     background: var(--tertiary);
     border-color: var(--core-violet-3);
@@ -42,7 +39,48 @@
     .popover {
       opacity: 1;
       pointer-events: auto;
-      transform: scale(1) translate3d(0,0,0);
+      transform: scale(1) translate3d(0, 0, 0);
+      text-align: left;
+      padding: 22px;
+
+      .ol {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .popover__heading,
+      .li {
+        font-family: HelveticaNeue;
+        font-size: 0.98rem;
+        color: #282846;
+        line-height: 22px;
+      }
+
+      .popover__heading {
+        opacity: 0.9;
+        margin-bottom: 5px;
+        display: inline-block;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .li {
+        opacity: 0.8;
+        &:first-child {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .ol .li {
+        display: inline-block;
+      }
     }
   }
 }
@@ -51,7 +89,7 @@
   background: var(--tertiary);
   border: 1px solid var(--aluminum-3);
   border-radius: 2px;
-  box-shadow: 0 2px 9px rgba(0,0,0,.1);
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
   color: var(--steel-4);
   cursor: default;
   min-width: 200px;
@@ -61,9 +99,10 @@
   position: absolute;
   right: 0;
   top: 25px;
-  transform: scale(.95) translate3d(5px,-25px,0);
+  transform: scale(0.95) translate3d(5px, -25px, 0);
   transform-origin: 95% 0;
-  transition: opacity var(--transition-speed-sm) var(--transition-timing), transform var(--transition-speed-sm) var(--transition-timing);;
+  transition: opacity var(--transition-speed-sm) var(--transition-timing),
+    transform var(--transition-speed-sm) var(--transition-timing);
   z-index: 1;
 
   .ol + .ol {
@@ -98,7 +137,7 @@
     }
 
     &:active {
-      background: #e2f8ff; 
+      background: #e2f8ff;
       color: var(--core-violet-3);
     }
 

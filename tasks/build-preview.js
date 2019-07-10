@@ -37,7 +37,7 @@ module.exports = async (src, dest, destTheme) => {
   // console.log('sampleUiModel', sampleUiModel);
 
   vfs
-    .src(['preview-site/**/*.html'])
+    .src(['preview-site/**/*.adoc'])
     .pipe(
       map((file, next) => {
         const doc = asciidoctor.load(file.contents, {
@@ -47,6 +47,7 @@ module.exports = async (src, dest, destTheme) => {
 
         const compiledLayout =
           layoutsIndex[file.stem === '404' ? '404.hbs' : 'default.hbs'];
+
         const previewSitePath = path.resolve('preview-site');
         const relativeToRoot = path.relative(file.path, previewSitePath);
         sampleUiModel['themeRootPath'] = path.join(
@@ -57,6 +58,16 @@ module.exports = async (src, dest, destTheme) => {
         sampleUiModel['siteRootUrl'] = path.join(relativeToRoot, 'index.html');
         sampleUiModel['contents'] = Buffer.from(doc.convert());
         sampleUiModel['navigation-link-prefix'] = relativeToRoot;
+        sampleUiModel.title = doc.getDocumentTitle();
+        sampleUiModel.layout = doc.getAttribute('page-layout', 'default');
+        sampleUiModel.attributes = Object.entries(doc.getAttributes())
+          .filter(([name, val]) => name.startsWith('page-'))
+          .reduce((accum, [name, val]) => {
+            accum[name.substr(5)] = val;
+            return accum;
+          }, {});
+
+        file.extname = '.html';
         file.contents = new Buffer(compiledLayout(sampleUiModel));
         next(null, file);
       })
