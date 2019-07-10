@@ -6,6 +6,13 @@ body {
   line-height: 1.6;
 }
 
-.wrapper {
+.root {
+  display: flex;
   max-width: 100vw;
+  align-content: flex-start;
+
+  > nav {
+    flex: 0;
+    flex-basis: 300px;
+  }
 }

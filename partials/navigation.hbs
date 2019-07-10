@@ -6,10 +6,11 @@
   data-version="{{domain.version.string}}"
   role="navigation"
 >
-  {{!-- search wrapper used to position search icon --}}
   <div class="flex align-center search">
-    <input class="input" placeholder="Search docs" type="search">
+    <input class="input" placeholder="Search" type="search">
   </div>
+
+  <div class="nav__domains">
   {{#each site.domains}}
   <ol class="nav-list {{#if ./selected}}active{{/if}} js-nav-list">
     <li class="flex align-center justify-justified nav-li">
@@ -37,14 +38,9 @@
             {{#unless ./latest}}
             <li class="flex align-center justify-justified li" {{#if ./selected}}selected{{/if}} value="{{{./url}}}">
               {{./string}}
-              @@include('build/_theme/images/icons/pin.svg')
             {{/unless}}
             {{/each}}
           </ol>
-          <small class="flex align-center small">
-            @@include('build/_theme/images/icons/pin.svg')
-            Remember on this computer
-          </small>
         </div>
       </button>
       {{/unless}}
@@ -52,5 +48,6 @@
     {{> navigation-tree items=items}}
   </ol>
   {{/each}}
+  </div>
 </nav>
 

@@ -1,16 +1,33 @@
 .nav {
-  max-height: 100vh;
+  height: 100vh;
   overflow-y: auto;
   padding: var(--lg);
   position: sticky;
   top: 0;
   width: var(--nav-width);
+  background: #F8F8FA;
+  color: rgb(40, 40, 70);
+  padding-top: 70px;
 
-  // search input wrapper
-  .search {
-    margin-bottom: var(--sm);
+  .nav__domains {
+    margin-top: 25px;
+  }
+
+  .search > .input {
+    margin-bottom: 50px;
     position: relative;
     width: $nav-width - ($lg * 2);
+    width: 100%;
+    border: none;
+    font-size: 0.8rem;
+    background: transparent;
+    padding: 0 2rem;
+    border-bottom: solid 1px #e2e2e7;
+    height: 70px;
+    color: rgba(40, 40, 70, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
 
     &::before {
       background-image: url(../images/icons/search.svg);
@@ -26,12 +43,9 @@
       width: var(--md);
       z-index: 1;
     }
-
-    .input {
-      padding-left: 25px; // align to navigation
-    }
   }
 }
+
 
 .nav-list {
   max-height: var(--nav-item-height);

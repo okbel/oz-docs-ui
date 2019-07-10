@@ -2,7 +2,7 @@
   <h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
   <div class="sectionbody">
     <div class="paragraph">
-      <p>This document assumes that you are using Anypoint Studio with Mule runtime 3.6 or newer, or that you are building your applications outside Studio and deploying them to Mule Standalone
+      <p>This document assumes that you are using Anypoint Studio with openzeppelin runtime 3.6 or newer, or that you are building your applications outside Studio and deploying them to openzeppelin Standalone
         <strong>3.5.0</strong> runtime or newer.</p>
     </div>
     <div class="listingblock">
@@ -64,7 +64,7 @@
           <p>Defining flows, subflows, or any message processors as shared resources is not supported.</p>
         </li>
         <li>
-          <p>To share a WMQ connector as a shared resource, you need to remove the mule-transport-wmq-ee-&lt;mule-version&gt;.jar file from the $MULE_HOME/lib/mule/per-app/ directory and remove all the native jars for WMQ connectivity in your application&#8217;s $MULE_HOME/apps/&lt;my-app&gt;/lib/ directory. Place all these jars in the $MULE_HOME/domains/&lt;my-domain&gt;/lib/ folder instead.</p>
+          <p>To share a WMQ connector as a shared resource, you need to remove the openzeppelin-transport-wmq-ee-&lt;openzeppelin-version&gt;.jar file from the $openzeppelin_HOME/lib/openzeppelin/per-app/ directory and remove all the native jars for WMQ connectivity in your application&#8217;s $openzeppelin_HOME/apps/&lt;my-app&gt;/lib/ directory. Place all these jars in the $openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/ folder instead.</p>
         </li>
         <li>
           <p>Adding properties in the configuration files of applications that use shared resources can result in issues, as these properties are shared with other apps in the domain and there may be conflicts. You can instead
@@ -113,7 +113,7 @@
   <h2 id="basic-anatomy"><a class="anchor" href="#basic-anatomy"></a>Basic Anatomy</h2>
   <div class="sectionbody">
     <div class="paragraph">
-      <p>The following files are key within the Mule Domain Project:</p>
+      <p>The following files are key within the openzeppelin Domain Project:</p>
     </div>
     <table class="tableblock frame-all grid-all spread">
       <colgroup>
@@ -122,11 +122,11 @@
       </colgroup>
       <tbody>
       <tr>
-        <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mule-domain-config.xml</strong></p>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>openzeppelin-domain-config.xml</strong></p>
         </td>
         <td class="tableblock halign-left valign-top">
           <p class="tableblock">This is the shared resources configuration file. This file must have the
-            <code>mule-domain-config.xml</code> file name.</p></td>
+            <code>openzeppelin-domain-config.xml</code> file name.</p></td>
       </tr>
       <tr>
         <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>/lib</strong></p></td>
@@ -135,12 +135,12 @@
         </td>
       </tr>
       <tr>
-        <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mule-deploy.properties</strong></p>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>openzeppelin-deploy.properties</strong></p>
         </td>
         <td class="tableblock halign-left valign-top">
-          <p class="tableblock">This optional file may contain two configuration properties are equivalent to the ones in a Mule application:
+          <p class="tableblock">This optional file may contain two configuration properties are equivalent to the ones in a openzeppelin application:
             <strong>redeployment.enabled</strong> and <strong>loader.overrides</strong>. See
-            <a href="../deploy/mule-application-deployment-descriptor#deployment-descriptor-in-a-domain.html" class="xref">Deployment Descriptor in a Domain</a> for more details.
+            <a href="../deploy/openzeppelin-application-deployment-descriptor#deployment-descriptor-in-a-domain.html" class="xref">Deployment Descriptor in a Domain</a> for more details.
           </p></td>
       </tr>
       </tbody>
@@ -189,7 +189,7 @@
       <ol class="arabic">
         <li>
           <p>In the top menu bar select <strong>File</strong> &gt; <strong>New</strong> &gt;
-            <strong>Mule Domain Project</strong></p>
+            <strong>openzeppelin Domain Project</strong></p>
           <div class="imageblock">
             <div class="content">
               <img src="../_images/shared-resources/new-domain.png" alt="new domain">
@@ -197,7 +197,7 @@
           </div>
         </li>
         <li>
-          <p>Fill in the same fields as you would with a regular Mule Project:</p>
+          <p>Fill in the same fields as you would with a regular openzeppelin Project:</p>
           <div class="imageblock">
             <div class="content">
               <img src="../_images/shared-resources/create-new-domain.png" alt="create new domain">
@@ -236,8 +236,8 @@
         <a class="anchor" href="#defining-shared-resources"></a>Defining Shared Resources</h3>
       <div class="paragraph">
         <p>You can configure the domain project that you just created in the previous step by defining shared resources in the the
-          <code>mule-domain-config.xml</code> file. You can define multiple resources in this configuration file. In Anypoint Studio, there are two different views for editing this file. The
-          <code>source</code> view should be the most familiar for those used to the XML editor in regular Studio Mule projects:
+          <code>openzeppelin-domain-config.xml</code> file. You can define multiple resources in this configuration file. In Anypoint Studio, there are two different views for editing this file. The
+          <code>source</code> view should be the most familiar for those used to the XML editor in regular Studio openzeppelin projects:
         </p>
       </div>
       <div class="imageblock">
@@ -253,7 +253,7 @@
       </div>
       <div class="paragraph">
         <p>Add additional namespaces and schema locations for each resource that you want to share. See the example definitions for each supported shared resource below for full namespace definitions required for each. Note that the examples are separated into separate XML configurations for clarity, but you can define multiple shared resources in a single
-          <code>mule-domain</code> project.</p>
+          <code>openzeppelin-domain</code> project.</p>
       </div>
     </div>
     <div class="sect2">
@@ -274,7 +274,7 @@
       </div>
       <div class="paragraph">
         <p>In Anypoint Studio, to associate an existing application with a domain, edit the
-          <code>mule-project.xml</code> file located at root level in the project. In the graphical view of this file, you see a
+          <code>openzeppelin-project.xml</code> file located at root level in the project. In the graphical view of this file, you see a
           <strong>Domain</strong> field, which by default is set to
           <strong>default</strong>, this value gives each project its independent domain. Change this value, the dropdown list on this field displays all of the domains you&#8217;ve created in the current workspace.
         </p>
@@ -296,7 +296,7 @@
             <td class="content">
               <div class="paragraph">
                 <p>If you&#8217;re creating your applications outside Studio, then to associate an existing application with a domain, edit the
-                  <code>mule-deploy.properties</code> file to include the domain property:</p>
+                  <code>openzeppelin-deploy.properties</code> file to include the domain property:</p>
               </div>
               <div class="paragraph">
                 <p><code>domain= &lt;name of domain folder&gt;</code></p>
@@ -305,7 +305,7 @@
                 <p>For example:</p>
               </div>
               <div class="paragraph">
-                <p><code>domain=mule-test-domain</code></p>
+                <p><code>domain=openzeppelin-test-domain</code></p>
               </div>
             </td>
           </tr>
@@ -317,24 +317,24 @@
         <a class="anchor" href="#referencing-shared-resources"></a>Referencing Shared Resources</h3>
       <div class="paragraph">
         <p>In the following example
-          <code>mule-domain-config.xml</code>, an HTTP connector is defined as a shared resource.</p>
+          <code>openzeppelin-domain-config.xml</code>, an HTTP connector is defined as a shared resource.</p>
       </div>
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
-            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xmlns:domain="http://www.openzeppelin.org/schema/openzeppelin/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/openzeppelin/http"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/http http://www.openzeppelin.org/schema/openzeppelin/http/current/openzeppelin-http.xsd"&gt;
 
     &lt;http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
       <div class="paragraph">
@@ -344,32 +344,32 @@
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
-            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xmlns:domain="http://www.openzeppelin.org/schema/openzeppelin/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/openzeppelin/http"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/http http://www.openzeppelin.org/schema/openzeppelin/http/current/openzeppelin-http.xsd"&gt;
 
     &lt;http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
       <div class="paragraph">
-        <p>Any Mule application associated with the domain can make use of the shared resource by referencing it within the configuration, just as you would reference a resource within the project itself. In the example below, the HTTP listener connector references the shared resource named
+        <p>Any openzeppelin application associated with the domain can make use of the shared resource by referencing it within the configuration, just as you would reference a resource within the project itself. In the example below, the HTTP listener connector references the shared resource named
           <code>HTTP_Listener_Configuration</code>.</p>
       </div>
       <div class="listingblock">
         <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;mule&gt;
+<pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;openzeppelin&gt;
    &lt;flow name="httpService"&gt;
       &lt;http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/&gt;
       &lt;set-payload value="success" /&gt;
    &lt;/flow&gt;
-&lt;/mule&gt;</code></pre>
+&lt;/openzeppelin&gt;</code></pre>
         </div>
       </div>
       <div class="paragraph">
@@ -411,13 +411,13 @@
       </div>
     </div>
     <div class="paragraph">
-      <p>The steps below describe how to deploy your domain project and the applications outside Studio, to Standalone Mule.</p>
+      <p>The steps below describe how to deploy your domain project and the applications outside Studio, to Standalone openzeppelin.</p>
     </div>
     <div class="olist arabic">
       <ol class="arabic">
         <li>
-          <p>In Studio, select <code>File &gt; Export</code>. Then in the folder named <strong>Mule</strong>, pick
-            <strong>Anypoint Studio Project to Mule Deployable Archive (includes Studio metadata)</strong>. This creates a .zip file that you can deploy to Standalone Mule.
+          <p>In Studio, select <code>File &gt; Export</code>. Then in the folder named <strong>openzeppelin</strong>, pick
+            <strong>Anypoint Studio Project to openzeppelin Deployable Archive (includes Studio metadata)</strong>. This creates a .zip file that you can deploy to Standalone openzeppelin.
           </p>
           <div class="imageblock">
             <div class="content">
@@ -433,13 +433,13 @@
                 <td class="content">
                   <div class="paragraph">
                     <p>If you&#8217;ve created your Domain outside Studio, Zip the components of your domain project by selecting the
-                      <code>mule-domain-config.xml</code> file and, if you have one, the
+                      <code>openzeppelin-domain-config.xml</code> file and, if you have one, the
                       <code>lib</code> folder with its contents, and compressing them into a single zip file. Name this zip file with the name of the domain. Copy the zip file to
-                      <code>MULE_HOME/domains</code>.</p>
+                      <code>openzeppelin_HOME/domains</code>.</p>
                   </div>
                   <div class="paragraph">
                     <p>Note that right clicking the a folder and selecting
-                      <strong>Compress</strong> results in additional folders being added to your folder structure when Mule unzips your file, which causes deployment problems. Use the command line to zip your files recursively, or package your app as a zip file from Studio.
+                      <strong>Compress</strong> results in additional folders being added to your folder structure when openzeppelin unzips your file, which causes deployment problems. Use the command line to zip your files recursively, or package your app as a zip file from Studio.
                     </p>
                   </div>
                 </td>
@@ -449,14 +449,14 @@
         </li>
         <li>
           <p>Save, zip, and copy the zip file for each application that references this domain into the
-            <code>MULE_HOME/apps</code> folder.</p>
+            <code>openzeppelin_HOME/apps</code> folder.</p>
         </li>
         <li>
-          <p>Start Mule via the command console.</p>
+          <p>Start openzeppelin via the command console.</p>
           <div class="paragraph">
-            <p>When Mule starts, it first deploys any domains found in the
-              <code>MULE_HOME/domains</code> folder, then it deploys the applications in the
-              <code>MULE_HOME/apps</code> folder, so that all domains are fully started before the applications start.
+            <p>When openzeppelin starts, it first deploys any domains found in the
+              <code>openzeppelin_HOME/domains</code> folder, then it deploys the applications in the
+              <code>openzeppelin_HOME/apps</code> folder, so that all domains are fully started before the applications start.
             </p>
           </div>
         </li>
@@ -476,19 +476,19 @@
         </div>
       </div>
       <div class="paragraph">
-        <p>The deployment behavior is the same as deploying a domain and apps separately: Mule first deploys the domain itself, then the applications. Deploying domain bundles simplifies the deployment mechanism for teams by removing the manual step of deploying applications separately.</p>
+        <p>The deployment behavior is the same as deploying a domain and apps separately: openzeppelin first deploys the domain itself, then the applications. Deploying domain bundles simplifies the deployment mechanism for teams by removing the manual step of deploying applications separately.</p>
       </div>
     </div>
   </div>
 </div>
 <div class="sect1">
-  <h2 id="example-mule-domain-projects">
-    <a class="anchor" href="#example-mule-domain-projects"></a>Example Mule Domain Projects</h2>
+  <h2 id="example-openzeppelin-domain-projects">
+    <a class="anchor" href="#example-openzeppelin-domain-projects"></a>Example openzeppelin Domain Projects</h2>
   <div class="sectionbody">
     <div class="paragraph">
       <p>The following code examples show sample
-        <code>mule-domain-config.xml</code> files, each configured to share a single resource. Note that you can define multiple shared resources in your
-        <code>mule-domain-config.xml</code> file.</p>
+        <code>openzeppelin-domain-config.xml</code> files, each configured to share a single resource. Note that you can define multiple shared resources in your
+        <code>openzeppelin-domain-config.xml</code> file.</p>
     </div>
     <div class="sect2">
       <h3 id="http"><a class="anchor" href="#http"></a>HTTP</h3>
@@ -498,18 +498,18 @@
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
-            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xmlns:domain="http://www.openzeppelin.org/schema/openzeppelin/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/openzeppelin/http"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/http http://www.openzeppelin.org/schema/openzeppelin/http/current/openzeppelin-http.xsd"&gt;
 
     &lt;http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081"/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -521,20 +521,20 @@
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
-            xmlns:http="http://www.openzeppelin.org/schema/mule/http"
+            xmlns:domain="http://www.openzeppelin.org/schema/openzeppelin/ee/domain"
+            xmlns:http="http://www.openzeppelin.org/schema/openzeppelin/http"
             xmlns:spring="http://www.springframework.org/schema/beans"
-            xmlns:tls="http://www.openzeppelin.org/schema/mule/tls"
-            xmlns:doc="http://www.openzeppelin.org/schema/mule/documentation"
+            xmlns:tls="http://www.openzeppelin.org/schema/openzeppelin/tls"
+            xmlns:doc="http://www.openzeppelin.org/schema/openzeppelin/documentation"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/vm http://www.openzeppelin.org/schema/mule/vm/current/mule-vm.xsd
-              http://www.openzeppelin.org/schema/mule/http http://www.openzeppelin.org/schema/mule/http/current/mule-http.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/vm http://www.openzeppelin.org/schema/openzeppelin/vm/current/openzeppelin-vm.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/http http://www.openzeppelin.org/schema/openzeppelin/http/current/openzeppelin-http.xsd
               http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-              http://www.openzeppelin.org/schema/mule/tls http://www.openzeppelin.org/schema/mule/tls/current/mule-tls.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/tls http://www.openzeppelin.org/schema/openzeppelin/tls/current/openzeppelin-tls.xsd"&gt;
 
 
 
@@ -546,7 +546,7 @@
         &lt;/tls:context&gt;
     &lt;/http:listener-config&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -556,20 +556,20 @@
         <p><strong><em>Enterprise</em></strong></p>
       </div>
       <div class="paragraph">
-        <p>Sharing a VM connector allows multiple Mule applications within the same domain to communicate through VM queues. Defining a VM connector as a shared resource is a best practice for consuming services provided by other Mule applications within the same container.</p>
+        <p>Sharing a VM connector allows multiple openzeppelin applications within the same domain to communicate through VM queues. Defining a VM connector as a shared resource is a best practice for consuming services provided by other openzeppelin applications within the same container.</p>
       </div>
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:vm="http://www.openzeppelin.org/schema/mule/vm"
+            xmlns:vm="http://www.openzeppelin.org/schema/openzeppelin/vm"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/vm http://www.openzeppelin.org/schema/mule/vm/current/mule-vm.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/vm http://www.openzeppelin.org/schema/openzeppelin/vm/current/openzeppelin-vm.xsd"&gt;
 
     &lt;vm:connector name="sharedVmConnector"/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -582,18 +582,18 @@
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:spring="http://www.springframework.org/schema/beans"
-            xmlns:doc="http://www.openzeppelin.org/schema/mule/documentation"
-            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
+            xmlns:doc="http://www.openzeppelin.org/schema/openzeppelin/documentation"
+            xmlns:jms="http://www.openzeppelin.org/schema/openzeppelin/jms"
             xmlns:util="http://www.springframework.org/schema/util"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
               http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
               http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-current.xsd
-              http://www.openzeppelin.org/schema/mule/jms http://www.openzeppelin.org/schema/mule/jms/current/mule-jms.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/jms http://www.openzeppelin.org/schema/openzeppelin/jms/current/openzeppelin-jms.xsd"&gt;
 
 
     &lt;spring:beans&gt;
@@ -611,7 +611,7 @@
                 jndiProviderProperties-ref="providerProperties"/&gt;
     &lt;/jms:connector&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -619,21 +619,21 @@
       <h3 id="jms-caching-connection-factory">
         <a class="anchor" href="#jms-caching-connection-factory"></a>JMS Caching Connection Factory</h3>
       <div class="paragraph">
-        <p>Mule provides a caching connection factory for JMS connections to improve JMS resource utilization.</p>
+        <p>openzeppelin provides a caching connection factory for JMS connections to improve JMS resource utilization.</p>
       </div>
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:spring="http://www.springframework.org/schema/beans"
-            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
+            xmlns:jms="http://www.openzeppelin.org/schema/openzeppelin/jms"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
               http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
               http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-current.xsd
-              http://www.openzeppelin.org/schema/mule/jms http://www.openzeppelin.org/schema/mule/jms/current/mule-jms.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/jms http://www.openzeppelin.org/schema/openzeppelin/jms/current/openzeppelin-jms.xsd"&gt;
 
     &lt;spring:bean name="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
         &lt;spring:property name="brokerURL" value="vm://localhost?broker.persistent=false&amp;amp;broker.useJmx=false"/&gt;
@@ -649,7 +649,7 @@
                             maxRedelivery="-1"
                             numberOfConsumers="1"/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -664,16 +664,16 @@
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:spring="http://www.springframework.org/schema/beans"
-            xmlns:db="http://www.openzeppelin.org/schema/mule/db"
+            xmlns:db="http://www.openzeppelin.org/schema/openzeppelin/db"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
               http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
               http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-current.xsd
-              http://www.openzeppelin.org/schema/mule/db http://www.openzeppelin.org/schema/mule/db/current/mule-db.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/db http://www.openzeppelin.org/schema/openzeppelin/db/current/openzeppelin-db.xsd"&gt;
 
 
     &lt;spring:bean id="jdbcDataSource" class="org.enhydra.jdbc.standard.StandardDataSource" destroy-method="shutdown"&gt;
@@ -683,7 +683,7 @@
 
     &lt;db:generic-config name="dbConfig" dataSource-ref="jdbcDataSource"/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -698,23 +698,23 @@
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;domain:mule-domain
-        xmlns="http://www.openzeppelin.org/schema/mule/core"
-        xmlns:domain="http://www.openzeppelin.org/schema/mule/ee/domain"
+&lt;domain:openzeppelin-domain
+        xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
+        xmlns:domain="http://www.openzeppelin.org/schema/openzeppelin/ee/domain"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:spring="http://www.springframework.org/schema/beans"
-        xmlns:doc="http://www.openzeppelin.org/schema/mule/documentation"
+        xmlns:doc="http://www.openzeppelin.org/schema/openzeppelin/documentation"
         xsi:schemaLocation="
-               http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
+               http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-               http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd"&gt;
+               http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd"&gt;
 
 &lt;tls:context name="customContext"&gt;
-        &lt;tls:trust-store path="trustStore" password="mulepassword"/&gt;
-        &lt;tls:key-store path="clientKeystore" keyPassword="mulepassword" password="mulepassword"/&gt;
+        &lt;tls:trust-store path="trustStore" password="openzeppelinpassword"/&gt;
+        &lt;tls:key-store path="clientKeystore" keyPassword="openzeppelinpassword" password="openzeppelinpassword"/&gt;
 &lt;/tls:context&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -728,9 +728,9 @@
       </div>
       <div class="paragraph">
         <p>To share a WMQ connector as a shared resource, you need to
-          <strong>remove</strong> the mule-transport-wmq-ee-&lt;mule-version&gt;.jar from $MULE_HOME/lib/mule/per-app/ folder and
-          <strong>remove</strong> native wmq jars from your application&#8217;s $MULE_HOME/apps/&lt;my-app&gt;/lib/ directory. Place all these jars in the
-          <code>$MULE_HOME/domains/&lt;my-domain&gt;/lib/</code> folder instead.</p>
+          <strong>remove</strong> the openzeppelin-transport-wmq-ee-&lt;openzeppelin-version&gt;.jar from $openzeppelin_HOME/lib/openzeppelin/per-app/ folder and
+          <strong>remove</strong> native wmq jars from your application&#8217;s $openzeppelin_HOME/apps/&lt;my-app&gt;/lib/ directory. Place all these jars in the
+          <code>$openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/</code> folder instead.</p>
       </div>
       <div class="paragraph">
         <p>For example:</p>
@@ -749,48 +749,48 @@
         <tbody>
         <tr>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/lib/mule/per-app/mule-transport-wmq-ee-&lt;mule-version&gt;.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/lib/openzeppelin/per-app/openzeppelin-transport-wmq-ee-&lt;openzeppelin-version&gt;.jar</p></td>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/domains/&lt;my-domain&gt;/lib/mule-transport-wmq-ee-&lt;mule-version&gt;.jar</p>
+            <p class="tableblock">$openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/openzeppelin-transport-wmq-ee-&lt;openzeppelin-version&gt;.jar</p>
           </td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mq-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mq-7.0.jar</p></td>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mq-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mq-7.0.jar</p></td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mq.jmqi-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mq.jmqi-7.0.jar</p></td>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mq.jmqi-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mq.jmqi-7.0.jar</p></td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mqetclient-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mqetclient-7.0.jar</p></td>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mqetclient-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mqetclient-7.0.jar</p></td>
         </tr>
         <tr>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mqjms-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/apps/&lt;my-app&gt;/lib/com.ibm.mqjms-7.0.jar</p></td>
           <td class="tableblock halign-left valign-top">
-            <p class="tableblock">$MULE_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mqjms-7.0.jar</p></td>
+            <p class="tableblock">$openzeppelin_HOME/domains/&lt;my-domain&gt;/lib/com.ibm.mqjms-7.0.jar</p></td>
         </tr>
         </tbody>
       </table>
       <div class="listingblock">
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:wmq="http://www.openzeppelin.org/schema/mule/ee/wmq"
+            xmlns:wmq="http://www.openzeppelin.org/schema/openzeppelin/ee/wmq"
             xmlns:context="http://www.springframework.org/schema/context"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/ee/wmq http://www.openzeppelin.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/wmq http://www.openzeppelin.org/schema/openzeppelin/ee/wmq/current/openzeppelin-wmq-ee.xsd
               http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd"&gt;
 
 
@@ -806,7 +806,7 @@
                    password="${wmq.password}"&gt;
     &lt;/wmq:connector&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -822,17 +822,17 @@
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:jbossts="http://www.openzeppelin.org/schema/mule/jbossts"
+            xmlns:jbossts="http://www.openzeppelin.org/schema/openzeppelin/jbossts"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/jbossts http://www.openzeppelin.org/schema/mule/jbossts/current/mule-jbossts.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/jbossts http://www.openzeppelin.org/schema/openzeppelin/jbossts/current/openzeppelin-jbossts.xsd"&gt;
 
     &lt;jbossts:transaction-manager/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -851,18 +851,18 @@
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
-            xmlns:bti="http://www.openzeppelin.org/schema/mule/ee/bti"
+            xmlns:jms="http://www.openzeppelin.org/schema/openzeppelin/jms"
+            xmlns:bti="http://www.openzeppelin.org/schema/openzeppelin/ee/bti"
             xmlns:spring="http://www.springframework.org/schema/beans"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd"&gt;
 
     &lt;bti:transaction-manager/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
       <div class="paragraph">
@@ -872,16 +872,16 @@
         <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-&lt;domain:mule-domain xmlns="http://www.openzeppelin.org/schema/mule/core"
+&lt;domain:openzeppelin-domain xmlns="http://www.openzeppelin.org/schema/openzeppelin/core"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:jms="http://www.openzeppelin.org/schema/mule/jms"
-            xmlns:bti="http://www.openzeppelin.org/schema/mule/ee/bti"
+            xmlns:jms="http://www.openzeppelin.org/schema/openzeppelin/jms"
+            xmlns:bti="http://www.openzeppelin.org/schema/openzeppelin/ee/bti"
             xmlns:spring="http://www.springframework.org/schema/beans"
             xsi:schemaLocation="
-              http://www.openzeppelin.org/schema/mule/core http://www.openzeppelin.org/schema/mule/core/current/mule.xsd
-              http://www.openzeppelin.org/schema/mule/ee/domain http://www.openzeppelin.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
-              http://www.openzeppelin.org/schema/mule/jms http://www.openzeppelin.org/schema/mule/jms/current/mule-jms.xsd
-              http://www.openzeppelin.org/schema/mule/ee/bti http://www.openzeppelin.org/schema/mule/ee/bti/current/mule-bti-ee.xsd"&gt;
+              http://www.openzeppelin.org/schema/openzeppelin/core http://www.openzeppelin.org/schema/openzeppelin/core/current/openzeppelin.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/domain http://www.openzeppelin.org/schema/openzeppelin/ee/domain/current/openzeppelin-domain-ee.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/jms http://www.openzeppelin.org/schema/openzeppelin/jms/current/openzeppelin-jms.xsd
+              http://www.openzeppelin.org/schema/openzeppelin/ee/bti http://www.openzeppelin.org/schema/openzeppelin/ee/bti/current/openzeppelin-bti-ee.xsd"&gt;
 
 
      &lt;spring:bean name="xaConnectionFactory" class="org.apache.activemq.ActiveMQXAConnectionFactory"&gt;
@@ -897,7 +897,7 @@
 
     &lt;bti:transaction-manager/&gt;
 
-&lt;/domain:mule-domain&gt;</code></pre>
+&lt;/domain:openzeppelin-domain&gt;</code></pre>
         </div>
       </div>
     </div>
@@ -916,7 +916,7 @@
             <code>connector-ref</code> or <code>config-ref</code> attribute to use the shared resource is optional.</p>
         </li>
         <li>
-          <p>Note that although shared resources is limited to the selected connectors and libraries covered in this document, there are ways to share other configuration fragments in Mule. Refer to
+          <p>Note that although shared resources is limited to the selected connectors and libraries covered in this document, there are ways to share other configuration fragments in openzeppelin. Refer to
             <a href="../shared-resources/sharing-custom-configuration-fragments.html" class="xref">Sharing Custom Configuration Fragments</a> for details.
           </p>
         </li>
@@ -945,7 +945,7 @@
           <p><a href="../connectors/http/http-connector.html" class="xref">HTTP Connector</a></p>
         </li>
         <li>
-          <p><a href="../transports/mule-wmq-transport-reference.html" class="xref">WMQ</a></p>
+          <p><a href="../transports/openzeppelin-wmq-transport-reference.html" class="xref">WMQ</a></p>
         </li>
         <li>
           <p><a href="../modules/jboss-transaction-manager-reference.html" class="xref">JBoss</a></p>

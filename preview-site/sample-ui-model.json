@@ -136,85 +136,85 @@
           }
         ]
       }, {
-        "name": "connector-devkit",
-        "title": "Connector DevKit",
+        "name": "contracts",
+        "title": "Contracts",
         "versions": [
           {
             "string": "3.8",
             "latest": true,
-            "url": "/connector-devkit/3.8/index.html"
+            "url": "/contracts/3.8/index.html"
           },
           {
             "string": "3.7",
-            "url": "/connector-devkit/3.7/index.html"
+            "url": "/contracts/3.7/index.html"
           },
           {
             "string": "3.6",
-            "url": "/connector-devkit/3.6/index.html"
+            "url": "/contracts/3.6/index.html"
           },
           {
             "string": "3.5",
-            "url": "/connector-devkit/3.5/index.html"
+            "url": "/contracts/3.5/index.html"
           },
           {
             "string": "3.4",
-            "url": "/connector-devkit/3.4/index.html"
+            "url": "/contracts/3.4/index.html"
           },
           {
             "string": "3.3",
-            "url": "/connector-devkit/3.3/index.html"
+            "url": "/contracts/3.3/index.html"
           },
           {
             "string": "3.2",
-            "url": "/connector-devkit/3.2/index.html"
+            "url": "/contracts/3.2/index.html"
           }
         ],
         "items": [
           {
             "title": "Overview",
-            "url": "/connector-devkit/3.8/"
+            "url": "/contracts/3.8/"
           }, {
             "title": "Setting up your development environment",
-            "url": "/connector-devkit/3.8/setting-up-your-dev-environment"
+            "url": "/contracts/3.8/setting-up-your-dev-environment"
           }, {
             "title": "Project structure",
-            "url": "/connector-devkit/3.8/connector-project-structure"
+            "url": "/contracts/3.8/connector-project-structure"
           }, {
             "title": "Creating a project",
             "items": [
               {
                 "title": "Overview",
-                "url": "/connector-devkit/3.8/creating-an-anypoint-connector-project"
+                "url": "/contracts/3.8/creating-an-anypoint-connector-project"
               }, {
                 "title": "Seting up API Access",
-                "url": "connector-devkit/3.8/setting-up-api-access"
+                "url": "contracts/3.8/setting-up-api-access"
               }, {
                 "title": "Connection strategies",
-                "url": "connector-devkit/3.8/connector-connection-strategies"
+                "url": "contracts/3.8/connector-connection-strategies"
               }, {
                 "title": "Authentication",
                 "items": [
                   {
                     "title": "Overview",
-                    "url": "/connector-devkit/3.8/authentication"
+                    "url": "/contracts/3.8/authentication"
                   }, {
                     "title": "Methods",
-                    "url": "/connector-devkit/3.8/authentication-methods"
+                    "url": "/contracts/3.8/authentication-methods"
                   }, {
                     "title": "OAuth v1",
-                    "url": "/connector-devkit/3.8/oauth-v1"
+                    "url": "/contracts/3.8/oauth-v1"
                   }, {
                     "title": "OAuth v2",
-                    "url": "/connector-devkit/3.8/oauth-v2"
+                    "url": "/contracts/3.8/oauth-v2"
                   }, {
                     "title": "Connection management",
-                    "url": "/connector-devkit/3.8/connection-management"
+                    "url": "/contracts/3.8/connection-management"
                   }, {
                     "title": "No authentication",
-                    "url": "/connector-devkit/3.8/no-authentication"
+                    "url": "/contracts/3.8/no-authentication"
                   }, {
                     "title": "HTTP authentication",
-                    "url": "/connector-devkit/3.8/http-basic-authentication",
+                    "url": "/contracts/3.8/http-basic-authentication",
                     "deprecated": true
                   }
                 ]
@@ -223,10 +223,10 @@
                 "items": [
                   {
                     "title": "Creating a connector",
-                    "url": "/connector-devkit/3.8/creating-a-java-sdk-based-connector"
+                    "url": "/contracts/3.8/creating-a-java-sdk-based-connector"
                   }, {
                     "title": "Connector example",
-                    "url": "/connector-devkit/3.8/creating-a-connector-using-a-java-sdk"
+                    "url": "/contracts/3.8/creating-a-connector-using-a-java-sdk"
                   }
                 ]
               }, {
@@ -234,13 +234,13 @@
                 "items": [
                   {
                     "title": "Creating a connector",
-                    "url": "/connector-devkit/3.8/creating-a-soap-connector"
+                    "url": "/contracts/3.8/creating-a-soap-connector"
                   }, {
                     "title": "Session management",
-                    "url": "/connector-devkit/3.8/soap-connect-session-management"
+                    "url": "/contracts/3.8/soap-connect-session-management"
                   }, {
                     "title": "Creating a connector using CXF",
-                    "url": "/connector-devkit/3.8/creating-a-connector-for-a-soap-service-via-cxf-client"
+                    "url": "/contracts/3.8/creating-a-connector-for-a-soap-service-via-cxf-client"
                   }
                 ]
               }
@@ -250,22 +250,22 @@
             "items": [
               {
                 "title": "Overview",
-                "url": "/connector-devkit/3.8/connector-attributes-and-operations"
+                "url": "/contracts/3.8/connector-attributes-and-operations"
               }, {
                 "title": "Defining message sources",
-                "url": "/connector-devkit/3.8/defining-message-sources"
+                "url": "/contracts/3.8/defining-message-sources"
               }, {
                 "title": "Creating message processors",
-                "url": "/connector-devkit/3.8/creating-message-processors"
+                "url": "/contracts/3.8/creating-message-processors"
               }, {
                 "title": "Defining attributes",
-                "url": "/connector-devkit/3.8/defining-connector-attributes"
+                "url": "/contracts/3.8/defining-connector-attributes"
               }, {
                 "title": "Complex data types",
-                "url": "/connector-devkit/3.8/complex-data-types-attributes"
+                "url": "/contracts/3.8/complex-data-types-attributes"
               }, {
                 "title": "MIME type and encoding",
-                "url": "/connector-devkit/3.8/mime-type-and-encoding"
+                "url": "/contracts/3.8/mime-type-and-encoding"
               }
             ]
           }, {
@@ -273,28 +273,28 @@
             "items": [
               {
                 "title": "Overview",
-                "url": "/connector-devkit/3.8/extending-connector-functionality"
+                "url": "/contracts/3.8/extending-connector-functionality"
               }, {
                 "title": "Adding DataSense",
-                "url": "/connector-devkit/3.8/adding-datasense"
+                "url": "/contracts/3.8/adding-datasense"
               }, {
                 "title": "Multi-level DataSense",
-                "url": "/connector-devkit/3.8/multiple-level-datasense-support"
+                "url": "/contracts/3.8/multiple-level-datasense-support"
               }, {
                 "title": "Adding DataSense query language",
-                "url": "/connector-devkit/3.8/adding-datasense-query-language"
+                "url": "/contracts/3.8/adding-datasense-query-language"
               }, {
                 "title": "Adding query pagination",
-                "url": "/connector-devkit/3.8/adding-query-pagination-support"
+                "url": "/contracts/3.8/adding-query-pagination-support"
               }, {
                 "title": "Building a batch enabled connector",
-                "url": "/connector-devkit/3.8/building-a-batch-enabled-connector"
+                "url": "/contracts/3.8/building-a-batch-enabled-connector"
               }, {
                 "title": "Shading libraries",
-                "url": "/connector-devkit/3.8/shading-libraries"
+                "url": "/contracts/3.8/shading-libraries"
               }, {
                 "title": "Adding libraries and JARs",
-                "url": "/connector-devkit/3.8/adding-libraries"
+                "url": "/contracts/3.8/adding-libraries"
               }
             ]
           }, {
@@ -302,27 +302,27 @@
             "item": [
               {
                 "title": "Overview",
-                "url": "/connector-devkit/3.8/developing-devkit-connector-tests"
+                "url": "/contracts/3.8/developing-devkit-connector-tests"
               }, {
                 "title": "Installing and testing in Studio",
-                "url": "/connector-devkit/3.8/installing-and-testing-your-connector-in-studio"
+                "url": "/contracts/3.8/installing-and-testing-your-connector-in-studio"
               }
             ]
           }, {
             "title": "Documenting your Connector",
-            "url": "/connector-devkit/3.8/connector-reference-documentation"
+            "url": "/contracts/3.8/connector-reference-documentation"
           }, {
             "title": "Packaging for release",
-            "url": "/connector-devkit/3.8/packaging-your-connector-for-release"
+            "url": "/contracts/3.8/packaging-your-connector-for-release"
           }, {
             "title": "Connector Certification",
             "items": [
               {
                 "title": "Overview",
-                "url": "/connector-devkit/3.8/connector-certification-program-guidelines"
+                "url": "/contracts/3.8/connector-certification-program-guidelines"
               }, {
                 "title": "License management",
-                "url": "/connector-devkit/3.8/certified-connector-license-management"
+                "url": "/contracts/3.8/certified-connector-license-management"
               }
             ]
           }
@@ -333,10 +333,10 @@
   "title": "Sample Page",
   "keywords": "key, words, many, of, them",
   "canonicalUrl": "https://example.com/index.html",
-  "editUrl": "https://github.com/openzeppelin/docs-connector-devkit/edit/v3.8/modules/ROOT/content/index.adoc",
+  "editUrl": "https://github.com/openzeppelin/contracts/edit/v3.8/modules/ROOT/content/index.adoc",
   "domain": {
-    "name": "connector-devkit",
-    "title": "Connector Devkit",
+    "name": "contracts",
+    "title": "Contracts",
     "type": "component",
     "versioned": true,
     "version": {
@@ -346,46 +346,46 @@
       {
         "string": "3.8",
         "latest": true,
-        "url": "/connector-devkit/3.8/index.html"
+        "url": "/contracts/3.8/index.html"
       },
       {
         "string": "3.7",
-        "url": "/connector-devkit/3.7/index.html"
+        "url": "/contracts/3.7/index.html"
       },
       {
         "string": "3.6",
-        "url": "/connector-devkit/3.6/index.html"
+        "url": "/contracts/3.6/index.html"
       },
       {
         "string": "3.5",
-        "url": "/connector-devkit/3.5/index.html"
+        "url": "/contracts/3.5/index.html"
       },
       {
         "string": "3.4",
-        "url": "/connector-devkit/3.4/index.html"
+        "url": "/contracts/3.4/index.html"
       },
       {
         "string": "3.3",
-        "url": "/connector-devkit/3.3/index.html"
+        "url": "/contracts/3.3/index.html"
       },
       {
         "string": "3.2",
-        "url": "/connector-devkit/3.2/index.html"
+        "url": "/contracts/3.2/index.html"
       }
     ]
   },
   "versions": [
     {
       "string": "3.5",
-      "url": "/connector-devkit/3.5/index.html"
+      "url": "/contracts/3.5/index.html"
     },
     {
       "string": "3.6",
-      "url": "/connector-devkit/3.6/index.html"
+      "url": "/contracts/3.6/index.html"
     },
     {
       "string": "3.7",
-      "url": "/connector-devkit/3.7/index.html"
+      "url": "/contracts/3.7/index.html"
     }
   ],
   "breadcrumbs": [
