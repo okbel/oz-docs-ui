@@ -1,11 +1,14 @@
 @font-face {
-  font-family: 'DIN Pro';
+  font-family: 'Silka';
+  src: url('../fonts/silka-regular-webfont.eot');
+  src: url('../fonts/silka-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/silka-regular-webfont.woff2') format('woff2'),
+    url('../fonts/silka-regular-webfont.woff') format('woff'),
+    url('../fonts/silka-regular-webfont.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  src: url('../fonts/din-pro-regular.woff');
-  src: local('DINPro'), url('../fonts/din-pro-regular.woff') format('woff');
 }
-
 
 h1,
 h2,
@@ -43,7 +46,6 @@ h6 {
   font-size: 16px;
 }
 
-
 .small {
   font-size: 13px;
   font-weight: var(--weight-normal); /* reset if within header tags */
@@ -60,7 +62,6 @@ h6 {
   white-space: pre;
   word-wrap: normal;
 }
-
 
 .link {
   color: var(--steel-2);

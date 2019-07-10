@@ -4,6 +4,7 @@ html.is-clipped--navbar {
 
 .header {
   margin-bottom: 20px;
+  border-bottom: solid 1px #e2e2e7;
 }
 
 .navbar {
@@ -13,7 +14,6 @@ html.is-clipped--navbar {
   width: 100%;
   word-wrap: break-word;
   z-index: var(--z-index-navbar);
-  border-bottom: solid 1px #e2e2e7;
   height: 70px;
 }
 
@@ -128,6 +128,7 @@ html.is-clipped--navbar {
   line-height: 1.5;
   padding: 0.5rem 1rem;
   position: relative;
+  font-family: 'Silka';
 }
 
 .navbar-item {

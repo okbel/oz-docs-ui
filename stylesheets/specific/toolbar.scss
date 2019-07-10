@@ -3,6 +3,7 @@
 
   .container {
     padding: var(--lg) var(--lg);
+    margin: 0;
   }
 }
 
@@ -12,7 +13,7 @@
   .link {
     font-size: 12px;
     height: var(--lg);
-    opacity: .75;
+    opacity: 0.75;
     text-decoration: none;
 
     &:hover,
@@ -22,9 +23,7 @@
     }
   }
 
-  
   .link-home {
-
     &:active svg,
     &:focus svg {
       filter: grayscale(0);
@@ -47,18 +46,16 @@
     display: inline-block;
     height: var(--md);
     margin: 0 var(--xs);
-    opacity: .4; 
+    opacity: 0.4;
     pointer-events: none;
     transform: rotate(-90deg);
     width: var(--md);
   }
 }
 
-
 .version-select + .link-edit {
   margin-left: var(--lg);
 }
-
 
 .link-edit {
   font-size: 12px;

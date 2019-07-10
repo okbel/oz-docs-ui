@@ -1,4 +1,3 @@
-
 :root {
   --core-violet-1: #9aa2e7;
   --core-violet-2: #6d79e9;
@@ -34,8 +33,11 @@
   --red-3: #d1344e;
   --tertiary: #fff;
 
-  --heading: 'Silka', 'Open Sans', sans-serif;
-  --sans-serif: 'Open Sans', sans-serif;
+  --heading: 'Silka', sans-serif;
+  --sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
   --monospace: monospace;
   --weight-normal: 400;
   --weight-bold: 600;
@@ -52,15 +54,15 @@
   --xl: 40px;
   --input-md: 30px;
 
-  --transition-speed-sm: .15s;
-  --transition-speed-md: .3s;
-  --transition-timing: cubic-bezier(.46,.03,.52,.96);
+  --transition-speed-sm: 0.15s;
+  --transition-speed-md: 0.3s;
+  --transition-timing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
 }
 
 $screen-sm: 576px;
 $screen-md: 768px;
 $screen-lg: 992px;
-$screen-xl: 1160px; 
+$screen-xl: 1160px;
 
 $header-height: 66px;
 $footer-height: 361px;

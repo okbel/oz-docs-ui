@@ -1,4 +1,10 @@
-<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M1.36278 0L1.36787 3.94183L7.40742 3.95558L7.40236 0.0376971L8.73519 0.00265382L8.6981 5.27362L0 5.28486L0.0369378 0.0348597L1.36278 0Z" transform="translate(2.8598 6.64626)" fill="#282846"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M6.00319 0L11.7143 4.23063V5.86337L5.97677 1.61317L0 5.5623L0.137638 3.91056L6.00319 0Z" transform="translate(1.198 1.32681) scale(0.999808) rotate(-1.50596)" fill="#282846"/>
+
+<svg viewBox="0 0 12 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.8">
+        <g id="Page-example" transform="translate(-360.000000, -95.000000)" fill="#282846">
+            <g id="Group-9" transform="translate(360.000000, 72.000000)">
+                <polygon id="Rectangle" points="0 28 6 23 12 28 12 37 7.5 37 7.5 33 4.5 33 4.5 37 0 37"></polygon>
+            </g>
+        </g>
+    </g>
 </svg>
