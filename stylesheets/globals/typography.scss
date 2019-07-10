@@ -10,6 +10,30 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Silka';
+  src: url('../fonts/silka-medium-webfont.eot');
+  src: url('../fonts/silka-medium-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/silka-medium-webfont.woff2') format('woff2'),
+    url('../fonts/silka-medium-webfont.woff') format('woff'),
+    url('../fonts/silka-medium-webfont.ttf') format('truetype');
+  font-weight: 500;
+  font-style: 500;
+}
+
+@font-face {
+  font-family: 'Silka';
+  src: url('../fonts/silka-semibold-webfont.eot');
+  src: url('../fonts/silka-semibold-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/silka-semibold-webfont.woff2') format('woff2'),
+    url('../fonts/silka-semibold-webfont.woff') format('woff'),
+    url('../fonts/silka-semibold-webfont.ttf') format('truetype');
+  font-weight: 600;
+  font-style: 600;
+}
+
 h1,
 h2,
 h3,
@@ -17,7 +41,7 @@ h4,
 h5,
 h6 {
   font-family: var(--heading);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
   line-height: 1.2;
   margin: 0;
 }
@@ -52,7 +76,7 @@ h6 {
 }
 
 .strong {
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
 }
 
 .monospace {

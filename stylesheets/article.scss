@@ -195,7 +195,7 @@
   }
 
   dt {
-    font-weight: var(--weight-bold);
+    font-weight: var(--weight-medium);
 
     &::after {
       content: ':';
@@ -230,7 +230,7 @@
       content: 'Note';
       display: block;
       font-size: 16px;
-      font-weight: var(--weight-bold);
+      font-weight: var(--weight-medium);
       opacity: .7;
       padding-left: 20px;
     }
