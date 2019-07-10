@@ -1,18 +1,56 @@
-= ERC20
+= H1 - Crowdsales - Test
 
-This set of interfaces, contracts, and utilities are all related to the https://eips.ethereum.org/EIPS/eip-20[ERC20 Token Standard].
+Crowdsales are a popular use for Ethereum; they let you allocate tokens to network participants in various ways, mostly in exchange for Ether. They come in a variety of shapes and flavors, so let's go over the various types available in OpenZeppelin and how to use them.
+Crowdsales have a bunch of different properties, but here are some important ones:
 
-TIP: For a walkthrough on how to create an ERC20 token read our xref:ROOT:tokens.adoc#erc20[ERC20 guide].
+== H2 - Crowdsales Rate
 
-There a few core contracts that implement the behavior specified in the EIP: xref:IERC20[`IERC20`], xref:ERC20[`ERC20`], XREF:ERC20Detailed[`ERC20Detailed`].
+Understanding the rate of a crowdsale is super important, and mistakes here are a common source of bugs. Firstly, all currency math is done in the smallest unit of that currency and converted to the correct decimal places when displaying the currency.
+This means that when you do math in your smart contracts, you need to understand that you're adding, dividing, and multiplying the smallest amount of a currency (like wei), not the commonly-used displayed value of the currency (Ether).
 
-Additionally there are multiple extensions, including: - designation of addresses that can create token supply (link:#erc20mintable[`ERC20Mintable`]), with an optional maximum cap (link:#erc20capped[`ERC20Capped`]), - destruction of own tokens (link:#erc20burnable[`ERC20Burnable`]), - designation of addresses that can pause token operations for all users (link:#erc20pausable[`ERC20Pausable`]).
+=== H3 - But First, Coffee a Primer on Tokens
 
-Finally, there are some utilities to interact with ERC20 contracts in various ways. - link:#safeerc20[`SafeERC20`] is a wrapper around the interface that eliminates the need to handle boolean return values. - link:#tokentimelock[`TokenTimelock`] can hold tokens for a beneficiary until a specified time.
+Simply put, a token isn't anything special. In Ethereum, pretty much everything is a contract, and that includes what we call tokens. "Sending a token" is the same as "calling a method on a smart contract that someone wrote and deployed". And, at the end of the day, a token is just a mapping of addresses to balances and some nice methods to add and subtract from those balances.
 
-NOTE: This page is incomplete. We're working to improve it for the next release. Stay tuned!
+==== H4 - Code Blocks
 
-== Core
+Simply put, a token isn't anything special. In Ethereum, pretty much everything is a contract, and that includes what we call tokens. "Sending a token" is the same as "calling a method on a smart.
+
+----
+require 'asciidoctor'
+
+puts Asciidoctor.convert_file 'mysample.adoc', to_file: false
+----
+
+[source,rust]
+----
+require 'asciidoctor'
+
+puts Asciidoctor.convert_file 'mysample.adoc', to_file: false
+----
+
+
+NOTE: Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+TIP: Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+WARNING: Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+=== Custom Alerts
+
+[.alert.tip]
+Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+[.alert.note--secondary]
+Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+[.alert.tip--secondary]
+Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+[.alert.warning--secondary]
+Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+
 
 [[IERC20]]
 === `IERC20`

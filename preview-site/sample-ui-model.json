@@ -4,14 +4,18 @@
     "title": "openzeppelin Documentation",
     "domains": [
       {
-        "name": "home",
-        "title": "Home",
-        "selected": true,
+        "name": "Home",
+        "title": "Test",
         "items": [
           {
-            "title": "Getting started",
-            "url": "/getting-started/",
-            "currentPath": true
+            "name": "styleguide",
+            "title": "Styleguide",
+            "url": "styleguide.html"
+          },
+          {
+            "name": "test",
+            "title": "Test",
+            "url": "test.html"
           }
         ]
       },
@@ -64,19 +68,19 @@
             "items": [
               {
                 "title": "Access Control",
-                "url": "/contracts/3.8/connector-attributes-and-operations"
+                "url": "/contracts/3.8"
               },
               {
                 "title": "Crowdsales",
-                "url": "/contracts/3.8/defining-message-sources"
+                "url": "/contracts/3.8"
               },
               {
                 "title": "Tokens",
-                "url": "/contracts/3.8/creating-message-processors"
+                "url": "/contracts/3.8"
               },
               {
                 "title": "Utilities",
-                "url": "/contracts/3.8/defining-connector-attributes"
+                "url": "/contracts/3.8"
               }
             ]
           },
@@ -85,15 +89,15 @@
             "items": [
               {
                 "title": "Access",
-                "url": "/contracts/3.8/extending-connector-functionality"
+                "url": "/contracts/3.8"
               },
               {
                 "title": "Crowdsales",
-                "url": "/contracts/3.8/adding-datasense"
+                "url": "/contracts/3.8"
               },
               {
                 "title": "Cryptography",
-                "url": "/contracts/3.8/multiple-level-datasense-support"
+                "url": "/contracts/3.8"
               },
               {
                 "title": "Drafts",

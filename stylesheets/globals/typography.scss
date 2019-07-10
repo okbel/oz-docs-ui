@@ -51,10 +51,14 @@ h1 {
   color: #282846;
   letter-spacing: 0;
   line-height: 32px;
+  padding-bottom: 15px;
+  border-bottom: solid 1.2px #d4d4da;
 }
 
 h2 {
   font-size: 28px;
+  padding-bottom: 15px;
+  border-bottom: solid 1.2px #d4d4da;
 }
 
 h3 {
@@ -94,7 +98,7 @@ h6 {
   color: var(--steel-2);
 
   &:hover {
-    color: var(--steel-4);
+    color: var(--violet-2);
   }
 
   &:focus,
