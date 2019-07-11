@@ -6,7 +6,7 @@ Author Name
 
 Ah, the "token": the world's most powerful and most misused tool. In this section we'll learn to harness the power of native units of account for good and world peace!
 
-=== But First, Coffee a Primer on Tokens
+== But First, Coffee a Primer on Tokens
 
 Simply put, a token isn't anything special. In Ethereum, pretty much everything is a contract, and that includes what we call tokens. "Sending a token" is the same as "calling a method on a smart contract that someone wrote and deployed". And, at the end of the day, a token is just a mapping of addresses to balances and some nice methods to add and subtract from those balances.
 

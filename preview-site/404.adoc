@@ -1,5 +1,1 @@
-<div class="imageblock center">
-<div class="content">
-404
-</div>
-</div>
+4040

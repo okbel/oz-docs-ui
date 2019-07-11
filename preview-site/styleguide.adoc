@@ -35,8 +35,6 @@ puts Asciidoctor.convert_file 'mysample.adoc', to_file: false
 .Function
 Type the word [userinput]#asciidoc# into the search bar.
 
-[function]
-algo
 
 [.function]
 ****

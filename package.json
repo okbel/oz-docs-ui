@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/openzeppelin/docs-site-theme.git"
   },
+  "scripts": {
+    "build": "gulp build-preview"
+  },
   "dependencies": {
     "asciidoctor.js": "^1.5.9",
     "autoprefixer": "^7.1.1",
