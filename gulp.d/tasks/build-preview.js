@@ -18,7 +18,7 @@ const ASCIIDOC_ATTRIBUTES = {
   'source-highlighter': 'highlight.js',
 };
 
-module.exports = async (src, dest, destTheme) => {
+module.exports = async function buildPreview(src, dest, destTheme) {
   const relativeThemePath = path.relative(dest, destTheme);
 
   const [layoutsIndex] = await Promise.all([
@@ -33,6 +33,8 @@ module.exports = async (src, dest, destTheme) => {
   );
   const sampleUiModelData = fs.readFileSync(sampleUiModelPath, 'utf8');
   const sampleUiModel = JSON.parse(sampleUiModelData.toString());
+
+  // console.log('sampleUiModel', sampleUiModel);
 
   vfs
     .src(['preview-site/**/*.adoc'])

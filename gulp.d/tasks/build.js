@@ -10,15 +10,12 @@ const minimatch = require('minimatch');
 const imagemin = require('gulp-imagemin');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglifyes');
-
-// css things
 const runSequence = require('run-sequence');
 const autoprefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass');
 const replace = require('gulp-replace');
 
-// paths
-const config = require('./../config');
+const config = require('./../../config');
 const src = config.get('source');
 const dest = config.get('destination');
 const destTheme = path.join(dest, config.get('theme_destination'));
@@ -26,7 +23,7 @@ const sassDir = 'stylesheets/**/*.scss';
 const sassSrc = 'stylesheets/index.scss';
 const sassDist = 'build/_theme/stylesheets';
 
-module.exports = async (src, dest, cacheBuster) => {
+module.exports = function build(src, dest, cacheBuster) {
   const srcOptions = { base: src, cwd: src };
 
   return merge([
