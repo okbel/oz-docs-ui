@@ -26,7 +26,7 @@ const sassDir = 'stylesheets/**/*.scss';
 const sassSrc = 'stylesheets/index.scss';
 const sassDist = 'build/_theme/stylesheets';
 
-module.exports = async (src, dest, cacheBuster) => {
+module.exports = (src, dest, cacheBuster) => {
   const srcOptions = { base: src, cwd: src };
 
   return merge([
