@@ -37,7 +37,7 @@ const buildTask = createTask({
 const previewBuildTask = createTask({
   name: 'preview:build',
   desc: 'Process and stage the UI assets and generate pages for the preview',
-  call: parallel(buildTask, buildPreviewPagesTask),
+  call: series(buildTask, buildPreviewPagesTask),
 });
 
 const previewServeTask = createTask({

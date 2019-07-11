@@ -72,618 +72,196 @@ Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token 
 
 
 
-[[IERC20]]
-=== `IERC20`
-
-Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see link:#erc20detailed[`ERC20Detailed`].
-
-Functions
-
-
-totalSupply()
-
-balanceOf(address account)
-
-transfer(address recipient, uint256 amount)
-
-allowance(address owner, address spender)
-
-approve(address spender, uint256 amount)
-
-transferFrom(address sender, address recipient, uint256 amount)
-
-Events
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-totalSupply() → uint256external
-
-Returns the amount of tokens in existence.
-
-balanceOf(address account) → uint256external
-
-Returns the amount of tokens owned by `account`.
-
-transfer(address recipient, uint256 amount) → boolexternal
-
-Moves `amount` tokens from the caller's account to `recipient`.
-
-Returns a boolean value indicating whether the operation succeeded.
-
-Emits a link:#IERC20.Transfer(address,address,uint256)[`Transfer`] event.
-
-allowance(address owner, address spender) → uint256external
-
-Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through link:#IERC20.transferFrom(address,address,uint256)[`transferFrom`]. This is zero by default.
-
-This value changes when link:#IERC20.approve(address,uint256)[`approve`] or link:#IERC20.transferFrom(address,address,uint256)[`transferFrom`] are called.
-
-approve(address spender, uint256 amount) → boolexternal
-
-Sets `amount` as the allowance of `spender` over the caller's tokens.
-
-Returns a boolean value indicating whether the operation succeeded.
-
-> Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-
-Emits an link:#IERC20.Approval(address,address,uint256)[`Approval`] event.
-
-transferFrom(address sender, address recipient, uint256 amount) → boolexternal
-
-Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance.
-
-Returns a boolean value indicating whether the operation succeeded.
-
-Emits a link:#IERC20.Transfer(address,address,uint256)[`Transfer`] event.
-
-Transfer(address from, address to, uint256 value)
-
-Emitted when `value` tokens are moved from one account (`from`) to another (`to`).
-
-Note that `value` may be zero.
-
-Approval(address owner, address spender, uint256 value)
-
-Emitted when the allowance of a `spender` for an `owner` is set by a call to link:#IERC20.approve(address,uint256)[`approve`]. `value` is the new allowance.
-
-=== `ERC20`
-
-Implementation of the link:#ierc20[`IERC20`] interface.
-
-This implementation is agnostic to the way tokens are created. This means that a supply mechanism has to be added in a derived contract using link:#ERC20._mint(address,uint256)[`_mint`]. For a generic mechanism see link:#erc20mintable[`ERC20Mintable`].
-
-_For a detailed writeup see our guide https://forum.zeppelin.solutions/t/how-to-implement-erc20-supply-mechanisms/226[How to implement supply mechanisms]._
-
-We have followed general OpenZeppelin guidelines: functions revert instead of returning `false` on failure. This behavior is nonetheless conventional and does not conflict with the expectations of ERC20 applications.
-
-Additionally, an link:#ERC20.Approval(address,address,uint256)[`Approval`] event is emitted on calls to link:#ERC20.transferFrom(address,address,uint256)[`transferFrom`]. This allows applications to reconstruct the allowance for all accounts just by listening to said events. Other implementations of the EIP may not emit these events, as it isn't required by the specification.
-
-Finally, the non-standard link:#ERC20.decreaseAllowance(address,uint256)[`decreaseAllowance`] and link:#ERC20.increaseAllowance(address,uint256)[`increaseAllowance`] functions have been added to mitigate the well-known issues around setting allowances. See link:#IERC20.approve(address,uint256)[`IERC20.approve`].
-
-Functions
-
-totalSupply()
-
-balanceOf(address account)
-
-transfer(address recipient, uint256 amount)
-
-allowance(address owner, address spender)
-
-approve(address spender, uint256 value)
-
-transferFrom(address sender, address recipient, uint256 amount)
-
-increaseAllowance(address spender, uint256 addedValue)
-
-decreaseAllowance(address spender, uint256 subtractedValue)
-
-_transfer(address sender, address recipient, uint256 amount)
-
-_mint(address account, uint256 amount)
-
-_burn(address account, uint256 value)
-
-_approve(address owner, address spender, uint256 value)
-
-_burnFrom(address account, uint256 amount)
-
-Events
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-totalSupply() → uint256public
-
-See link:#IERC20.totalSupply()[`IERC20.totalSupply`].
-
-balanceOf(address account) → uint256public
-
-See link:#IERC20.balanceOf(address)[`IERC20.balanceOf`].
-
-transfer(address recipient, uint256 amount) → boolpublic
-
-See link:#IERC20.transfer(address,uint256)[`IERC20.transfer`].
-
-Requirements:
-
-* `recipient` cannot be the zero address.
-* the caller must have a balance of at least `amount`.
-
-allowance(address owner, address spender) → uint256public
-
-See link:#IERC20.allowance(address,address)[`IERC20.allowance`].
-
-approve(address spender, uint256 value) → boolpublic
-
-See link:#IERC20.approve(address,uint256)[`IERC20.approve`].
-
-Requirements:
-
-* `spender` cannot be the zero address.
-
-transferFrom(address sender, address recipient, uint256 amount) → boolpublic
-
-See link:#IERC20.transferFrom(address,address,uint256)[`IERC20.transferFrom`].
-
-Emits an link:#ERC20.Approval(address,address,uint256)[`Approval`] event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of link:#erc20[`ERC20`];
-
-Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `value`. - the caller must have allowance for `sender`'s tokens of at least `amount`.
-
-increaseAllowance(address spender, uint256 addedValue) → boolpublic
-
-Atomically increases the allowance granted to `spender` by the caller.
-
-This is an alternative to link:#ERC20.approve(address,uint256)[`approve`] that can be used as a mitigation for problems described in link:#IERC20.approve(address,uint256)[`IERC20.approve`].
-
-Emits an link:#ERC20.Approval(address,address,uint256)[`Approval`] event indicating the updated allowance.
-
-Requirements:
-
-* `spender` cannot be the zero address.
-
-decreaseAllowance(address spender, uint256 subtractedValue) → boolpublic
-
-Atomically decreases the allowance granted to `spender` by the caller.
-
-This is an alternative to link:#ERC20.approve(address,uint256)[`approve`] that can be used as a mitigation for problems described in link:#IERC20.approve(address,uint256)[`IERC20.approve`].
-
-Emits an link:#ERC20.Approval(address,address,uint256)[`Approval`] event indicating the updated allowance.
-
-Requirements:
-
-* `spender` cannot be the zero address.
-* `spender` must have allowance for the caller of at least `subtractedValue`.
-
-_transfer(address sender, address recipient, uint256 amount)internal
-
-Moves tokens `amount` from `sender` to `recipient`.
-
-This is internal function is equivalent to link:#ERC20.transfer(address,uint256)[`transfer`], and can be used to e.g. implement automatic token fees, slashing mechanisms, etc.
-
-Emits a link:#ERC20.Transfer(address,address,uint256)[`Transfer`] event.
-
-Requirements:
-
-* `sender` cannot be the zero address.
-* `recipient` cannot be the zero address.
-* `sender` must have a balance of at least `amount`.
-
-_mint(address account, uint256 amount)internal
-
-Creates `amount` tokens and assigns them to `account`, increasing the total supply.
-
-Emits a link:#ERC20.Transfer(address,address,uint256)[`Transfer`] event with `from` set to the zero address.
-
-Requirements
-
-* `to` cannot be the zero address.
-
-_burn(address account, uint256 value)internal
-
-Destoys `amount` tokens from `account`, reducing the total supply.
-
-Emits a link:#ERC20.Transfer(address,address,uint256)[`Transfer`] event with `to` set to the zero address.
-
-Requirements
-
-* `account` cannot be the zero address.
-* `account` must have at least `amount` tokens.
-
-_approve(address owner, address spender, uint256 value)internal
-
-Sets `amount` as the allowance of `spender` over the `owner`s tokens.
-
-This is internal function is equivalent to link:#ERC20.approve(address,uint256)[`approve`], and can be used to e.g. set automatic allowances for certain subsystems, etc.
-
-Emits an link:#ERC20.Approval(address,address,uint256)[`Approval`] event.
-
-Requirements:
-
-* `owner` cannot be the zero address.
-* `spender` cannot be the zero address.
-
-_burnFrom(address account, uint256 amount)internal
-
-Destoys `amount` tokens from `account`.`amount` is then deducted from the caller's allowance.
-
-See link:#ERC20._burn(address,uint256)[`_burn`] and link:#ERC20._approve(address,address,uint256)[`_approve`].
-
-=== `ERC20Detailed`
-
-Optional functions from the ERC20 standard.
-
-Functions
-
-constructor(string name, string symbol, uint8 decimals)
-
-name()
-
-symbol()
-
-decimals()
-
-totalSupply()
-
-balanceOf(address account)
-
-transfer(address recipient, uint256 amount)
-
-allowance(address owner, address spender)
-
-approve(address spender, uint256 amount)
-
-transferFrom(address sender, address recipient, uint256 amount)
-
-Events
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-constructor(string name, string symbol, uint8 decimals)public
-
-Sets the values for link:#ERC20Detailed.name()[`name`], link:#ERC20Detailed.symbol()[`symbol`], and link:#ERC20Detailed.decimals()[`decimals`]. All three of these values are immutable: they can only be set once during construction.
-
-name() → stringpublic
-
-Returns the name of the token.
-
-symbol() → stringpublic
-
-Returns the symbol of the token, usually a shorter version of the name.
-
-decimals() → uint8public
-
-Returns the number of decimals used to get its user representation. For example, if link:#ERC20Detailed.decimals()[`decimals`] equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`).
-
-Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei.
-
-> Note that this information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including link:#IERC20.balanceOf(address)[`IERC20.balanceOf`] and link:#IERC20.transfer(address,uint256)[`IERC20.transfer`].
+== ERC 721
+
+This set of interfaces, contracts, and utilities are all related to the `ERC721` Non-Fungible Token Standard.
+
+NOTE: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+
+For a walkthrough on how to create an `ERC721` token read our `ERC721` guide.
+
+The EIP consists of three interfaces, found here as `IERC721`, `IERC721Metadata`, and `IERC721Enumerable`. Only the first one is required in a contract to be ERC721 compliant.
+
+Each interface is implemented separately in `ERC721`, `ERC721Metadata`, and `ERC721Enumerable`. You can choose the subset of functionality you would like to support in your token by combining the desired subset through inheritance.
+
+The fully featured token implementing all three interfaces is prepackaged as `ERC721Full`.
+
+Additionally, `IERC721Receiver` can be used to prevent tokens from becoming forever locked in contracts. Imagine sending an in-game item to an exchange address that can't send it back!. When using safeTransferFrom(), the token contract checks to see that the receiver is an `IERC721Receiver`, which implies that it knows how to handle `ERC721` tokens. If you're writing a contract that needs to receive ERC721 tokens, you'll want to include this interface.
+
+Finally, some custom extensions are also included:
+
+* `ERC721Mintable` — like the ERC20 version, this allows certain addresses to mint new tokens
+* `ERC721Pausable` — like the ERC20 version, this allows addresses to freeze transfers of tokens
+
+WARNING: This page is incomplete. We're working to improve it for the next release. Stay tuned!
+
+== Core
+
+=== IERC721
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+----
+balanceOf(address owner)
+ownerOf(uint256 tokenId)
+safeTransferFrom(address from, address to, uint256 tokenId)
+transferFrom(address from, address to, uint256 tokenId)
+approve(address to, uint256 tokenId)
+getApproved(uint256 tokenId)
+setApprovalForAll(address operator, bool _approved)
+isApprovedForAll(address owner, address operator)
+safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
+supportsInterface(bytes4 interfaceId)
+----
+
+[.description]
+.Events
+----
+Transfer(address from, address to, uint256 tokenId)
+Approval(address owner, address approved, uint256 tokenId)
+ApprovalForAll(address owner, address operator, bool approved)
+----
+
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+	Requirements:
+	* from, to cannot be zero.
+	* tokenId must be owned by from.
+	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
 
 == Extensions
 
-=== `ERC20Mintable`
-
-Extension of link:#erc20[`ERC20`] that adds a set of accounts with the link:../access#minterrole[`MinterRole`], which have permission to mint (create) new tokens as they see fit.
-
-At construction, the deployer of the contract is the only minter.
-
-Functions
-
-mint(address account, uint256 amount)
-
-constructor()
-
-isMinter(address account)
-
-addMinter(address account)
-
-renounceMinter()
-
-_addMinter(address account)
-
-_removeMinter(address account)
-
-totalSupply()
-
-balanceOf(address account)
-
-transfer(address recipient, uint256 amount)
-
-allowance(address owner, address spender)
-
-approve(address spender, uint256 value)
-
-transferFrom(address sender, address recipient, uint256 amount)
-
-increaseAllowance(address spender, uint256 addedValue)
-
-decreaseAllowance(address spender, uint256 subtractedValue)
-
-_transfer(address sender, address recipient, uint256 amount)
-
-_mint(address account, uint256 amount)
-
-_burn(address account, uint256 value)
-
-_approve(address owner, address spender, uint256 value)
-
-_burnFrom(address account, uint256 amount)
-
-Events
-
-MinterAdded(address account)
-
-MinterRemoved(address account)
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-mint(address account, uint256 amount) → boolpublic
-
-See link:#ERC20._mint(address,uint256)[`ERC20._mint`].
-
-Requirements:
-
-* the caller must have the link:../access#minterrole[`MinterRole`].
-
-=== `ERC20Burnable`
-
-Extension of link:#erc20[`ERC20`] that allows token holders to destroy both their own tokens and those that they have an allowance for, in a way that can be recognized off-chain (via event analysis).
-
-Functions
-
-burn(uint256 amount)
-
-burnFrom(address account, uint256 amount)
-
-totalSupply()
-
-balanceOf(address account)
-
-transfer(address recipient, uint256 amount)
-
-allowance(address owner, address spender)
-
-approve(address spender, uint256 value)
-
-transferFrom(address sender, address recipient, uint256 amount)
-
-increaseAllowance(address spender, uint256 addedValue)
-
-decreaseAllowance(address spender, uint256 subtractedValue)
-
-_transfer(address sender, address recipient, uint256 amount)
-
-_mint(address account, uint256 amount)
-
-_burn(address account, uint256 value)
-
-_approve(address owner, address spender, uint256 value)
-
-_burnFrom(address account, uint256 amount)
-
-Events
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-burn(uint256 amount)public
-
-Destroys `amount` tokens from the caller.
-
-See link:#ERC20._burn(address,uint256)[`ERC20._burn`].
-
-burnFrom(address account, uint256 amount)public
-
-See link:#ERC20._burnFrom(address,uint256)[`ERC20._burnFrom`].
-
-=== `ERC20Pausable`
-
-ERC20 modified with pausable transfers.
-
-Functions
-
-transfer(address to, uint256 value)
-
-transferFrom(address from, address to, uint256 value)
-
-approve(address spender, uint256 value)
-
-increaseAllowance(address spender, uint256 addedValue)
-
-decreaseAllowance(address spender, uint256 subtractedValue)
-
-constructor()
-
-paused()
-
-pause()
-
-unpause()
-
-isPauser(address account)
-
-addPauser(address account)
-
-renouncePauser()
-
-_addPauser(address account)
-
-_removePauser(address account)
-
-totalSupply()
-
-balanceOf(address account)
-
-allowance(address owner, address spender)
-
-_transfer(address sender, address recipient, uint256 amount)
-
-_mint(address account, uint256 amount)
-
-_burn(address account, uint256 value)
-
-_approve(address owner, address spender, uint256 value)
-
-_burnFrom(address account, uint256 amount)
-
-Events
-
-Paused(address account)
-
-Unpaused(address account)
-
-PauserAdded(address account)
-
-PauserRemoved(address account)
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-transfer(address to, uint256 value) → boolpublic
-
-transferFrom(address from, address to, uint256 value) → boolpublic
-
-approve(address spender, uint256 value) → boolpublic
-
-increaseAllowance(address spender, uint256 addedValue) → boolpublic
-
-decreaseAllowance(address spender, uint256 subtractedValue) → boolpublic
-
-=== `ERC20Capped`
-
-Extension of link:#erc20mintable[`ERC20Mintable`] that adds a cap to the supply of tokens.
-
-Functions
-
-constructor(uint256 cap)
-
-cap()
-
-_mint(address account, uint256 value)
-
-mint(address account, uint256 amount)
-
-constructor()
-
-isMinter(address account)
-
-addMinter(address account)
-
-renounceMinter()
-
-_addMinter(address account)
-
-_removeMinter(address account)
-
-totalSupply()
-
-balanceOf(address account)
-
-transfer(address recipient, uint256 amount)
-
-allowance(address owner, address spender)
-
-approve(address spender, uint256 value)
-
-transferFrom(address sender, address recipient, uint256 amount)
-
-increaseAllowance(address spender, uint256 addedValue)
-
-decreaseAllowance(address spender, uint256 subtractedValue)
-
-_transfer(address sender, address recipient, uint256 amount)
-
-_burn(address account, uint256 value)
-
-_approve(address owner, address spender, uint256 value)
-
-_burnFrom(address account, uint256 amount)
-
-Events
-
-MinterAdded(address account)
-
-MinterRemoved(address account)
-
-Transfer(address from, address to, uint256 value)
-
-Approval(address owner, address spender, uint256 value)
-
-constructor(uint256 cap)public
-
-Sets the value of the link:#ERC20Capped.cap()[`cap`]. This value is immutable, it can only be set once during construction.
-
-cap() → uint256public
-
-Returns the cap on the token's total supply.
-
-_mint(address account, uint256 value)internal
-
-See link:#ERC20Mintable.mint(address,uint256)[`ERC20Mintable.mint`].
-
-Requirements:
-
-* `value` must not cause the total supply to go over the cap.
-
-== Utilities
-
-=== `SafeERC20`
-
-Wrappers around ERC20 operations that throw on failure (when the token contract returns false). Tokens that return no value (and instead revert or throw on failure) are also supported, non-reverting calls are assumed to be successful. To use this library you can add a `using SafeERC20 for ERC20;` statement to your contract, which allows you to call the safe operations as `token.safeTransfer(...)`, etc.
-
-Functions
-
-safeTransfer(contract IERC20 token, address to, uint256 value)
-
-safeTransferFrom(contract IERC20 token, address from, address to, uint256 value)
-
-safeApprove(contract IERC20 token, address spender, uint256 value)
-
-safeIncreaseAllowance(contract IERC20 token, address spender, uint256 value)
-
-safeDecreaseAllowance(contract IERC20 token, address spender, uint256 value)
-
-safeTransfer(contract IERC20 token, address to, uint256 value)internal
-
-safeTransferFrom(contract IERC20 token, address from, address to, uint256 value)internal
-
-safeApprove(contract IERC20 token, address spender, uint256 value)internal
-
-safeIncreaseAllowance(contract IERC20 token, address spender, uint256 value)internal
-
-safeDecreaseAllowance(contract IERC20 token, address spender, uint256 value)internal
-
-=== `TokenTimelock`
-
-TokenTimelock is a token holder contract that will allow a beneficiary to extract the tokens after a given release time.
-
-Functions
-
-constructor(contract IERC20 token, address beneficiary, uint256 releaseTime)
-
-token()
-
-beneficiary()
-
-releaseTime()
-
-release()
-
-constructor(contract IERC20 token, address beneficiary, uint256 releaseTime)public
-
-token() → contract IERC20public
-
-beneficiary() → addresspublic
-
-releaseTime() → uint256public
-
-release()public
+=== IERC721
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+----
+balanceOf(address owner)
+ownerOf(uint256 tokenId)
+safeTransferFrom(address from, address to, uint256 tokenId)
+transferFrom(address from, address to, uint256 tokenId)
+approve(address to, uint256 tokenId)
+getApproved(uint256 tokenId)
+setApprovalForAll(address operator, bool _approved)
+isApprovedForAll(address owner, address operator)
+safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
+supportsInterface(bytes4 interfaceId)
+----
+
+[.description]
+.Events
+----
+Transfer(address from, address to, uint256 tokenId)
+Approval(address owner, address approved, uint256 tokenId)
+ApprovalForAll(address owner, address operator, bool approved)
+----
+
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+	Requirements:
+	* from, to cannot be zero.
+	* tokenId must be owned by from.
+	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
+
+== Convenience
+
+=== IERC721
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+----
+balanceOf(address owner)
+ownerOf(uint256 tokenId)
+safeTransferFrom(address from, address to, uint256 tokenId)
+transferFrom(address from, address to, uint256 tokenId)
+approve(address to, uint256 tokenId)
+getApproved(uint256 tokenId)
+setApprovalForAll(address operator, bool _approved)
+isApprovedForAll(address owner, address operator)
+safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
+supportsInterface(bytes4 interfaceId)
+----
+
+[.description]
+.Events
+----
+Transfer(address from, address to, uint256 tokenId)
+Approval(address owner, address approved, uint256 tokenId)
+ApprovalForAll(address owner, address operator, bool approved)
+----
+
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+	Requirements:
+	* from, to cannot be zero.
+	* tokenId must be owned by from.
+	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
