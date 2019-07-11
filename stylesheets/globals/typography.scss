@@ -58,11 +58,19 @@ h1 {
 h2 {
   font-size: 28px;
   padding-bottom: 15px;
-  border-bottom: solid 1.2px #d4d4da;
 }
 
 h3 {
   font-size: 28px;
+  color: #282846;
+  letter-spacing: 0;
+  line-height: 32px;
+  padding-bottom: 15px;
+  border-bottom: solid 1.2px #d4d4da;
+}
+
+h3 {
+  font-size: 24px;
 }
 
 h4 {

@@ -29,18 +29,62 @@ require 'asciidoctor'
 puts Asciidoctor.convert_file 'mysample.adoc', to_file: false
 ----
 
+[%header,cols="4*"]
+|===
+a|
+Contracts
+
+ a|
+Parameters Name
+
+ a|
+Parameters Type
+
+ a|
+Inline Functions
+
+|`ERC20Burnable` | [.primary]`account` | [.secondary]`address` | [.light]`decimals()`
+|`ERC20Burnable` | [.primary]`account` | [.secondary]`address` | [.light]`decimals()`
+|`ERC20Burnable` | [.primary]`account` | [.secondary]`address` | [.light]`decimals()`
+
+|===
+
 == Functions
 
 [[function]]
-.Function
+.Function Test
 Type the word [userinput]#asciidoc# into the search bar.
+
+
+[[function]]
+	[title]#Functions#
+	[content]
+	****
+	balanceOf(address owner)
+	ownerOf(uint256 tokenId)
+	safeTransferFrom(address from, address to, uint256 tokenId)
+	transferFrom(address from, address to, uint256 tokenId)
+	approve(address to, uint256 tokenId)
+	getApproved(uint256 tokenId)
+	setApprovalForAll(address operator, bool _approved)
+	isApprovedForAll(address owner, address operator)
+	safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
+	supportsInterface(bytes4 interfaceId)
+	****
+
+[.function]
+****
+totalSupply() => [userinput]#uint236# [userinput]#external#
+****
 
 
 [.function]
 ****
 totalSupply() => [userinput]#uint236# [userinput]#external#
-
 ****
+
+
+
 
 NOTE: Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
 
