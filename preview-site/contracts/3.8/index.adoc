@@ -21,7 +21,7 @@ Finally, some custom extensions are also included:
 
 WARNING: This page is incomplete. We're working to improve it for the next release. Stay tuned!
 
-== CORE
+== Core
 
 === IERC721
 Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
@@ -49,5 +49,145 @@ Approval(address owner, address approved, uint256 tokenId)
 ApprovalForAll(address owner, address operator, bool approved)
 ----
 
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+	Requirements:
+	* from, to cannot be zero.
+	* tokenId must be owned by from.
+	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
+
 == Extensions
+
+=== IERC721
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+----
+balanceOf(address owner)
+ownerOf(uint256 tokenId)
+safeTransferFrom(address from, address to, uint256 tokenId)
+transferFrom(address from, address to, uint256 tokenId)
+approve(address to, uint256 tokenId)
+getApproved(uint256 tokenId)
+setApprovalForAll(address operator, bool _approved)
+isApprovedForAll(address owner, address operator)
+safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
+supportsInterface(bytes4 interfaceId)
+----
+
+[.description]
+.Events
+----
+Transfer(address from, address to, uint256 tokenId)
+Approval(address owner, address approved, uint256 tokenId)
+ApprovalForAll(address owner, address operator, bool approved)
+----
+
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+	Requirements:
+	* from, to cannot be zero.
+	* tokenId must be owned by from.
+	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
+
 == Convenience
+
+=== IERC721
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+----
+balanceOf(address owner)
+ownerOf(uint256 tokenId)
+safeTransferFrom(address from, address to, uint256 tokenId)
+transferFrom(address from, address to, uint256 tokenId)
+approve(address to, uint256 tokenId)
+getApproved(uint256 tokenId)
+setApprovalForAll(address operator, bool _approved)
+isApprovedForAll(address owner, address operator)
+safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
+supportsInterface(bytes4 interfaceId)
+----
+
+[.description]
+.Events
+----
+Transfer(address from, address to, uint256 tokenId)
+Approval(address owner, address approved, uint256 tokenId)
+ApprovalForAll(address owner, address operator, bool approved)
+----
+
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+	Requirements:
+	* from, to cannot be zero.
+	* tokenId must be owned by from.
+	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
