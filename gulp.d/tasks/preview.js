@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const browserSync = require('browser-sync');
 const chokidar = require('chokidar');
-const debounce = require('lodash.debounce');
+// const debounce = require('lodash.debounce');
 
 const watchedDirs = [
   'helpers',
@@ -16,7 +16,7 @@ const watchedDirs = [
   'stylesheets',
 ];
 
-module.exports = function preview({ dest, port }, buildCallback) {
+module.exports = ({ dest, port }) => {
   browserSync({
     files: dest,
     ghostMode: false,
@@ -29,7 +29,7 @@ module.exports = function preview({ dest, port }, buildCallback) {
     server: dest,
   });
 
-  const build = debounce(buildCallback, 300);
+  // const build = debounce(buildCallback, 300)
   const watcher = chokidar.watch(watchedDirs, { ignoreInitial: true });
   watcher.on('all', () => build());
 };

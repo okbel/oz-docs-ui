@@ -18,8 +18,9 @@ const ASCIIDOC_ATTRIBUTES = {
   'source-highlighter': 'highlight.js',
 };
 
-module.exports = async function buildPreview(src, dest, destTheme) {
+module.exports = async (src, dest, destTheme, previewSrcDir) => {
   const relativeThemePath = path.relative(dest, destTheme);
+  console.log(relativeThemePath);
 
   const [layoutsIndex] = await Promise.all([
     compileLayouts(src),
@@ -27,33 +28,34 @@ module.exports = async function buildPreview(src, dest, destTheme) {
     registerHelpers(src),
   ]);
 
-  const sampleUiModelPath = path.resolve(
-    __dirname,
-    '../preview-site/sample-ui-model.json'
-  );
+  const sampleUiModelPath = path.resolve(previewSrcDir, 'sample-ui-model.json');
   const sampleUiModelData = fs.readFileSync(sampleUiModelPath, 'utf8');
   const sampleUiModel = JSON.parse(sampleUiModelData.toString());
 
-  // console.log('sampleUiModel', sampleUiModel);
+  console.log(
+    'src, dest, destTheme, previewSrcDir -------->',
+    src,
+    dest,
+    destTheme,
+    previewSrcDir
+  );
 
   vfs
-    .src(['preview-site/**/*.adoc'])
+    .src(['preview-src/**/*.adoc'])
     .pipe(
       map((file, next) => {
         const doc = asciidoctor.load(file.contents, {
           safe: 'safe',
           attributes: ASCIIDOC_ATTRIBUTES,
         });
-
+        console.log('-------------> file', file);
         const compiledLayout =
           layoutsIndex[file.stem === '404' ? '404.hbs' : 'default.hbs'];
 
-        const previewSitePath = path.resolve('preview-site');
-        const relativeToRoot = path.relative(file.path, previewSitePath);
-        sampleUiModel['themeRootPath'] = path.join(
-          relativeToRoot,
-          relativeThemePath
-        );
+        const relativeToRoot = path.relative(file.path, previewSrcDir);
+        sampleUiModel['themeRootPath'] = path.join(relativeToRoot, destTheme);
+
+        console.log(sampleUiModel['themeRootPath'], relativeToRoot);
 
         sampleUiModel['siteRootUrl'] = path.join(relativeToRoot, 'index.html');
         sampleUiModel['contents'] = Buffer.from(doc.convert());
@@ -82,7 +84,7 @@ function registerPartials(src) {
       .pipe(
         fileinclude({
           prefix: '@@',
-          basepath: src,
+          basepath: path.resolve(src, '..'),
         })
       )
       .pipe(

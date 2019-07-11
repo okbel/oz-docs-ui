@@ -1,68 +1,79 @@
 'use strict';
 
-const path = require('path');
-
-const vfs = require('vinyl-fs');
-const map = require('map-stream');
-const merge = require('merge-stream');
 const minimatch = require('minimatch');
-
-const imagemin = require('gulp-imagemin');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglifyes');
 const runSequence = require('run-sequence');
-const autoprefixer = require('gulp-autoprefixer');
-const sass = require('gulp-sass');
 const replace = require('gulp-replace');
+const autoprefixer = require('autoprefixer');
+const browserify = require('browserify');
+const buffer = require('vinyl-buffer');
+const concat = require('gulp-concat');
+const cssnano = require('cssnano');
+const fs = require('fs-extra');
+const imagemin = require('gulp-imagemin');
+const { obj: map } = require('through2');
+const merge = require('merge-stream');
+const ospath = require('path');
+const path = ospath.posix;
+const postcss = require('gulp-postcss');
+const postcssCalc = require('postcss-calc');
+const postcssImport = require('postcss-import');
+const postcssUrl = require('postcss-url');
+const postcssVar = require('postcss-custom-properties');
+const uglify = require('gulp-uglify');
+const vfs = require('vinyl-fs');
+const sass = require('gulp-sass');
+sass.compiler = require('node-sass');
 
-const config = require('./../../config');
-const src = config.get('source');
-const dest = config.get('destination');
-const destTheme = path.join(dest, config.get('theme_destination'));
 const sassDir = 'stylesheets/**/*.scss';
 const sassSrc = 'stylesheets/index.scss';
-const sassDist = 'build/_theme/stylesheets';
+const sassDist = '_theme/stylesheets';
 
-module.exports = function build(src, dest, cacheBuster) {
-  const srcOptions = { base: src, cwd: src };
+module.exports = (src, dest, preview) => {
+  const opts = { base: src, cwd: src };
+  const sourcemaps = preview || process.env.SOURCEMAPS === 'true';
+
+  // const postcssPlugins = [
+  //   postcssImport,
+  //   postcssUrl([
+  //     require('@csstools/postcss-sass'),
+  //     {
+  //       filter: '**/~typeface-*/files/*',
+  //       url: (asset) => {
+  //         const relpath = asset.pathname.substr(1);
+  //         const abspath = require.resolve(relpath);
+  //         const basename = ospath.basename(abspath);
+  //         const destpath = ospath.join(dest, 'font', basename);
+  //         if (!fs.pathExistsSync(destpath)) fs.copySync(abspath, destpath);
+  //         return path.join('..', 'font', basename);
+  //       },
+  //     },
+  //   ]),
+  //   postcssVar({ preserve: preview ? 'preserve-computed' : false }),
+  //   preview ? postcssCalc : () => {},
+  //   autoprefixer,
+  //   preview ? () => {} : cssnano({ preset: 'default' }),
+  // ];
+
+  const postcssPlugins = [require('@csstools/postcss-sass'), autoprefixer()];
 
   return merge([
-    vfs.src('images/**/*.{svg,png}', srcOptions).pipe(imagemin()),
-
+    vfs.src('images/**/*.{svg,png}', opts).pipe(imagemin()),
     vfs
-      .src('scripts/{0..9}{0..9}-*.js', srcOptions)
+      .src('scripts/+([0-9])-*.js', { ...opts, sourcemaps })
       // .pipe(uglify())
       .pipe(concat('scripts/site.js')),
-
-    vfs.src('scripts/*.pack.js', srcOptions),
-
-    vfs.src('fonts/*.{woff,woff2}', srcOptions),
-
+    vfs.src('scripts/*.pack.js', opts),
+    vfs.src('fonts/*.{woff,woff2}', opts),
+    // vfs
+    //   .src('stylesheets/index.scss')
+    //   .pipe(sass())
+    //   .pipe(autoprefixer),
     vfs
-      .src('stylesheets/index.scss', srcOptions)
-      .pipe(sass().on('error', sass.logError))
-      .pipe(
-        autoprefixer({
-          browsers: ['last 2 versions'],
-          remove: false,
-        })
-      )
-      .on('error', function(err) {
-        console.log(err.message);
-      }),
-
-    // vfs.src('node_modules/typeface-*/**/*.{svg,eot,woff,woff2}', srcOptions)
-    //  .pipe(map((file, next) => {
-    //    // move font files to fonts (without any subfolder)
-    //    file.dirname = path.join(file.base, 'fonts')
-    //    next(null, file)
-    //  })),
-
-    vfs.src('helpers/*.js', srcOptions),
-    vfs.src('layouts/*.hbs', srcOptions),
-    // .pipe(replace(/(\.css)(?=">)/g, cacheBuster ? '$1?' + cacheBuster : '$1')),
-    vfs
-      .src('partials/*.hbs', srcOptions)
-      .pipe(replace(/(\.js)(?=">)/g, cacheBuster ? '$1?' + cacheBuster : '$1')),
-  ]).pipe(vfs.dest(dest));
+      .src('stylesheets/index.scss', { ...opts, sourcemaps })
+      .pipe(postcss(postcssPlugins))
+      .pipe(sass()),
+    vfs.src('helpers/*.js', opts),
+    vfs.src('layouts/*.hbs', opts),
+    vfs.src('partials/*.hbs', opts),
+  ]).pipe(vfs.dest(dest, { sourcemaps: sourcemaps && '.' }));
 };

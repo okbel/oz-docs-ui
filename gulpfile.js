@@ -1,37 +1,43 @@
-'use strict';
-
-const path = require('path');
+const { series, parallel, watch } = require('gulp');
 const createTask = require('./gulp.d/lib/create-task');
 const exportTasks = require('./gulp.d/lib/export-tasks');
 
 const config = require('./config');
-const build = require('./tasks/build');
-const buildPreview = require('./tasks/build-preview');
-const { series, parallel } = require('gulp');
+const build = require('./gulp.d/tasks/build');
+const buildPreview = require('./gulp.d/tasks/build-preview');
 
+const bundleName = 'ui';
+const buildDir = 'build';
+const previewSrcDir = 'preview-src';
+const previewDestDir = 'public';
+const srcDir = 'src';
+const destDir = `${previewDestDir}/`;
 const { reload: livereload } =
   process.env.LIVERELOAD === 'true' ? require('gulp-connect') : {};
 const serverConfig = { host: '0.0.0.0', port: 5252, livereload };
-
-const src = config.get('source');
-const dest = config.get('destination');
-const destTheme = path.join(dest, config.get('theme_destination'));
+const destTheme = '_theme';
 
 const task = require('./gulp.d/tasks');
 const glob = {
-  all: [src, dest],
-  css: `${src}/css/**/*.css`,
-  js: ['gulpfile.js', 'gulp.d/**/*.js', `${src}/{helpers,js}/**/*.js`],
+  all: [srcDir, previewSrcDir],
+  css: `${srcDir}/css/**/*.css`,
+  js: ['gulpfile.js', 'gulp.d/**/*.js', `${srcDir}/{helpers,js}/**/*.js`],
 };
+
 const buildPreviewPagesTask = createTask({
   name: 'preview:build-pages',
-  call: () => buildPreview(src, dest, destTheme),
+  call: () => buildPreview(srcDir, destDir, destTheme, previewSrcDir),
 });
 
 const buildTask = createTask({
   name: 'build',
   desc: 'Build and stage the UI assets for bundling',
-  call: () => build(src, destTheme, config.get('cache_buster')),
+  call: () =>
+    build(
+      srcDir,
+      `${destDir}${destTheme}`,
+      process.argv.slice(2).some((name) => name.startsWith('preview'))
+    ),
 });
 
 const previewBuildTask = createTask({
@@ -42,7 +48,9 @@ const previewBuildTask = createTask({
 
 const previewServeTask = createTask({
   name: 'preview:serve',
-  call: task.serve(dest, serverConfig, () => watch(glob.all, previewBuildTask)),
+  call: task.serve(destDir, serverConfig, () =>
+    watch(glob.all, previewBuildTask)
+  ),
 });
 
 const previewTask = createTask({
@@ -51,36 +59,13 @@ const previewTask = createTask({
   call: series(previewBuildTask, previewServeTask),
 });
 
-module.exports = exportTasks(previewBuildTask);
-// function buildTask(cb) {
-//   build(src, destTheme, config.get('cache_buster'));
-//   cb();
-// }
-
-// function buildPreviewTask(cb) {
-//   buildPreview(src, dest, destTheme);
-//   cb();
-// }
-
-// function previewTask(cb) {
-//   preview({ dest, port: config.get('port') });
-//   cb();
-// }
-
-// const previewBuildTask = function previewTask(cb) {
-//   preview({ dest, port: config.get('port') });
-//   cb();
-// }
-//   call: ,
-// })
-
-// exports.build = buildTask;
-// exports.buildPreview = buildPreviewTask;
-// exports.preview = series(previewBuildTask, previewServeTask);
-
-// gulp.task('build', () => build(src, destTheme, config.get('cache_buster')));
-
-// gulp.task('build-preview', ['build'], () => buildPreview(src, dest, destTheme));
+module.exports = exportTasks(
+  previewBuildTask,
+  previewTask,
+  previewServeTask,
+  buildTask,
+  buildPreviewPagesTask
+);
 
 // gulp.task('preview', ['build-preview'], () =>
 //   preview({ dest, port: config.get('port') }, () => gulp.start('build-preview'))
