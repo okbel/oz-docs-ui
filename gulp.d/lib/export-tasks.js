@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = (...tasks) => {
-  console.log('exporting', tasks);
   const seed = {};
   if (tasks.length) {
     if (tasks.lastIndexOf(tasks[0]) > 0) {

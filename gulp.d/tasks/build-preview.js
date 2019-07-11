@@ -20,7 +20,6 @@ const ASCIIDOC_ATTRIBUTES = {
 
 module.exports = async (src, dest, destTheme, previewSrcDir) => {
   const relativeThemePath = path.relative(dest, destTheme);
-  console.log(relativeThemePath);
 
   const [layoutsIndex] = await Promise.all([
     compileLayouts(src),
@@ -32,14 +31,6 @@ module.exports = async (src, dest, destTheme, previewSrcDir) => {
   const sampleUiModelData = fs.readFileSync(sampleUiModelPath, 'utf8');
   const sampleUiModel = JSON.parse(sampleUiModelData.toString());
 
-  console.log(
-    'src, dest, destTheme, previewSrcDir -------->',
-    src,
-    dest,
-    destTheme,
-    previewSrcDir
-  );
-
   vfs
     .src(['preview-src/**/*.adoc'])
     .pipe(
@@ -48,14 +39,11 @@ module.exports = async (src, dest, destTheme, previewSrcDir) => {
           safe: 'safe',
           attributes: ASCIIDOC_ATTRIBUTES,
         });
-        console.log('-------------> file', file);
         const compiledLayout =
           layoutsIndex[file.stem === '404' ? '404.hbs' : 'default.hbs'];
 
         const relativeToRoot = path.relative(file.path, previewSrcDir);
         sampleUiModel['themeRootPath'] = path.join(relativeToRoot, destTheme);
-
-        console.log(sampleUiModel['themeRootPath'], relativeToRoot);
 
         sampleUiModel['siteRootUrl'] = path.join(relativeToRoot, 'index.html');
         sampleUiModel['contents'] = Buffer.from(doc.convert());
