@@ -10,13 +10,17 @@
           {
             "name": "styleguide",
             "title": "Styleguide",
-						"url": "styleguide.html",
-						"urlType": "internal"
+						"url": "/styleguide.html"
           },
           {
             "name": "test",
             "title": "Test",
-            "url": "test.html"
+            "url": "/test.html"
+					},
+					{
+            "name": "ERC20",
+            "title": "ERC20",
+            "url": "/contracts/3.8/index.html"
           }
         ]
       },
@@ -36,18 +40,6 @@
           {
             "string": "3.6",
             "url": "/contracts/3.6/index.html"
-          },
-          {
-            "string": "3.5",
-            "url": "/contracts/3.5/index.html"
-          },
-          {
-            "string": "3.4",
-            "url": "/contracts/3.4/index.html"
-          },
-          {
-            "string": "3.3",
-            "url": "/contracts/3.3/index.html"
           },
           {
             "string": "3.2",
@@ -102,31 +94,31 @@
               },
               {
                 "title": "Drafts",
-                "url": "/contracts/3.8/adding-datasense-query-language"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "Introspection",
-                "url": "/contracts/3.8/adding-query-pagination-support"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "Lifecycle",
-                "url": "/contracts/3.8/building-a-batch-enabled-connector"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "Math",
-                "url": "/contracts/3.8/shading-libraries"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "Ownership",
-                "url": "/contracts/3.8/adding-libraries"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "Payment",
-                "url": "/contracts/3.8/adding-libraries"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "ERC 20",
-                "url": "/contracts/3.8/adding-libraries"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "ERC 721",
@@ -134,17 +126,17 @@
               },
               {
                 "title": "ERC 777",
-                "url": "/contracts/3.8/adding-libraries"
+								"url": "/contracts/3.8"
               },
               {
                 "title": "Utilities",
-                "url": "/contracts/3.8/adding-libraries"
+								"url": "/contracts/3.8"
               }
             ]
           }
         ]
-      },
-      {
+			},
+			{
         "name": "sdk",
         "title": "SDK",
         "versions": [
@@ -162,18 +154,6 @@
             "url": "/contracts/3.6/index.html"
           },
           {
-            "string": "3.5",
-            "url": "/contracts/3.5/index.html"
-          },
-          {
-            "string": "3.4",
-            "url": "/contracts/3.4/index.html"
-          },
-          {
-            "string": "3.3",
-            "url": "/contracts/3.3/index.html"
-          },
-          {
             "string": "3.2",
             "url": "/contracts/3.2/index.html"
           }
@@ -181,202 +161,96 @@
         "items": [
           {
             "title": "Overview",
-            "url": "/contracts/3.8/"
-          },
-          {
-            "title": "Setting up your development environment",
-            "url": "/contracts/3.8/setting-up-your-dev-environment"
-          },
-          {
-            "title": "Project structure",
-            "url": "/contracts/3.8/connector-project-structure"
-          },
-          {
-            "title": "Creating a project",
             "items": [
               {
-                "title": "Overview",
-                "url": "/contracts/3.8/creating-an-anypoint-connector-project"
-              },
-              {
-                "title": "Seting up API Access",
-                "url": "contracts/3.8/setting-up-api-access"
-              },
-              {
-                "title": "Connection strategies",
-                "url": "contracts/3.8/connector-connection-strategies"
-              },
-              {
-                "title": "Authentication",
-                "items": [
-                  {
-                    "title": "Overview",
-                    "url": "/contracts/3.8/authentication"
-                  },
-                  {
-                    "title": "Methods",
-                    "url": "/contracts/3.8/authentication-methods"
-                  },
-                  {
-                    "title": "OAuth v1",
-                    "url": "/contracts/3.8/oauth-v1"
-                  },
-                  {
-                    "title": "OAuth v2",
-                    "url": "/contracts/3.8/oauth-v2"
-                  },
-                  {
-                    "title": "Connection management",
-                    "url": "/contracts/3.8/connection-management"
-                  },
-                  {
-                    "title": "No authentication",
-                    "url": "/contracts/3.8/no-authentication"
-                  },
-                  {
-                    "title": "HTTP authentication",
-                    "url": "/contracts/3.8/http-basic-authentication",
-                    "deprecated": true
-                  }
-                ]
-              },
-              {
-                "title": "Java",
-                "items": [
-                  {
-                    "title": "Creating a connector",
-                    "url": "/contracts/3.8/creating-a-java-sdk-based-connector"
-                  },
-                  {
-                    "title": "Connector example",
-                    "url": "/contracts/3.8/creating-a-connector-using-a-java-sdk"
-                  }
-                ]
-              },
-              {
-                "title": "SOAP",
-                "items": [
-                  {
-                    "title": "Creating a connector",
-                    "url": "/contracts/3.8/creating-a-soap-connector"
-                  },
-                  {
-                    "title": "Session management",
-                    "url": "/contracts/3.8/soap-connect-session-management"
-                  },
-                  {
-                    "title": "Creating a connector using CXF",
-                    "url": "/contracts/3.8/creating-a-connector-for-a-soap-service-via-cxf-client"
-                  }
-                ]
+                "title": "Getting Started",
+                "url": "/contracts/3.8"
               }
             ]
           },
           {
-            "title": "Adding functionality",
+            "title": "Guides",
             "items": [
               {
-                "title": "Overview",
-                "url": "/contracts/3.8/connector-attributes-and-operations"
+                "title": "Access Control",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Defining message sources",
-                "url": "/contracts/3.8/defining-message-sources"
+                "title": "Crowdsales",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Creating message processors",
-                "url": "/contracts/3.8/creating-message-processors"
+                "title": "Tokens",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Defining attributes",
-                "url": "/contracts/3.8/defining-connector-attributes"
-              },
-              {
-                "title": "Complex data types",
-                "url": "/contracts/3.8/complex-data-types-attributes"
-              },
-              {
-                "title": "MIME type and encoding",
-                "url": "/contracts/3.8/mime-type-and-encoding"
+                "title": "Utilities",
+                "url": "/contracts/3.8"
               }
             ]
           },
           {
-            "title": "Extending functionality",
+            "title": "API Reference",
             "items": [
               {
-                "title": "Overview",
-                "url": "/contracts/3.8/extending-connector-functionality"
+                "title": "Access",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Adding DataSense",
-                "url": "/contracts/3.8/adding-datasense"
+                "title": "Crowdsales",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Multi-level DataSense",
-                "url": "/contracts/3.8/multiple-level-datasense-support"
+                "title": "Cryptography",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Adding DataSense query language",
-                "url": "/contracts/3.8/adding-datasense-query-language"
+                "title": "Drafts",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Adding query pagination",
-                "url": "/contracts/3.8/adding-query-pagination-support"
+                "title": "Introspection",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Building a batch enabled connector",
-                "url": "/contracts/3.8/building-a-batch-enabled-connector"
+                "title": "Lifecycle",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Shading libraries",
-                "url": "/contracts/3.8/shading-libraries"
+                "title": "Math",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Adding libraries and JARs",
-                "url": "/contracts/3.8/adding-libraries"
-              }
-            ]
-          },
-          {
-            "title": "Developing Tests",
-            "item": [
-              {
-                "title": "Overview",
-                "url": "/contracts/3.8/developing-devkit-connector-tests"
+                "title": "Ownership",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Installing and testing in Studio",
-                "url": "/contracts/3.8/installing-and-testing-your-connector-in-studio"
-              }
-            ]
-          },
-          {
-            "title": "Documenting your Connector",
-            "url": "/contracts/3.8/connector-reference-documentation"
-          },
-          {
-            "title": "Packaging for release",
-            "url": "/contracts/3.8/packaging-your-connector-for-release"
-          },
-          {
-            "title": "Connector Certification",
-            "items": [
-              {
-                "title": "Overview",
-                "url": "/contracts/3.8/connector-certification-program-guidelines"
+                "title": "Payment",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "License management",
-                "url": "/contracts/3.8/certified-connector-license-management"
+                "title": "ERC 20",
+								"url": "/contracts/3.8"
+              },
+              {
+                "title": "ERC 721",
+                "url": "/erc-721.html"
+              },
+              {
+                "title": "ERC 777",
+								"url": "/contracts/3.8"
+              },
+              {
+                "title": "Utilities",
+								"url": "/contracts/3.8"
               }
             ]
           }
         ]
-      },
-      {
+			},
+			{
         "name": "starter-kit",
-        "title": "Starter Kit",
+        "title": "Starters Kit",
         "versions": [
           {
             "string": "3.8",
@@ -392,18 +266,6 @@
             "url": "/contracts/3.6/index.html"
           },
           {
-            "string": "3.5",
-            "url": "/contracts/3.5/index.html"
-          },
-          {
-            "string": "3.4",
-            "url": "/contracts/3.4/index.html"
-          },
-          {
-            "string": "3.3",
-            "url": "/contracts/3.3/index.html"
-          },
-          {
             "string": "3.2",
             "url": "/contracts/3.2/index.html"
           }
@@ -411,194 +273,88 @@
         "items": [
           {
             "title": "Overview",
-            "url": "/contracts/3.8/"
-          },
-          {
-            "title": "Setting up your development environment",
-            "url": "/contracts/3.8/setting-up-your-dev-environment"
-          },
-          {
-            "title": "Project structure",
-            "url": "/contracts/3.8/connector-project-structure"
-          },
-          {
-            "title": "Creating a project",
             "items": [
               {
-                "title": "Overview",
-                "url": "/contracts/3.8/creating-an-anypoint-connector-project"
-              },
-              {
-                "title": "Seting up API Access",
-                "url": "contracts/3.8/setting-up-api-access"
-              },
-              {
-                "title": "Connection strategies",
-                "url": "contracts/3.8/connector-connection-strategies"
-              },
-              {
-                "title": "Authentication",
-                "items": [
-                  {
-                    "title": "Overview",
-                    "url": "/contracts/3.8/authentication"
-                  },
-                  {
-                    "title": "Methods",
-                    "url": "/contracts/3.8/authentication-methods"
-                  },
-                  {
-                    "title": "OAuth v1",
-                    "url": "/contracts/3.8/oauth-v1"
-                  },
-                  {
-                    "title": "OAuth v2",
-                    "url": "/contracts/3.8/oauth-v2"
-                  },
-                  {
-                    "title": "Connection management",
-                    "url": "/contracts/3.8/connection-management"
-                  },
-                  {
-                    "title": "No authentication",
-                    "url": "/contracts/3.8/no-authentication"
-                  },
-                  {
-                    "title": "HTTP authentication",
-                    "url": "/contracts/3.8/http-basic-authentication",
-                    "deprecated": true
-                  }
-                ]
-              },
-              {
-                "title": "Java",
-                "items": [
-                  {
-                    "title": "Creating a connector",
-                    "url": "/contracts/3.8/creating-a-java-sdk-based-connector"
-                  },
-                  {
-                    "title": "Connector example",
-                    "url": "/contracts/3.8/creating-a-connector-using-a-java-sdk"
-                  }
-                ]
-              },
-              {
-                "title": "SOAP",
-                "items": [
-                  {
-                    "title": "Creating a connector",
-                    "url": "/contracts/3.8/creating-a-soap-connector"
-                  },
-                  {
-                    "title": "Session management",
-                    "url": "/contracts/3.8/soap-connect-session-management"
-                  },
-                  {
-                    "title": "Creating a connector using CXF",
-                    "url": "/contracts/3.8/creating-a-connector-for-a-soap-service-via-cxf-client"
-                  }
-                ]
+                "title": "Getting Started",
+                "url": "/contracts/3.8"
               }
             ]
           },
           {
-            "title": "Adding functionality",
+            "title": "Guides",
             "items": [
               {
-                "title": "Overview",
-                "url": "/contracts/3.8/connector-attributes-and-operations"
+                "title": "Access Control",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Defining message sources",
-                "url": "/contracts/3.8/defining-message-sources"
+                "title": "Crowdsales",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Creating message processors",
-                "url": "/contracts/3.8/creating-message-processors"
+                "title": "Tokens",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Defining attributes",
-                "url": "/contracts/3.8/defining-connector-attributes"
-              },
-              {
-                "title": "Complex data types",
-                "url": "/contracts/3.8/complex-data-types-attributes"
-              },
-              {
-                "title": "MIME type and encoding",
-                "url": "/contracts/3.8/mime-type-and-encoding"
+                "title": "Utilities",
+                "url": "/contracts/3.8"
               }
             ]
           },
           {
-            "title": "Extending functionality",
+            "title": "API Reference",
             "items": [
               {
-                "title": "Overview",
-                "url": "/contracts/3.8/extending-connector-functionality"
+                "title": "Access",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Adding DataSense",
-                "url": "/contracts/3.8/adding-datasense"
+                "title": "Crowdsales",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Multi-level DataSense",
-                "url": "/contracts/3.8/multiple-level-datasense-support"
+                "title": "Cryptography",
+                "url": "/contracts/3.8"
               },
               {
-                "title": "Adding DataSense query language",
-                "url": "/contracts/3.8/adding-datasense-query-language"
+                "title": "Drafts",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Adding query pagination",
-                "url": "/contracts/3.8/adding-query-pagination-support"
+                "title": "Introspection",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Building a batch enabled connector",
-                "url": "/contracts/3.8/building-a-batch-enabled-connector"
+                "title": "Lifecycle",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Shading libraries",
-                "url": "/contracts/3.8/shading-libraries"
+                "title": "Math",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Adding libraries and JARs",
-                "url": "/contracts/3.8/adding-libraries"
-              }
-            ]
-          },
-          {
-            "title": "Developing Tests",
-            "item": [
-              {
-                "title": "Overview",
-                "url": "/contracts/3.8/developing-devkit-connector-tests"
+                "title": "Ownership",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "Installing and testing in Studio",
-                "url": "/contracts/3.8/installing-and-testing-your-connector-in-studio"
-              }
-            ]
-          },
-          {
-            "title": "Documenting your Connector",
-            "url": "/contracts/3.8/connector-reference-documentation"
-          },
-          {
-            "title": "Packaging for release",
-            "url": "/contracts/3.8/packaging-your-connector-for-release"
-          },
-          {
-            "title": "Connector Certification",
-            "items": [
-              {
-                "title": "Overview",
-                "url": "/contracts/3.8/connector-certification-program-guidelines"
+                "title": "Payment",
+								"url": "/contracts/3.8"
               },
               {
-                "title": "License management",
-                "url": "/contracts/3.8/certified-connector-license-management"
+                "title": "ERC 20",
+								"url": "/contracts/3.8"
+              },
+              {
+                "title": "ERC 721",
+                "url": "/erc-721.html"
+              },
+              {
+                "title": "ERC 777",
+								"url": "/contracts/3.8"
+              },
+              {
+                "title": "Utilities",
+								"url": "/contracts/3.8"
               }
             ]
           }
@@ -606,64 +362,9 @@
       }
     ]
   },
-  "title": "Contracts",
   "keywords": "key, words, many, of, them",
   "canonicalUrl": "https://example.com/index.html",
   "editUrl": "https://github.com/openzeppelin/contracts/edit/v3.8/modules/ROOT/content/index.adoc",
-  "domain": {
-    "name": "contracts",
-    "title": "Contracts",
-    "type": "component",
-    "versioned": true,
-    "version": {
-      "string": "3.6"
-    },
-    "versions": [
-      {
-        "string": "3.8",
-        "latest": true,
-        "url": "/contracts/3.8/index.html"
-      },
-      {
-        "string": "3.7",
-        "url": "/contracts/3.7/index.html"
-      },
-      {
-        "string": "3.6",
-        "url": "/contracts/3.6/index.html"
-      },
-      {
-        "string": "3.5",
-        "url": "/contracts/3.5/index.html"
-      },
-      {
-        "string": "3.4",
-        "url": "/contracts/3.4/index.html"
-      },
-      {
-        "string": "3.3",
-        "url": "/contracts/3.3/index.html"
-      },
-      {
-        "string": "3.2",
-        "url": "/contracts/3.2/index.html"
-      }
-    ]
-  },
-  "versions": [
-    {
-      "string": "3.5",
-      "url": "/contracts/3.5/index.html"
-    },
-    {
-      "string": "3.6",
-      "url": "/contracts/3.6/index.html"
-    },
-    {
-      "string": "3.7",
-      "url": "/contracts/3.7/index.html"
-    }
-  ],
   "breadcrumbs": [
     {
       "title": "API Reference",
