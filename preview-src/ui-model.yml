@@ -1,0 +1,101 @@
+antoraVersion: '2.0.0'
+site:
+  url: &home_url /index.html
+  title: OS Documentation
+  components:
+    contracts:
+      name: contracts
+      title: Contracts
+      url: *home_url
+      versions:
+      - version: 3.2
+        url: *home_url
+        navigation:
+        - items:
+          - content: OS Documentation
+            url: *home_url
+          - content: Anypoint Platform Glossary
+            url: '#'
+          - content: Rust
+            url: https://Rust.org
+            urlType: external
+    sdk: &component
+      name: sdk
+      title: SDK
+      url: '#'
+      versions:
+      - &component_version_latest
+        version: '3.9'
+        url: '#'
+        navigation:
+        - items:
+          - content: About Starters Kit
+            url: '#'
+          - content: Getting Started with Starters Kit Development
+            url: '#'
+          - content: Creating an Starters Kit Project
+            url: '#'
+      - &component_version
+        version: '3.8'
+        url: /connector-devkit/3.8/index.html
+        navigation:
+        - items:
+          - content: About Starters Kit
+            #url: /connector-devkit/3.8/index.html
+            url: '#'
+          - content: Getting Started with Starters Kit Development
+            # NOTE comment out url to make this a heading
+            url: '#'
+            items:
+            - content: Setting Up Your Development Environment
+              url: /connector-devkit/3.8/index.html
+              #url: '#'
+              items:
+              - content: Windows
+                #url: /connector-devkit/3.8/index.html
+                url: '#'
+              - content: Linux
+                url: '#'
+              - content: macOS
+                url: '#'
+            - content: Starters Kit Tutorial
+              url: '#'
+              #url: /connector-devkit/3.8/index.html
+            - content: Connector Project Structure
+              url: '#'
+            - content: DevKit Rust Annotation Reference
+              url: '#'
+          - content: Creating an Starters Kit Project
+            url: '#'
+      - version: '3.7'
+        url: /connector-devkit/3.7/index.html
+        navigation:
+        - items:
+          - content: About Starters Kit
+            url: /connector-devkit/3.7/index.html
+          - content: Getting Started with Starters Kit Development
+            url: '#'
+          - content: Creating an Starters Kit Project
+            url: '#'
+      latest: *component_version_latest
+page:
+  title: &page_title About Starters Kit
+  url: &page_url /connector-devkit/3.8/index.html
+  component: *component
+  componentVersion: *component_version
+  version: '3.8'
+  module: ROOT
+  home: false
+  editUrl: https://github.com/OS/docs-site-antora-ui/edit/master/preview-site-src/index.adoc
+  versions:
+  - version: '3.9'
+    url: '#'
+  - version: '3.8'
+    url: '#'
+  - version: '3.7'
+    missing: true
+    url: '#'
+  breadcrumbs:
+  - content: *page_title
+    url: *page_url
+    urlType: internal

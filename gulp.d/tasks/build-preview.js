@@ -10,6 +10,7 @@ const minimatch = require('minimatch');
 const handlebars = require('handlebars');
 const requireFromString = require('require-from-string');
 const asciidoctor = require('asciidoctor.js')();
+const yaml = require('js-yaml');
 
 const ASCIIDOC_ATTRIBUTES = {
   experimental: '',
@@ -27,9 +28,9 @@ module.exports = async (src, dest, destTheme, previewSrcDir) => {
     registerHelpers(src),
   ]);
 
-  const sampleUiModelPath = path.resolve(previewSrcDir, 'sample-ui-model.json');
+  const sampleUiModelPath = path.resolve(previewSrcDir, 'ui-model.yml');
   const sampleUiModelData = fs.readFileSync(sampleUiModelPath, 'utf8');
-  const sampleUiModel = JSON.parse(sampleUiModelData.toString());
+  const sampleUiModel = yaml.safeLoad(sampleUiModelData);
 
   vfs
     .src(['preview-src/**/*.adoc'])

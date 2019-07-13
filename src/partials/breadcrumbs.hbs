@@ -1,4 +1,4 @@
-<li class="flex align-center li">
+{{!-- <li class="flex align-center li">
 	<a href="{{siteRootUrl}}" class="link link-home">
 		@@include('public/_theme/images/icons/home.svg')
 	</a>
@@ -16,4 +16,23 @@
 			<li class="flex align-center li">
 				<span class="crumb">{{{./title}}}</span>
 				{{/if}}
-				{{/each}}
+				{{/each}} --}}
+{{#if page.breadcrumbs}}
+<ol class="flex grow align-center breadcrumbs" aria-label="breadcrumbs">
+  <li class="flex align-center li">
+    <a href="{{@root.site.url}}" class="link link-home">
+      @@include('public/_theme/images/icons/home.svg')
+    </a>
+  </li>
+  {{#with page.componentVersion}}
+  {{#if (and ./title (not (or ./root (eq @root.page.breadcrumbs.0.content ./title))))}}
+  <li class="flex align-center li"><a class="link" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
+  {{/if}}
+  {{/with}}
+  {{#each page.breadcrumbs}}
+  {{#if (eq ./urlType 'internal')}}
+  <li class="flex align-center li"><a class="link" href="{{{relativize ./url}}}">{{{./content}}}</a></li>
+  {{/if}}
+  {{/each}}
+</ol>
+{{/if}}
