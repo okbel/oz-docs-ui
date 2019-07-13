@@ -28,18 +28,12 @@ Interface of the ERC20 standard as defined in the EIP. Does not include the opti
 
 [.description]
 .Functions
-----
-balanceOf(address owner)
-ownerOf(uint256 tokenId)
-safeTransferFrom(address from, address to, uint256 tokenId)
-transferFrom(address from, address to, uint256 tokenId)
-approve(address to, uint256 tokenId)
-getApproved(uint256 tokenId)
-setApprovalForAll(address operator, bool _approved)
-isApprovedForAll(address owner, address operator)
-safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
-supportsInterface(bytes4 interfaceId)
-----
+****
+* <<Function.ownerOf>>
+* <<Function.balanceOf>>
+* <<Function.transferFrom>>
+* <<Function.setApprovalForAll>>
+****
 
 [.description]
 .Events
@@ -49,24 +43,28 @@ Approval(address owner, address approved, uint256 tokenId)
 ApprovalForAll(address owner, address operator, bool approved)
 ----
 
+[[Function.ownerOf]]
 [.function]
 .ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
 ****
 	Returns the number of NFTs in owner's account.
 ****
 
+[[Function.balanceOf]]
 [.function]
 .balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
 ****
 	Returns the number of NFTs in owner's account.
 ****
 
+[[Function.transferFrom]]
 [.function]
 .transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
 ****
 	Returns the number of NFTs in owner's account.
 ****
 
+[[Function.setApprovalForAll]]
 [.function]
 .setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
 ****

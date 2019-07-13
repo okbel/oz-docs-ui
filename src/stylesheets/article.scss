@@ -13,7 +13,8 @@
     margin-top: var(--xl);
   }
 
-  > h1:first-child {
+  > h1:first-child,
+  .sect2 h3:first-child {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -285,7 +286,7 @@
   .sidebarblock {
     padding: 1.5rem;
     background-color: #fbfbfc;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
 
     .title {
       opacity: 0.8;
@@ -315,7 +316,7 @@
         border: none;
         padding: 0;
         margin: 0;
-        padding: 1rem 0;
+        padding: 0.8rem 0;
         font-family: var(--sans-serif);
         line-height: 1.8rem;
         font-size: 0.975rem;
@@ -378,7 +379,7 @@
         transform: translateY(-50%);
         right: 1rem;
         font-family: var(--monospace);
-        font-weight: 600;
+        font-weight: 700;
       }
 
       .literalblock {
