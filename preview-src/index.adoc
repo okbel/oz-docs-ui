@@ -6,6 +6,19 @@ Author Name
 
 Ah, the "token": the world's most powerful and most misused tool. In this section we'll learn to harness the power of native units of account for good and world peace!
 
+[.card]
+****
+Starter Kit
+****
+[.card]
+****
+SDK
+****
+[.card]
+****
+Contracts
+****
+
 == Getting Started
 === But First, Coffee a Primer on Tokens
 

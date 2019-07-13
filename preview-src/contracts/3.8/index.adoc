@@ -1,5 +1,7 @@
 = ERC 721
 
+:page-toc:
+
 This set of interfaces, contracts, and utilities are all related to the `ERC721` Non-Fungible Token Standard.
 
 NOTE: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.

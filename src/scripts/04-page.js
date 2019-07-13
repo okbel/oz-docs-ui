@@ -1,107 +1,81 @@
 (function() {
   'use strict';
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var doc = document.querySelector('.doc');
+  var sidebar = document.querySelector('aside.toc.sidebar');
+  if (!sidebar) return;
+  var doc;
+  var headings;
+  if (
+    document.querySelector('.body.-toc') ||
+    !(headings = find(
+      'h1[id].sect0, .sect1 > h2[id]',
+      (doc = document.querySelector('article.doc'))
+    )).length
+  ) {
+    sidebar.parentNode.removeChild(sidebar);
+    return;
+  }
+  var lastActiveFragment;
+  var links = {};
+  var menu;
 
-    if (!doc) return;
-    var sidebar = document.querySelector('.js-toc');
-    var menu;
+  var list = headings.reduce(function(accum, heading) {
+    var link = toArray(heading.childNodes).reduce(function(target, child) {
+      if (child.nodeName !== 'A') target.appendChild(child.cloneNode(true));
+      return target;
+    }, document.createElement('a'));
+    links[(link.href = '#' + heading.id)] = link;
+    var listItem = document.createElement('li');
+    listItem.appendChild(link);
+    accum.appendChild(listItem);
+    return accum;
+  }, document.createElement('ul'));
 
-    var headings = find('.sect1 > h2[id]', doc);
-    var subheadings = find('.sect1 > h3[id]', doc);
+  if (!(menu = sidebar && sidebar.querySelector('.toc-menu'))) {
+    menu = document.createElement('div');
+    menu.className = 'toc-menu';
+  }
 
-    if (!headings.length) {
-      if (sidebar) {
-        sidebar.parentNode.removeChild(sidebar);
-        document.querySelector('.main').classList.add('no-sidebar');
+  var title = document.createElement('h3');
+  title.textContent = 'On This Page';
+  menu.appendChild(title);
+  menu.appendChild(list);
+
+  if (sidebar) {
+    window.addEventListener('load', function() {
+      onScroll();
+      window.addEventListener('scroll', onScroll);
+    });
+  }
+
+  var startOfContent = doc.querySelector('h1.page ~ :not(.labels)');
+  if (startOfContent) {
+    var embeddedToc = document.createElement('aside');
+    embeddedToc.className = 'toc embedded';
+    embeddedToc.appendChild(menu.cloneNode(true));
+    doc.insertBefore(embeddedToc, startOfContent);
+  }
+
+  function onScroll() {
+    // NOTE doc.parentNode.offsetTop ~= doc.parentNode.getBoundingClientRect().top + window.pageYOffset
+    //var targetPosition = doc.parentNode.offsetTop
+    // NOTE no need to compensate wheen using spacer above [id] elements
+    var targetPosition = 0;
+    var activeFragment;
+    headings.some(function(heading) {
+      if (Math.floor(heading.getBoundingClientRect().top) <= targetPosition) {
+        activeFragment = '#' + heading.id;
+      } else {
+        return true;
       }
-      return;
-    }
-
-    var lastActiveFragment;
-    var links = {};
-
-    var list = headings.reduce(function(accum, heading) {
-      var link = toArray(heading.childNodes).reduce(function(target, child) {
-        if (child.nodeName !== 'A') target.appendChild(child.cloneNode(true));
-        return target;
-      }, document.createElement('a'));
-      links[(link.href = '#' + heading.id)] = link;
-      var listItem = document.createElement('li');
-      listItem.appendChild(link);
-      // Append subitems to listItem
-      // var sublink = document.createElement('a'); // A
-      // listItem.appendChild(sublink);
-
-      accum.appendChild(listItem);
-      return accum;
-    }, document.createElement('ol'));
-
-    if (!(menu = sidebar && sidebar.querySelector('.toc-menu'))) {
-      menu = document.createElement('div');
-      menu.className = 'toc-menu';
-    }
-
-    menu.appendChild(list);
-
-    if (sidebar) window.addEventListener('scroll', onScroll);
-
-    var startOfContent = doc.querySelector('h1.page + *');
-    if (startOfContent) {
-      // generate list
-      var options = headings.reduce(function(accum, heading) {
-        var option = toArray(heading.childNodes).reduce(function(
-          target,
-          child
-        ) {
-          if (child.nodeName !== 'A') target.appendChild(child.cloneNode(true));
-          return target;
-        },
-        document.createElement('option'));
-        option.value = '#' + heading.id;
-        accum.appendChild(option);
-        return accum;
-      }, document.createElement('select'));
-
-      var selectWrap = document.createElement('div');
-      selectWrap.classList.add('select-wrapper');
-      selectWrap.appendChild(options);
-
-      // create jump to label
-      var jumpTo = document.createElement('option');
-      jumpTo.innerHTML = 'Jump to…';
-      jumpTo.setAttribute('disabled', true);
-      options.insertBefore(jumpTo, options.firstChild);
-      options.className = 'toc toc-embedded select';
-
-      // jump on change
-      options.addEventListener('change', function(e) {
-        var thisOptions = e.currentTarget.options;
-        window.location.hash = thisOptions[thisOptions.selectedIndex].value;
-      });
-
-      // add to page
-      doc.insertBefore(selectWrap, startOfContent);
-    }
-    function onScroll() {
-      var targetPosition = doc.parentNode.offsetTop;
-      var activeFragment;
-
-      headings.some(function(heading) {
-        if (heading.getBoundingClientRect().top < targetPosition) {
-          activeFragment = '#' + heading.id;
-        } else {
-          return true;
-        }
-      });
-
-      if (activeFragment) {
+    });
+    if (activeFragment) {
+      if (activeFragment !== lastActiveFragment) {
         if (lastActiveFragment) {
-          links[lastActiveFragment].classList.remove('active');
+          links[lastActiveFragment].classList.remove('is-active');
         }
         var activeLink = links[activeFragment];
-        activeLink.classList.add('active');
+        activeLink.classList.add('is-active');
         if (menu.scrollHeight > menu.offsetHeight) {
           menu.scrollTop = Math.max(
             0,
@@ -109,18 +83,18 @@
           );
         }
         lastActiveFragment = activeFragment;
-      } else if (lastActiveFragment) {
-        links[lastActiveFragment].classList.remove('active');
-        lastActiveFragment = undefined;
       }
+    } else if (lastActiveFragment) {
+      links[lastActiveFragment].classList.remove('is-active');
+      lastActiveFragment = undefined;
     }
+  }
 
-    function find(selector, from) {
-      return toArray((from || document).querySelectorAll(selector));
-    }
+  function find(selector, from) {
+    return toArray((from || document).querySelectorAll(selector));
+  }
 
-    function toArray(collection) {
-      return [].slice.call(collection);
-    }
-  });
+  function toArray(collection) {
+    return [].slice.call(collection);
+  }
 })();

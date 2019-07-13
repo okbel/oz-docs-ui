@@ -1,0 +1,17 @@
+.article .sidebarblock.card, .card {
+  background: var(--core-violet-3);
+  border-radius: 6px;
+  width: 200px;
+  height: 200px;
+  display: inline-flex;
+  color: white;
+  box-shadow: rgba(203, 203, 203, 0.81) 0px 4px 5px 0px;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  p {
+    color: white;
+  }
+}
