@@ -286,6 +286,7 @@
     padding: 1.5rem;
     background-color: #fbfbfc;
     margin: 1rem 0;
+
     .title {
       opacity: 0.8;
       font-family: Silka;
@@ -295,10 +296,31 @@
       line-height: 20px;
       font-weight: 600;
       text-transform: uppercase;
+
+      > code,
+      > pre {
+        font-family: var(--monospace);
+      }
     }
 
     &.description {
       background-color: #fbfbfc;
+      color: #3e3e59;
+    }
+
+    .content {
+      color: #3e3e59;
+      code,
+      pre {
+        border: none;
+        padding: 0;
+        margin: 0;
+        padding: 1rem 0;
+        font-family: var(--sans-serif);
+        line-height: 1.8rem;
+        font-size: 0.975rem;
+        color: inherit;
+      }
     }
 
     code,
@@ -326,9 +348,11 @@
         color: #292947;
         border-bottom: solid 1px #e9e9ed;
         text-transform: none;
-        font-family: var(--sans-serif);
+        font-family: var(--monospace);
+        font-weight: 500;
 
         code {
+          font-family: var(--monospace);
           border: none;
           background-color: #f5f6fe;
           border-radius: 5px;
@@ -353,6 +377,8 @@
         top: 50%;
         transform: translateY(-50%);
         right: 1rem;
+        font-family: var(--monospace);
+        font-weight: 600;
       }
 
       .literalblock {

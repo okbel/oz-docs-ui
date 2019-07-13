@@ -32,6 +32,10 @@
     top: 0;
     left: 0;
   }
+
+  .nav__domains > .nav-list {
+    margin-bottom: var(--md);
+  }
 }
 
 .nav-list {
@@ -81,7 +85,7 @@
 }
 
 .nav-link.nav-heading {
-  font-family: 'Silka';
+  font-family: "Silka";
 }
 
 .nav-link {
@@ -114,18 +118,18 @@
   color: var(--steel-2);
 }
 
-.nav-li[data-depth='0'] .nav-heading,
-.nav-li[data-depth='1'] .nav-heading,
-.nav-li[data-depth='2'] .nav-heading,
-.nav-li[data-depth='3'] .nav-heading,
-.nav-li[data-depth='4'] .nav-heading,
-.nav-li[data-depth='5'] .nav-heading,
-.nav-li[data-depth='6'] .nav-heading {
+.nav-li[data-depth="0"] .nav-heading,
+.nav-li[data-depth="1"] .nav-heading,
+.nav-li[data-depth="2"] .nav-heading,
+.nav-li[data-depth="3"] .nav-heading,
+.nav-li[data-depth="4"] .nav-heading,
+.nav-li[data-depth="5"] .nav-heading,
+.nav-li[data-depth="6"] .nav-heading {
   font-weight: var(--weight-medium);
   margin-top: var(--md);
 }
 
-.nav-li[data-depth='0'] {
+.nav-li[data-depth="0"] {
   .nav-heading {
     font-size: 0.875rem;
     font-weight: var(--weight-medium);
@@ -139,7 +143,7 @@
   }
 }
 
-.nav-li[data-depth='1'] {
+.nav-li[data-depth="1"] {
   .nav-heading {
     font-size: 0.8rem;
     font-weight: var(--weight-normal);
