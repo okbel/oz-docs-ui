@@ -1,35 +1,31 @@
 @font-face {
-  font-family: 'Silka';
-  src: url('../fonts/silka-regular-webfont.eot');
-  src: url('../fonts/silka-regular-webfont.eot?#iefix')
-      format('embedded-opentype'),
-    url('../fonts/silka-regular-webfont.woff2') format('woff2'),
-    url('../fonts/silka-regular-webfont.woff') format('woff'),
-    url('../fonts/silka-regular-webfont.ttf') format('truetype');
+  font-family: "Silka";
+  src: url("../fonts/silka-regular-webfont.eot");
+  src: url("../fonts/silka-regular-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/silka-regular-webfont.woff2") format("woff2"),
+    url("../fonts/silka-regular-webfont.woff") format("woff"),
+    url("../fonts/silka-regular-webfont.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Silka';
-  src: url('../fonts/silka-medium-webfont.eot');
-  src: url('../fonts/silka-medium-webfont.eot?#iefix')
-      format('embedded-opentype'),
-    url('../fonts/silka-medium-webfont.woff2') format('woff2'),
-    url('../fonts/silka-medium-webfont.woff') format('woff'),
-    url('../fonts/silka-medium-webfont.ttf') format('truetype');
+  font-family: "Silka";
+  src: url("../fonts/silka-medium-webfont.eot");
+  src: url("../fonts/silka-medium-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/silka-medium-webfont.woff2") format("woff2"), url("../fonts/silka-medium-webfont.woff") format("woff"),
+    url("../fonts/silka-medium-webfont.ttf") format("truetype");
   font-weight: 500;
   font-style: 500;
 }
 
 @font-face {
-  font-family: 'Silka';
-  src: url('../fonts/silka-semibold-webfont.eot');
-  src: url('../fonts/silka-semibold-webfont.eot?#iefix')
-      format('embedded-opentype'),
-    url('../fonts/silka-semibold-webfont.woff2') format('woff2'),
-    url('../fonts/silka-semibold-webfont.woff') format('woff'),
-    url('../fonts/silka-semibold-webfont.ttf') format('truetype');
+  font-family: "Silka";
+  src: url("../fonts/silka-semibold-webfont.eot");
+  src: url("../fonts/silka-semibold-webfont.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/silka-semibold-webfont.woff2") format("woff2"),
+    url("../fonts/silka-semibold-webfont.woff") format("woff"),
+    url("../fonts/silka-semibold-webfont.ttf") format("truetype");
   font-weight: 600;
   font-style: 600;
 }
@@ -43,7 +39,7 @@ h6 {
   font-family: var(--heading);
   font-weight: var(--weight-medium);
   line-height: 1.2;
-  margin: 0;
+  margin-top: 0;
 }
 
 h1 {

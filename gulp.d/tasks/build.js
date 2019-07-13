@@ -57,7 +57,13 @@ module.exports = (src, dest, preview) => {
   const postcssPlugins = [require('@csstools/postcss-sass'), autoprefixer()];
 
   return merge([
-    vfs.src('images/**/*.{svg,png}', opts).pipe(imagemin()),
+    vfs.src('images/**/*.{svg,png}', opts).pipe(imagemin([
+			imagemin.svgo({
+				plugins: [
+					{removeViewBox: false},
+				]
+			})
+		])),
     vfs
       .src('scripts/+([0-9])-*.js', { ...opts, sourcemaps })
       // .pipe(uglify())

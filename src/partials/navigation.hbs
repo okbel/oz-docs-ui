@@ -15,14 +15,20 @@
 			<li class="flex align-center justify-justified nav-li">
 				<a class="flex grow align-center strong link nav-link nav-heading"
 					tabindex="0">
-					<image class="icon" src="/_theme/images/icons/{{{this.name}}}.svg">
-						<span class="flex grow">{{{./title}}}</span>
-					</a>
-					{{#if this.versions}}
-					{{#unless (eq this.versions.length 1)}}
-					<button class="flex align-center shrink btn btn-version">
-						3.8
-						@@include('public/_theme/images/icons/chevron.svg')
+					<img class="icon" src="/_theme/images/icons/{{{this.name}}}.svg">
+					<span class="flex grow">{{{./title}}}</span>
+				</a>
+				{{#if this.versions}}
+				{{#unless (eq this.versions.length 1)}}
+				<button class="flex align-center shrink btn btn-version">
+					3.8
+					{{!-- @@include('public/_theme/images/icons/chevron.svg')--}}
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000"
+						viewBox="0 0 30 30">
+						<path d="M15.003 21.284L6.563 9.232l1.928-.516 6.512 9.299 6.506-9.299
+							1.928.516-8.434 12.052z" />
+						</svg>
+
 						<div class="popover">
 							<span class="popover__heading">Current version</span>
 							<ol class="ol">

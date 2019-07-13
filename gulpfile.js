@@ -20,8 +20,8 @@ const destTheme = '_theme';
 const task = require('./gulp.d/tasks');
 const glob = {
   all: [srcDir, previewSrcDir],
-  css: `${srcDir}/css/**/*.css`,
-  js: ['gulpfile.js', 'gulp.d/**/*.js', `${srcDir}/{helpers,js}/**/*.js`],
+	css: `${srcDir}/stylesheets/**/*.scss`,
+  js: ['gulpfile.js', 'gulp.d/**/*.js', `${srcDir}/{helpers,scripts}/**/*.js`],
 };
 
 const buildPreviewPagesTask = createTask({
@@ -46,11 +46,10 @@ const previewBuildTask = createTask({
   call: series(buildTask, buildPreviewPagesTask),
 });
 
+
 const previewServeTask = createTask({
   name: 'preview:serve',
-  call: task.serve(destDir, serverConfig, () =>
-    watch(glob.all, previewBuildTask)
-  ),
+  call: task.serve(previewDestDir, serverConfig, () => watch(glob.all, previewBuildTask)),
 });
 
 const previewTask = createTask({

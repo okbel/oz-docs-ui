@@ -4,19 +4,20 @@ const fs = require('fs');
 
 const browserSync = require('browser-sync');
 const chokidar = require('chokidar');
-// const debounce = require('lodash.debounce');
+const debounce = require('lodash.debounce');
 
 const watchedDirs = [
-  'helpers',
-  'images',
-  'layouts',
-  'partials',
-  'preview-site',
-  'scripts',
-  'stylesheets',
+  '../../src/helpers',
+  '../../src/images',
+  '../../src/layouts',
+  '../../src/partials',
+  '../../src/preview-site',
+  '../../src/scripts',
+  '../../src/stylesheets',
 ];
 
 module.exports = ({ dest, port }) => {
+	console.log('Ahre')
   browserSync({
     files: dest,
     ghostMode: false,
@@ -29,7 +30,7 @@ module.exports = ({ dest, port }) => {
     server: dest,
   });
 
-  // const build = debounce(buildCallback, 300)
+  const build = debounce(buildCallback, 300)
   const watcher = chokidar.watch(watchedDirs, { ignoreInitial: true });
   watcher.on('all', () => build());
 };

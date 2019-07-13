@@ -131,9 +131,9 @@ ApprovalForAll(address owner, address operator, bool approved)
 
 [.function]
 .balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
-****
+----
 	Returns the number of NFTs in owner's account.
-****
+----
 
 [.function]
 .transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
