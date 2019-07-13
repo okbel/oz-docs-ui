@@ -37,11 +37,11 @@ Interface of the ERC20 standard as defined in the EIP. Does not include the opti
 
 [.description]
 .Events
-----
-Transfer(address from, address to, uint256 tokenId)
-Approval(address owner, address approved, uint256 tokenId)
-ApprovalForAll(address owner, address operator, bool approved)
-----
+****
+* <<Event.Transfer>>
+* <<Event.Approval>>
+* <<Event.ApprovalForAll>>
+****
 
 [[Function.ownerOf]]
 [.function]
@@ -68,13 +68,41 @@ ApprovalForAll(address owner, address operator, bool approved)
 [.function]
 .setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
 ****
-	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+Transfers a specific NFT (tokenId) from one account (from) to another (to).
 
-	Requirements:
-	* from, to cannot be zero.
-	* tokenId must be owned by from.
-	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+.Requirements
+* from, to cannot be zero.
+* tokenId must be owned by from.
+* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
 ****
+
+[[Event.Transfer]]
+[.event]
+.Transfer(address owner) → [secondary]`uint256` [function__type]#payable external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+[[Event.Approval]]
+[.event]
+.Approval(address owner) → [secondary]`uint256` [function__type]#external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+[[Event.ApprovalForAll]]
+[.event]
+.ApprovalForAll(address owner) → [secondary]`uint256` [function__type]#payable external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
 
 == Extensions
 
