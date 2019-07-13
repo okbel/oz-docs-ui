@@ -2,6 +2,7 @@
   padding-bottom: var(--lg); /* matches nav padding */
   padding-left: var(--xl);
   padding-right: var(--xl);
+	min-height: calc(100vh - 163px);
 
   h1,
   h2,
@@ -286,7 +287,7 @@
   .sidebarblock {
     padding: 1.5rem;
     background-color: #fbfbfc;
-    margin: 1.5rem 0;
+    margin: 2rem 0;
 
     .ulist {
       ul {
@@ -387,7 +388,7 @@
             padding: 0;
           }
         }
-      }
+			}
 
       .title {
         position: relative;
@@ -418,8 +419,16 @@
           &.light {
             color: #4f4f68;
           }
-        }
-      }
+				}
+			}
+
+			.ulist .title {
+				border-bottom: none;
+				font-size: 1rem;
+				font-family: inherit;
+				padding: 0.5rem 1rem;
+			}
+
       .function__type {
         position: absolute;
         top: 50%;

@@ -10,7 +10,8 @@
           {
             "name": "styleguide",
             "title": "Styleguide",
-            "url": "styleguide.html"
+						"url": "styleguide.html",
+						"urlType": "internal"
           },
           {
             "name": "test",

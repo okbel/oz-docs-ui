@@ -15,8 +15,8 @@
 
   &:hover,
   &:focus {
-    border-color: var(--aluminum-5);
-    color: var(--steel-1);
+    border-color: var(--core-violet-2);
+    color: var(--core-violet-2);
   }
 
   &:active {
@@ -42,11 +42,22 @@
       transform: scale(1) translate3d(0, 0, 0);
       text-align: left;
       padding: 22px;
+      background: #ffffff;
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      width: 140px;
 
       .ol {
         display: flex;
         flex-direction: row;
-        margin-bottom: 15px;
+				margin-bottom: 15px;
+
+				&.current {
+					li {
+						color: var(--core-violet-3);
+					}
+				}
+				
 
         &:last-child {
           margin-bottom: 0;
