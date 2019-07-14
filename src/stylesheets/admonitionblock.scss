@@ -25,6 +25,8 @@
   background-size: 35px;
   background-origin: border-box;
   background-position: 1.5rem center;
+  line-height: 1.6;
+  padding-right: 20px;
 
   table {
     padding: 0;
@@ -49,6 +51,7 @@
     color: #a134d1;
     background-image: url(../images/icons/unicorn.png);
   }
+
   &.tip {
     border: 1px solid #4e5ee4;
     color: #4e5ee4;
@@ -62,12 +65,35 @@
     color: #ff7539;
     background-image: url(../images/icons/warning.png);
   }
+}
+
+.alert {
+  position: relative;
+
+  p {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    margin-left: 60px;
+  }
 
   &.note--secondary {
     color: white;
     background-image: linear-gradient(45deg, #a134d1 0%, #6746d6 100%);
     background-size: 100%;
     background-position: 0;
+
+    &::after {
+      content: "";
+      background-image: url(../images/icons/unicorn.png);
+      width: 65px;
+      height: 65px;
+      background-size: 100%;
+      position: absolute;
+      top: 18%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
   }
 
   &.tip--secondary {
@@ -75,6 +101,17 @@
     background-image: linear-gradient(-135deg, #3f62ff 0%, #2ba3ff 100%);
     background-size: 100%;
     background-position: 0;
+    &::after {
+      content: "";
+      background-image: url(../images/icons/book.png);
+      width: 65px;
+      height: 65px;
+      background-size: 100%;
+      position: absolute;
+      top: 18%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
   }
 
   &.warning--secondary {
@@ -82,5 +119,26 @@
     background-image: linear-gradient(-135deg, #ff8f3f 0%, #ff5533 100%);
     background-size: 100%;
     background-position: 0;
+    &::after {
+      content: "";
+      background-image: url(../images/icons/rocket_1f680.png);
+      width: 65px;
+      height: 65px;
+      background-size: 100%;
+      position: absolute;
+      top: 18%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.note--secondary,
+  &.tip--secondary,
+  &.warning--secondary {
+    padding: 1.5rem;
+    p {
+      margin: 0;
+      padding: 0;
+    }
   }
 }

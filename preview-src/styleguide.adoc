@@ -61,17 +61,16 @@ WARNING: Tip: For an overview of ERC20 tokens and a walkthrough on how to create
 === Custom Alerts
 
 [.alert.tip]
-Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+OpenZeppelin has a 5 week release cycle, every five weeks a new release is published.
 
 [.alert.note--secondary]
-Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+OpenZeppelin has a 5 week release cycle, every five weeks a new release is published.
 
 [.alert.tip--secondary]
-Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
+Tip: For a detailed writeup see our guide How to implement supply mechanisms.
 
 [.alert.warning--secondary]
-Tip: For an overview of ERC20 tokens and a walkthrough on how to create a token contract, read our ERC20 guide.
-
+Warning: This page is incomplete. We're working to improve it for the next release.
 
 
 == ERC 721
@@ -99,171 +98,82 @@ WARNING: This page is incomplete. We're working to improve it for the next relea
 
 == Core
 
-=== IERC721
+=== IERC720
 Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
 
 [.description]
 .Functions
-----
-balanceOf(address owner)
-ownerOf(uint256 tokenId)
-safeTransferFrom(address from, address to, uint256 tokenId)
-transferFrom(address from, address to, uint256 tokenId)
-approve(address to, uint256 tokenId)
-getApproved(uint256 tokenId)
-setApprovalForAll(address operator, bool _approved)
-isApprovedForAll(address owner, address operator)
-safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
-supportsInterface(bytes4 interfaceId)
-----
+****
+* <<IERC720.ownerOf>>
+* <<IERC720.balanceOf>>
+* <<IERC720.transferFrom>>
+* <<IERC720.setApprovalForAll>>
+****
 
 [.description]
 .Events
-----
-Transfer(address from, address to, uint256 tokenId)
-Approval(address owner, address approved, uint256 tokenId)
-ApprovalForAll(address owner, address operator, bool approved)
-----
+****
+* <<IERC720.Transfer>>
+* <<IERC720.Approval>>
+* <<IERC720.ApprovalForAll>>
+****
 
+[[IERC720.ownerOf]]
 [.function]
 .ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
 ****
 	Returns the number of NFTs in owner's account.
 ****
 
-[.function]
-.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
-----
-	Returns the number of NFTs in owner's account.
-----
-
-[.function]
-.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
-****
-	Returns the number of NFTs in owner's account.
-****
-
-[.function]
-.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
-****
-	Transfers a specific NFT (tokenId) from one account (from) to another (to).
-
-	Requirements:
-	* from, to cannot be zero.
-	* tokenId must be owned by from.
-	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
-****
-
-== Extensions
-
-=== IERC721
-Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
-
-[.description]
-.Functions
-----
-balanceOf(address owner)
-ownerOf(uint256 tokenId)
-safeTransferFrom(address from, address to, uint256 tokenId)
-transferFrom(address from, address to, uint256 tokenId)
-approve(address to, uint256 tokenId)
-getApproved(uint256 tokenId)
-setApprovalForAll(address operator, bool _approved)
-isApprovedForAll(address owner, address operator)
-safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
-supportsInterface(bytes4 interfaceId)
-----
-
-[.description]
-.Events
-----
-Transfer(address from, address to, uint256 tokenId)
-Approval(address owner, address approved, uint256 tokenId)
-ApprovalForAll(address owner, address operator, bool approved)
-----
-
-[.function]
-.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
-****
-	Returns the number of NFTs in owner's account.
-****
-
+[[IERC720.balanceOf]]
 [.function]
 .balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
 ****
 	Returns the number of NFTs in owner's account.
 ****
 
+[[IERC720.transferFrom]]
 [.function]
 .transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
 ****
 	Returns the number of NFTs in owner's account.
 ****
 
+[[IERC720.setApprovalForAll]]
 [.function]
 .setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
 ****
-	Transfers a specific NFT (tokenId) from one account (from) to another (to).
+Transfers a specific NFT (tokenId) from one account (from) to another (to).
 
-	Requirements:
-	* from, to cannot be zero.
-	* tokenId must be owned by from.
-	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+.Requirements:
+* from, to cannot be zero.
+* tokenId must be owned by from.
+* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
 ****
 
-== Convenience
-
-=== IERC721
-Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
-
-[.description]
-.Functions
-----
-balanceOf(address owner)
-ownerOf(uint256 tokenId)
-safeTransferFrom(address from, address to, uint256 tokenId)
-transferFrom(address from, address to, uint256 tokenId)
-approve(address to, uint256 tokenId)
-getApproved(uint256 tokenId)
-setApprovalForAll(address operator, bool _approved)
-isApprovedForAll(address owner, address operator)
-safeTransferFrom(address from, address to, uint256 tokenId, bytes data)
-supportsInterface(bytes4 interfaceId)
-----
-
-[.description]
-.Events
-----
-Transfer(address from, address to, uint256 tokenId)
-Approval(address owner, address approved, uint256 tokenId)
-ApprovalForAll(address owner, address operator, bool approved)
-----
-
-[.function]
-.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+[[IERC720.Transfer]]
+[.event]
+.Transfer(address owner) → [secondary]`uint256` [function__type]#payable external#
 ****
-	Returns the number of NFTs in owner's account.
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
 ****
 
-[.function]
-.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+[[IERC720.Approval]]
+[.event]
+.Approval(address owner) → [secondary]`uint256` [function__type]#external#
 ****
-	Returns the number of NFTs in owner's account.
-****
-
-[.function]
-.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
-****
-	Returns the number of NFTs in owner's account.
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
 ****
 
-[.function]
-.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+[[IERC720.ApprovalForAll]]
+[.event]
+.ApprovalForAll(address owner) → [secondary]`uint256` [function__type]#payable external#
 ****
-	Transfers a specific NFT (tokenId) from one account (from) to another (to).
-
-	Requirements:
-	* from, to cannot be zero.
-	* tokenId must be owned by from.
-	* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
 ****

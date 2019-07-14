@@ -66,6 +66,10 @@
     }
   }
 
+  .sect2 {
+    margin-top: 20px;
+  }
+
   .anchor {
     display: inline-block;
     height: var(--lg);
@@ -289,8 +293,8 @@
 
   /** Custom **/
 
-  .listingblock,
   .sidebarblock {
+    border-radius: var(--border-radius);
     padding: 1.5rem;
     background-color: #fbfbfc;
     margin: 2rem 0;
@@ -371,10 +375,6 @@
       line-height: 1.8rem;
       font-size: 0.875rem;
     }
-  }
-
-  .sidebarblock {
-    border-radius: var(--border-radius);
 
     &.function,
     &.event {
