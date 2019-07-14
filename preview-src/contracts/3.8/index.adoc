@@ -105,6 +105,165 @@ Transfers a specific NFT (tokenId) from one account (from) to another (to).
 	Emits a `Transfer` event.
 ****
 
+=== IERC999
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+****
+* <<IERC999.ownerOf>>
+* <<IERC999.balanceOf>>
+* <<IERC999.transferFrom>>
+* <<IERC999.setApprovalForAll>>
+****
+
+[.description]
+.Events
+****
+* <<IERC999.Transfer>>
+* <<IERC999.Approval>>
+* <<IERC999.ApprovalForAll>>
+****
+
+[[IERC999.ownerOf]]
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[[IERC999.balanceOf]]
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[[IERC999.transferFrom]]
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[[IERC999.setApprovalForAll]]
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+.Requirements:
+* from, to cannot be zero.
+* tokenId must be owned by from.
+* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
+
+[[IERC999.Transfer]]
+[.event]
+.Transfer(address owner) → [secondary]`uint256` [function__type]#payable external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+[[IERC999.Approval]]
+[.event]
+.Approval(address owner) → [secondary]`uint256` [function__type]#external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+[[IERC999.ApprovalForAll]]
+[.event]
+.ApprovalForAll(address owner) → [secondary]`uint256` [function__type]#payable external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+=== IERC315
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+[.description]
+.Functions
+****
+* <<IERC315.ownerOf>>
+* <<IERC315.balanceOf>>
+* <<IERC315.transferFrom>>
+* <<IERC315.setApprovalForAll>>
+****
+
+[.description]
+.Events
+****
+* <<IERC315.Transfer>>
+* <<IERC315.Approval>>
+* <<IERC315.ApprovalForAll>>
+****
+
+[[IERC315.ownerOf]]
+[.function]
+.ownerOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[[IERC315.balanceOf]]
+[.function]
+.balanceOf(address owner) → [secondary]`uint256` [function__type]#public#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[[IERC315.transferFrom]]
+[.function]
+.transferFrom(address owner) → [secondary]`uint256` [function__type]#internal#
+****
+	Returns the number of NFTs in owner's account.
+****
+
+[[IERC315.setApprovalForAll]]
+[.function]
+.setApprovalForAll(address owner) → [primary]`bool` [function__type]#private#
+****
+Transfers a specific NFT (tokenId) from one account (from) to another (to).
+
+.Requirements:
+* from, to cannot be zero.
+* tokenId must be owned by from.
+* If the caller is not from, it must be have been allowed to move this NFT by either approve or setApproveForAll.
+****
+
+[[IERC315.Transfer]]
+[.event]
+.Transfer(address owner) → [secondary]`uint256` [function__type]#payable external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+[[IERC315.Approval]]
+[.event]
+.Approval(address owner) → [secondary]`uint256` [function__type]#external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
+
+[[IERC315.ApprovalForAll]]
+[.event]
+.ApprovalForAll(address owner) → [secondary]`uint256` [function__type]#payable external#
+****
+	Moves `amount` tokens from the caller's account to recipient.      .
+	Returns a boolean value indicating whether the operation succeeded.
+	Emits a `Transfer` event.
+****
 
 == Extensions
 
@@ -269,3 +428,15 @@ Transfers a specific NFT (tokenId) from one account (from) to another (to).
 	Returns a boolean value indicating whether the operation succeeded.
 	Emits a `Transfer` event.
 ****
+
+=== IERC324
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+=== IERC724
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+=== IERC327
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.
+
+=== IERC729
+Interface of the ERC20 standard as defined in the EIP. Does not include the optional functions; to access them see ERC20Detailed.

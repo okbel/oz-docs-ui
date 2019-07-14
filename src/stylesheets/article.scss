@@ -1,14 +1,14 @@
 .article-wrapper {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .article {
   padding-bottom: var(--lg); /* matches nav padding */
   padding-left: var(--xl);
   padding-right: var(--xl);
-	min-height: calc(100vh - 163px);
-	max-width: 980px;
+  min-height: calc(100vh - 163px);
+  max-width: 980px;
 
   h1,
   h2,
@@ -244,7 +244,7 @@
   code {
     border: none;
     background-color: #f5f6fe;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     color: #5766e5;
     padding: 0.2rem;
   }
@@ -261,7 +261,7 @@
     code {
       border: none;
       background-color: #f5f6fe;
-      border-radius: 6px;
+      border-radius: var(--border-radius);
       color: #5766e5;
 
       &.primary {
@@ -330,8 +330,8 @@
       letter-spacing: 0.8px;
       line-height: 20px;
       font-weight: 600;
-			text-transform: uppercase;
-			font-size: 0.9rem;
+      text-transform: uppercase;
+      font-size: 0.9rem;
 
       > code,
       > pre {
@@ -345,9 +345,9 @@
     }
 
     .content {
-			color: #3e3e59;
-			background-color: transparent;
-			border-radius: 6px;
+      color: #3e3e59;
+      background-color: transparent;
+      border-radius: var(--border-radius);
       code,
       pre {
         border: none;
@@ -374,24 +374,24 @@
   }
 
   .sidebarblock {
-    border-radius: 6px;
+    border-radius: var(--border-radius);
 
     &.function,
     &.event {
       border: solid 1px #e9e9ed;
-			padding: 0;
-			background: white;
+      padding: 0;
+      background: white;
 
       > * :not(.title) {
         padding-left: 1.5rem;
 
         &.ulist {
           padding: 0;
-					margin: 0;
-					
-					.title {
-						background-color: transparent;
-					}
+          margin: 0;
+
+          .title {
+            background-color: transparent;
+          }
         }
 
         ul {
@@ -399,18 +399,18 @@
           margin-left: 40px;
           list-style: disc;
           li {
-						padding: 0;
-						p {
-							padding: 0;
-						}
-					}
+            padding: 0;
+            p {
+              padding: 0;
+            }
+          }
         }
-			}
+      }
 
       .paragraph {
-				padding: 0;
-				margin: 0;
-			}
+        padding: 0;
+        margin: 0;
+      }
 
       .title {
         position: relative;
@@ -420,10 +420,9 @@
         border-bottom: solid 1px #e9e9ed;
         text-transform: none;
         font-family: var(--monospace);
-				font-weight: 500;
-				border-top-left-radius: 6px;
-				border-top-right-radius: 6px;
-
+        font-weight: 500;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
 
         code {
           font-family: var(--monospace);
@@ -444,15 +443,15 @@
           &.light {
             color: #4f4f68;
           }
-				}
-			}
+        }
+      }
 
-			.ulist .title {
-				border-bottom: none;
-				font-size: 1rem;
-				font-family: inherit;
-				padding: 1rem 1.5rem;
-			}
+      .ulist .title {
+        border-bottom: none;
+        font-size: 1rem;
+        font-family: inherit;
+        padding: 1rem 1.5rem;
+      }
 
       .function__type {
         position: absolute;
@@ -466,7 +465,7 @@
       .literalblock {
         background: white;
         padding: 1rem 0;
-        border-radius: 6px;
+        border-radius: var(--border-radius);
 
         pre,
         code {

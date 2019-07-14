@@ -47,6 +47,33 @@
       padding: 0;
       line-height: 1.2;
     }
+
+    .subheading-list {
+      margin-left: 0.5rem;
+      display: flex;
+      flex-direction: column;
+
+      .subheading-item {
+        a {
+          font-size: 0.8rem;
+          color: var(--core-violet-2);
+          text-align: center;
+          padding: 2px 0.5rem;
+          background-color: var(--aluminum-0);
+          border-radius: var(--border-radius);
+          display: inline-block;
+          font-weight: normal;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 200px;
+
+          &.is-active {
+            font-weight: bold;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -61,11 +88,11 @@
 
   color: var(--color-text);
   display: block;
-  font-size: 12px;
+  font-size: 0.8rem;
   padding: var(--xs) var(--sm);
   padding-left: 0;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 .toc a:hover {
@@ -73,8 +100,9 @@
 }
 
 .toc a.is-active {
-  font-weight: 500;
-  color: var(--core-violet-1);
+  font-weight: 600;
+  color: var(--steel-2);
+  font-size: 0.81rem;
 }
 
 .toc a.is-active:focus,

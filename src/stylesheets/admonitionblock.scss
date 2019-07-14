@@ -9,7 +9,7 @@
 .admonitionblock,
 .alert {
   border: 1px solid rgb(196, 196, 196);
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   font-family: Silka;
   color: rgb(36, 36, 36);
   line-height: 100%;
@@ -39,8 +39,8 @@
 
   .content {
     padding-left: 60px;
-		font-size: 1rem;
-		text-align: left;
+    font-size: 1rem;
+    text-align: left;
   }
 
   &.note {

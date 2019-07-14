@@ -22,14 +22,45 @@
   var links = {};
   var menu;
 
+  function findSubheadings(node) {
+    var subheadings = find('h3', node);
+    if (!subheadings.length) {
+      return;
+    }
+    console.log(subheadings);
+  }
+
   var list = headings.reduce(function(accum, heading) {
+    var shds = toArray(find('h3', heading.parentNode));
+    var $shdsList = document.createElement('ul');
+    $shdsList.classList.add('subheading-list');
+
+    shds.map((n) => {
+      var $shdItem = document.createElement('li');
+      $shdItem.classList.add('subheading-item');
+      var $shdLink = document.createElement('a');
+      $shdLink.innerText = n.innerText;
+      $shdLink.href = '#' + n.id;
+      $shdItem.appendChild($shdLink);
+      $shdsList.appendChild($shdItem);
+
+      links[($shdLink.href = '#' + n.id)] = $shdLink;
+    });
+
     var link = toArray(heading.childNodes).reduce(function(target, child) {
       if (child.nodeName !== 'A') target.appendChild(child.cloneNode(true));
       return target;
     }, document.createElement('a'));
+
     links[(link.href = '#' + heading.id)] = link;
+
     var listItem = document.createElement('li');
     listItem.appendChild(link);
+
+    if (shds.length) {
+      listItem.appendChild($shdsList);
+    }
+
     accum.appendChild(listItem);
     return accum;
   }, document.createElement('ul'));
@@ -65,6 +96,12 @@
     // NOTE doc.parentNode.offsetTop ~= doc.parentNode.getBoundingClientRect().top + window.pageYOffset
     //var targetPosition = doc.parentNode.offsetTop
     // NOTE no need to compensate wheen using spacer above [id] elements
+
+    var headings = find(
+      'h1[id].sect0, .sect1 > h2[id], .sect2 > h3[id]',
+      (doc = document.querySelector('article.doc'))
+    );
+
     var targetPosition = 0;
     var activeFragment;
     headings.some(function(heading) {
