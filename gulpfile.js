@@ -2,11 +2,9 @@ const { series, parallel, watch } = require('gulp');
 const createTask = require('./gulp.d/lib/create-task');
 const exportTasks = require('./gulp.d/lib/export-tasks');
 
-const config = require('./config');
 const build = require('./gulp.d/tasks/build');
 const buildPreview = require('./gulp.d/tasks/build-preview');
 
-const bundleName = 'ui';
 const buildDir = 'build';
 const previewSrcDir = 'preview-src';
 const previewDestDir = 'public';
@@ -16,11 +14,12 @@ const { reload: livereload } =
   process.env.LIVERELOAD === 'true' ? require('gulp-connect') : {};
 const serverConfig = { host: '0.0.0.0', port: 5252, livereload };
 const destTheme = '_theme';
+const repositoryName = 'oz-docs-ui';
 
 const task = require('./gulp.d/tasks');
 const glob = {
   all: [srcDir, previewSrcDir],
-	css: `${srcDir}/stylesheets/**/*.scss`,
+  css: `${srcDir}/stylesheets/**/*.scss`,
   js: ['gulpfile.js', 'gulp.d/**/*.js', `${srcDir}/{helpers,scripts}/**/*.js`],
 };
 
@@ -46,10 +45,11 @@ const previewBuildTask = createTask({
   call: series(buildTask, buildPreviewPagesTask),
 });
 
-
 const previewServeTask = createTask({
   name: 'preview:serve',
-  call: task.serve(previewDestDir, serverConfig, () => watch(glob.all, previewBuildTask)),
+  call: task.serve(previewDestDir, serverConfig, () =>
+    watch(glob.all, previewBuildTask)
+  ),
 });
 
 const previewTask = createTask({
@@ -58,21 +58,25 @@ const previewTask = createTask({
   call: series(previewBuildTask, previewServeTask),
 });
 
+const packTask = createTask({
+  name: 'pack',
+  call: () => task.pack(repositoryName, buildDir, destTheme),
+});
+
+const bundleTask = createTask({
+  name: 'bundle',
+  desc: 'Bundle UI Theme into a ZIP file',
+  call: series(buildTask, packTask),
+});
+
 module.exports = exportTasks(
   previewBuildTask,
   previewTask,
   previewServeTask,
   buildTask,
-  buildPreviewPagesTask
+  buildPreviewPagesTask,
+  bundleTask
 );
-
-// gulp.task('preview', ['build-preview'], () =>
-//   preview({ dest, port: config.get('port') }, () => gulp.start('build-preview'))
-// );
-
-// gulp.task('pack', ['build'], () =>
-//   pack({ repo: config.get('repository.name'), dest, destTheme })
-// );
 
 // gulp.task('release', ['pack'], () =>
 //   release({

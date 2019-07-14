@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "gulp preview:build",
-    "dev": "gulp preview"
+    "dev": "gulp preview",
+    "bundle": "gulp bundle"
   },
   "engines": {
     "node": ">= 8.0.0"
