@@ -6,17 +6,23 @@ Author Name
 
 Ah, the "token": the world's most powerful and most misused tool. In this section we'll learn to harness the power of native units of account for good and world peace!
 
-[.card]
+[.card.violet#contracts]
 ****
-Starter Kit
+A library of modular, reusable, secure smart contracts, written in Solidity.
+
+[.link]#Get started >#
 ****
-[.card]
+[.card.blue#sdk]
 ****
-SDK
+A suite of tools to help you develop, test, upgrade and deploy smart contracts.
+
+[.link]#Get started >#
 ****
-[.card]
+[.card.hellblue#kit]
 ****
-Contracts
+Bundles to kickstart your decentralized web application.
+
+[.link]#Get started >#
 ****
 
 == Getting Started
