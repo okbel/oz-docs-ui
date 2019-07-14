@@ -1,8 +1,14 @@
+.article-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
 .article {
   padding-bottom: var(--lg); /* matches nav padding */
   padding-left: var(--xl);
   padding-right: var(--xl);
 	min-height: calc(100vh - 163px);
+	max-width: 980px;
 
   h1,
   h2,

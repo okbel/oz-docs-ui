@@ -144,11 +144,10 @@
 
     &:hover,
     &:focus {
-      background: var(--aluminum-2);
+      color: var(--core-violet-3);
     }
 
     &:active {
-      background: #e2f8ff;
       color: var(--core-violet-3);
     }
 

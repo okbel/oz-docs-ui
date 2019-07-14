@@ -240,12 +240,14 @@ html.is-clipped--navbar {
   }
 
   .navbar-menu {
-    flex-grow: 1;
+		flex-grow: 1;
+		max-width: 1280px;
   }
 
   .navbar-end {
     justify-content: flex-end;
-    margin-left: auto;
+		margin-left: auto;
+		padding-right: 2rem;
   }
 
   .navbar-dropdown {
