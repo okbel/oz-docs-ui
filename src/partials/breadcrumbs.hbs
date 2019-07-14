@@ -1,19 +1,13 @@
-<li class="flex align-center li">
-	<a href="{{siteRootUrl}}" class="link link-home">
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
 		@@include('public/_theme/images/icons/home.svg')
-	</a>
-	{{#if domain.title}}
-	{{#unless (or domain.root (eq domain.title breadcrumbs.0.title))}}
-	<li class="flex align-center li">
-		<a class="link" href="{{{domain.url}}}">{{{domain.title}}}</a>
-		{{/unless}}
-		{{/if}}
-		{{#each breadcrumbs}}
-		{{#if ./url}}
-		<li class="flex align-center li">
-			<a class="link" href="{{{./url}}}">{{{./title}}}</a>
-			{{else}}
-			<li class="flex align-center li">
-				<span class="crumb">{{{./title}}}</span>
-				{{/if}}
-				{{/each}}
+    {{#unless (eq page.component.name 'home')}}
+    {{#unless (eq page.breadcrumbs.0.content page.componentVersion.title)}}
+    <li class="crumb"><a href="{{relativize page.componentVersion.url}}">{{{page.componentVersion.title}}}</a></li>
+    {{/unless}}
+    {{/unless}}
+    {{#each page.breadcrumbs}}
+    <li class="crumb">{{#if (eq ./urlType 'internal')}}<a href="{{relativize ./url}}">{{{./content}}}</a>{{else}}{{{./content}}}{{/if}}</li>
+    {{/each}}
+  </ul>
+</nav>

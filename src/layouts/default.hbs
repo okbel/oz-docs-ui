@@ -22,7 +22,7 @@
 			rel="stylesheet">
 		{{> head }}
 	</head>
-	<body class="flex col">
+	<body class="flex col {{#if page.attributes.role}} {{page.attributes.role}}{{/if}}">
 		{{> main }}
 	</body>
 </html>
