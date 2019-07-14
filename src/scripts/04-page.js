@@ -1,12 +1,15 @@
 (function() {
   'use strict';
 
-  var sidebar = document.querySelector('aside.toc.sidebar');
+  var sidebar = document.querySelector(
+    'main .article-wrapper > aside.toc-sidebar'
+  );
+
   if (!sidebar) return;
   var doc;
   var headings;
   if (
-    document.querySelector('.body.-toc') ||
+    document.querySelector('.body.ui-toc') ||
     !(headings = find(
       'h1[id].sect0, .sect1 > h2[id]',
       (doc = document.querySelector('article.doc'))
@@ -37,7 +40,9 @@
   }
 
   var title = document.createElement('h3');
-  title.textContent = 'On This Page';
+  // title.textContent = 'On This Page';
+  var elTitle = document.querySelector('main .article-wrapper h1');
+  title.textContent = elTitle.textContent;
   menu.appendChild(title);
   menu.appendChild(list);
 

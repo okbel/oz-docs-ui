@@ -1,6 +1,6 @@
 = openzeppelin Docs: Default Theme
 // Settings:
-:toc:
+:page-toc:
 :toc-title: Contents
 :idprefix:
 :idseparator: -

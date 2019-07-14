@@ -59,7 +59,12 @@ module.exports = async (src, dest, destTheme, previewSrcDir) => {
           .filter(([name]) => name.startsWith('page-'))
           .reduce((accum, [name, val]) => {
             const k = name.substr(5);
-            accum = accum.concat(k, ' ', k, '-', val);
+            accum = accum.concat(' ui-', k);
+
+            if (val) {
+              accum = accum.concat(' ui-', k, '-', val);
+            }
+
             return accum;
           }, '');
 
