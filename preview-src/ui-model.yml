@@ -1,10 +1,9 @@
----
 site:
   url: http://localhost:5252
   title: openzeppelin Documentation
-  domains:
+  components:
   - name: home
-    title: Test auuuu
+    title: Test
     items:
     - name: styleguide
       title: Styleguide

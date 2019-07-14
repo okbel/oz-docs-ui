@@ -1,16 +1,16 @@
 <nav
 	class="nav js-nav"
-	data-domain="{{domain.name}}"
+	data-component="{{component.name}}"
 	data-is-home="{{home}}"
-	data-is-site-aspect="{{domain.siteAspect}}"
-	data-version="{{domain.version.string}}"
+	data-is-site-aspect="{{component.siteAspect}}"
+	data-version="{{component.version.string}}"
 	role="navigation">
 	<div class="flex align-center search">
 		<input class="input" placeholder="Search" type="search">
 	</div>
 
-	<div class="nav__domains">
-		{{#each site.domains}}
+	<div class="nav-components">
+		{{#each site.components}}
 		<ol class="nav-list {{#if ./selected}}active{{/if}} js-nav-list">
 			<li class="flex align-center justify-justified nav-li">
 				<a class="flex grow align-center strong link nav-link nav-heading"

@@ -1,3 +1,4 @@
-'use strict'
+'use strict';
 
-module.exports = (domain) => domain.versioned && domain.versions.length > 1
+module.exports = (component) =>
+  component.versioned && component.versions.length > 1;

@@ -473,7 +473,7 @@ Here's an overview of the available model:
 
 | site
 | Information about the site.
-Properties include url, title, buildNumber, domains, aspect, aspectNav, and swiftypeKey.
+Properties include url, title, buildNumber, components, aspect, aspectNav, and swiftypeKey.
 
 | title
 | The page title (also used as the primary heading).

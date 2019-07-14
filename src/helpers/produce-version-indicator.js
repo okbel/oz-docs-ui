@@ -1,3 +1,4 @@
-'use strict'
+'use strict';
 
-module.exports = (domain) => domain.versioned ? ` (${domain.version.string})` : ''
+module.exports = (component) =>
+  component.versioned ? ` (${component.version.string})` : '';

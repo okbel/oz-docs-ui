@@ -9,8 +9,11 @@
   color: rgb(40, 40, 70);
   padding-top: 70px;
 
-  .nav__domains {
+  .nav-components {
     margin-top: 25px;
+    > .nav-list {
+      margin-bottom: var(--md);
+    }
   }
 
   .search > .input {
@@ -31,10 +34,6 @@
     position: absolute;
     top: 0;
     left: 0;
-  }
-
-  .nav__domains > .nav-list {
-    margin-bottom: var(--md);
   }
 }
 
