@@ -42,18 +42,26 @@ module.exports = async (src, dest, destTheme, previewSrcDir) => {
 
         const relativeToRoot = path.relative(file.path, previewSrcDir);
         sampleUiModel['themeRootPath'] = path.join(relativeToRoot, destTheme);
-
         sampleUiModel['siteRootUrl'] = path.join(relativeToRoot, 'index.html');
         sampleUiModel['contents'] = Buffer.from(doc.convert());
         sampleUiModel['navigation-link-prefix'] = relativeToRoot;
         sampleUiModel.title = doc.getDocumentTitle();
         sampleUiModel.layout = doc.getAttribute('page-layout', 'default');
         sampleUiModel.attributes = Object.entries(doc.getAttributes())
-          .filter(([name, val]) => name.startsWith('page-'))
+          .filter(([name]) => name.startsWith('page-'))
           .reduce((accum, [name, val]) => {
             accum[name.substr(5)] = val;
             return accum;
           }, {});
+
+        // Readeable by html data attrs
+        sampleUiModel.attrs = Object.entries(doc.getAttributes())
+          .filter(([name]) => name.startsWith('page-'))
+          .reduce((accum, [name, val]) => {
+            const k = name.substr(5);
+            accum = accum.concat(k, ' ', k, '-', val);
+            return accum;
+          }, '');
 
         file.extname = '.html';
         file.contents = new Buffer(compiledLayout(sampleUiModel));

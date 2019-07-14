@@ -1,6 +1,6 @@
 = ERC 721
 
-:page-toc:
+:page-toc: active
 
 This set of interfaces, contracts, and utilities are all related to the `ERC721` Non-Fungible Token Standard.
 
