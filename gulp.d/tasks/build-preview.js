@@ -10,6 +10,7 @@ const minimatch = require('minimatch');
 const handlebars = require('handlebars');
 const requireFromString = require('require-from-string');
 const asciidoctor = require('asciidoctor.js')();
+const yaml = require('js-yaml');
 
 const ASCIIDOC_ATTRIBUTES = {
   experimental: '',
@@ -21,15 +22,12 @@ const ASCIIDOC_ATTRIBUTES = {
 module.exports = async (src, dest, destTheme, previewSrcDir) => {
   const relativeThemePath = path.relative(dest, destTheme);
 
-  const [layoutsIndex] = await Promise.all([
+  const [sampleUiModel, layoutsIndex] = await Promise.all([
+    loadSampleUiModel(previewSrcDir),
     compileLayouts(src),
     registerPartials(src),
     registerHelpers(src),
   ]);
-
-  const sampleUiModelPath = path.resolve(previewSrcDir, 'sample-ui-model.json');
-  const sampleUiModelData = fs.readFileSync(sampleUiModelPath, 'utf8');
-  const sampleUiModel = JSON.parse(sampleUiModelData.toString());
 
   vfs
     .src(['preview-src/**/*.adoc'])
@@ -64,6 +62,10 @@ module.exports = async (src, dest, destTheme, previewSrcDir) => {
     )
     .pipe(vfs.dest(dest));
 };
+
+function loadSampleUiModel(src) {
+  return yaml.safeLoad(fs.readFileSync(path.join(src, 'ui-model.yml'), 'utf8'));
+}
 
 function registerPartials(src) {
   return new Promise((resolve, reject) => {
