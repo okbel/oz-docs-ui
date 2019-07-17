@@ -31,49 +31,21 @@ const sassDist = '_theme/stylesheets';
 module.exports = (src, dest, preview) => {
   const opts = { base: src, cwd: src };
   const sourcemaps = preview || process.env.SOURCEMAPS === 'true';
-
-  // const postcssPlugins = [
-  //   postcssImport,
-  //   postcssUrl([
-  //     require('@csstools/postcss-sass'),
-  //     {
-  //       filter: '**/~typeface-*/files/*',
-  //       url: (asset) => {
-  //         const relpath = asset.pathname.substr(1);
-  //         const abspath = require.resolve(relpath);
-  //         const basename = ospath.basename(abspath);
-  //         const destpath = ospath.join(dest, 'font', basename);
-  //         if (!fs.pathExistsSync(destpath)) fs.copySync(abspath, destpath);
-  //         return path.join('..', 'font', basename);
-  //       },
-  //     },
-  //   ]),
-  //   postcssVar({ preserve: preview ? 'preserve-computed' : false }),
-  //   preview ? postcssCalc : () => {},
-  //   autoprefixer,
-  //   preview ? () => {} : cssnano({ preset: 'default' }),
-  // ];
-
   const postcssPlugins = [require('@csstools/postcss-sass'), autoprefixer()];
-
   return merge([
-    vfs.src('images/**/*.{svg,png}', opts).pipe(imagemin([
-			imagemin.svgo({
-				plugins: [
-					{removeViewBox: false},
-				]
-			})
-		])),
+    vfs.src('images/**/*.{svg,png}', opts).pipe(
+      imagemin([
+        imagemin.svgo({
+          plugins: [{ removeViewBox: false }],
+        }),
+      ])
+    ),
     vfs
       .src('scripts/+([0-9])-*.js', { ...opts, sourcemaps })
       // .pipe(uglify())
       .pipe(concat('scripts/site.js')),
     vfs.src('scripts/*.pack.js', opts),
     vfs.src('fonts/*.{woff,woff2}', opts),
-    // vfs
-    //   .src('stylesheets/index.scss')
-    //   .pipe(sass())
-    //   .pipe(autoprefixer),
     vfs
       .src('stylesheets/index.scss', { ...opts, sourcemaps })
       .pipe(postcss(postcssPlugins))

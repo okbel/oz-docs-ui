@@ -60,7 +60,7 @@ const previewTask = createTask({
 
 const packTask = createTask({
   name: 'pack',
-  call: () => task.pack(repositoryName, buildDir, destTheme),
+  call: () => task.pack(repositoryName, previewDestDir, buildDir),
 });
 
 const bundleTask = createTask({
@@ -77,14 +77,3 @@ module.exports = exportTasks(
   buildPreviewPagesTask,
   bundleTask
 );
-
-// gulp.task('release', ['pack'], () =>
-//   release({
-//     owner: config.get('repository.owner'),
-//     repo: config.get('repository.name'),
-//     token: config.get('github_token'),
-//     dest,
-//   })
-// );
-
-// gulp.task('update', () => update());
